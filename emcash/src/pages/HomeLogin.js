@@ -22,7 +22,7 @@ export default function HomeLogin(){
         </HalfPage>  
         <HalfPage>
             <SecondtHalfPage />  
-        </HalfPage>     
+        </HalfPage>   
         </WholePage>       
         </>
 

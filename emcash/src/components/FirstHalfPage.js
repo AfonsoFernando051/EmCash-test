@@ -106,6 +106,18 @@ const LineCardAboveImg = styled.img`
     top: 254px;
     left: 279px;
 `
+const InvestText = styled.h1`
+    margin-top: 10%;
+    margin-left: 13%;
+    color: var(--dark-500, #1B1B1B);
+    /* body1 */
+    font-family: Public Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18.8px; /* 117.5% */
+    letter-spacing: -0.4px;
+`
 
 export default function FirstHalfPage(){
 
@@ -127,6 +139,7 @@ export default function FirstHalfPage(){
                     <LineCardAboveImg src={LineCardAbove}/>
                     <KhabyImg src={Khaby}></KhabyImg>
                 </FrontImage>
+                <InvestText>O investimento evoluiu. O empréstimo também.</InvestText>  
             </WholePage>
         </>
 

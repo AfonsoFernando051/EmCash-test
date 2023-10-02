@@ -1,12 +1,20 @@
 import React from "react";
 import styled from 'styled-components';
+// @ts-ignore
 import Vector from "../assets/vector.png";
+// @ts-ignore
 import Khaby from "../assets/vetor-khaby-lame.png";
+// @ts-ignore
 import Card from "../assets/Card.png";
+// @ts-ignore
 import LogoCash from "../assets/logoCash.png";
+// @ts-ignore
 import ChipCard from "../assets/ChipCard.png";
+// @ts-ignore
 import Mastercard from "../assets/mastercard.png";
+// @ts-ignore
 import LineCardAbout from "../assets/lineCardAbout.png";
+// @ts-ignore
 import LineCardAbove from "../assets/lineCardAbove.png";
 
 const WholePage = styled.div`

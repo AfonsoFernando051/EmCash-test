@@ -6,14 +6,7 @@ export default function NavFuncionarios(){
 
     return(
         <NavSelection>
-            <NavSelectionTitle>
-                Lista de funcionários
-            </NavSelectionTitle>
-            <NavSelectionButton>Adicionar novo</NavSelectionButton>
-            <Selection>
-                <Selected>Selecionados({count})</Selected>
-                <DeleteSelection>Apagar Seleção</DeleteSelection>
-            </Selection>
+
         </NavSelection>
     )
 }

@@ -16,6 +16,7 @@ export default function WorkersTable() {
         }
     ]) 
     const [count, setCount] = useState(0);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isChecked, setIsChecked] = useState(false);
     const [selections, setSelections] = useState<any>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);

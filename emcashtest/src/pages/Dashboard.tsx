@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import Header from '../components/dashboard/Header';
 import NavFuncionarios from "../components/dashboard/NavFuncionarios";
 import WorkersTable from '../components/dashboard/WorkersTable';

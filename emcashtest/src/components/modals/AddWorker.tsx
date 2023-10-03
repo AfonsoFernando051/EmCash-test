@@ -66,24 +66,35 @@ const InputName = styled.input`
     width: 350px;
     padding: 12px;
     align-items: flex-start;
+    margin: 1% 0%;
+    border-radius: 4px;
 `
 const InputCPF = styled.input`
     display: flex;
     width: 350px;
     padding: 12px;
     align-items: flex-start;
+    margin: 1% 0%;
+    border-radius: 4px;
+
 `
 const InputPhone = styled.input`
     display: flex;
     width: 350px;
     padding: 12px;
     align-items: flex-start;
+    margin: 1% 0%;
+    border-radius: 4px;
+
 `
 const InputEmail = styled.input`
     display: flex;
     width: 350px;
     padding: 12px;
     align-items: flex-start;
+    margin: 1% 0%;
+    border-radius: 4px;
+
 `
 const ButtonAdd = styled.button`
     display: flex;
@@ -119,7 +130,8 @@ const ButtonCancel = styled.button`
     letter-spacing: -0.2px;
 `
 const ButtonModal = styled.div`
-    display: flex
+    display: flex;
+    flex-direction:row;
     justify-content: flex-end;
 
 `

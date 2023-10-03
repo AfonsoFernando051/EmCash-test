@@ -1,79 +1,7 @@
-import React, {useState} from "react";
+import * as React from "react";
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
-import axios, { AxiosError, AxiosResponse } from 'axios';
-
-type FormValues = {
-    usuario: string,
-    senha: string
-}
-
-export default function SecondHalfPage() {
-
-  const handleClick = () => {   
-    setLoginError(false);
-    return 0;
-  }
-  
-  const [loginError, setLoginError] = useState(false);
-  const form = useForm<FormValues>();
-  const {register, handleSubmit} = form;
-
-  const onSubmit = (data: FormValues) => {
-    const url = 'http://18.117.195.42/login';
-    
-    axios.post(url, data)
-        .then((response: AxiosResponse) => {
-            console.log('Resposta: ', response.data);
-        })
-        .catch((error: AxiosError )=> {
-            setLoginError(true);
-            console.log('Erro: ', error);
-        })
-    
-  }
-
-  return (
-    <WholePage>
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <TitleForm>Seja bem-vindo!</TitleForm>
-            <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
-            <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
-            <RegisterInput {...register("senha", { required: true })} type="password" placeholder="Senha" />
-            <LoginInvalid style={{display: loginError ? 'flex' : 'none'}}>
-                <LoginInvalidIconCheck>
-                    <AiFillCheckCircle size={23}/>
-                </LoginInvalidIconCheck>
-                <LoginInvalidContent>
-                    Usuário e/ou senha incorretos.
-                </LoginInvalidContent>
-                <LoginInvalidIconX >
-                    <AiOutlineClose size={13} onClick={handleClick}/>
-                </LoginInvalidIconX>
-            </LoginInvalid>
-            <ForgotPassword>
-                <OrangeLink href="">Esqueci minha senha</OrangeLink>
-            </ForgotPassword>
-            <RegisterButton type="submit">Entrar</RegisterButton>
-            <NotYet>
-                <NotYetText>
-                    Ainda não tem uma conta?
-                </NotYetText>
-                <OrangeLink  href="">
-                    Cadastrar
-                </OrangeLink>
-            </NotYet>
-        </Form>
-        <NeedHelp>
-            <OrangeLink>
-                Precisa de Ajuda?
-            </OrangeLink>
-        </NeedHelp>
-    </WholePage>
-  );
-}
-
 
 const WholePage = styled.div`
     background: linear-gradient(286deg, rgba(243, 243, 243, 0.16) 8.14%, rgba(243, 243, 243, 0.04) 38.39%, rgba(243, 243, 243, 0.16) 88.69%);
@@ -129,6 +57,7 @@ const RegisterInput = styled.input`
 `
 
 const LoginInvalid = styled.div`
+    display: none;
     border-radius: 4px;
     display: flex;
     width: 280px;
@@ -159,7 +88,7 @@ const LoginInvalidIconCheck = styled.i`
 
 `
 
-const LoginInvalidIconX = styled.div`
+const LoginInvalidIconX = styled.i`
     color: #AD2C55;
     padding: 15px 1px 0px 0px;
 `
@@ -221,3 +150,53 @@ const NeedHelp = styled.div`
     padding: 5% 0% 6% 58%;
 
 `
+
+export default function App() {
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      usuario: '',
+      senha: '',
+    }
+  });
+
+  return (
+    <WholePage>
+        <Form onSubmit={handleSubmit(console.log)}>
+            <TitleForm>Seja bem-vindo!</TitleForm>
+            <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
+            <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
+            <RegisterInput {...register("senha", { minLength: 2 })} placeholder="Senha" />
+            <LoginInvalid>
+                <LoginInvalidIconCheck>
+                    <AiFillCheckCircle size={23}/>
+                </LoginInvalidIconCheck>
+                <LoginInvalidContent>
+                    Usuário e/ou senha incorretos.
+                </LoginInvalidContent>
+                <LoginInvalidIconX>
+                    <AiOutlineClose size={13}/>
+                </LoginInvalidIconX>
+            </LoginInvalid>
+            <ForgotPassword>
+                <OrangeLink href="">Esqueci minha senha</OrangeLink>
+            </ForgotPassword>
+            <RegisterButton type="submit">Entrar</RegisterButton>
+            <NotYet>
+                <NotYetText>
+                    Ainda não tem uma conta?
+                </NotYetText>
+                <OrangeLink  href="">
+                    Cadastrar
+                </OrangeLink>
+            </NotYet>
+        </Form>
+        <NeedHelp>
+            <OrangeLink>
+                Precisa de Ajuda?
+            </OrangeLink>
+        </NeedHelp>
+    </WholePage>
+    
+  );
+}

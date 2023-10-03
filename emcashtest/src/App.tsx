@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeLogin from './pages/HomeLogin';
 import SecondHalfPage from './components/loginPage/SecondHalfPage';
-import {BrowserRouter, Router, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
 function App() {
   return (

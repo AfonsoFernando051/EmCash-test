@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from '../components/dashboard/Header';
 import NavFuncionarios from "../components/dashboard/NavFuncionarios";
 import WorkersTable from '../components/dashboard/WorkersTable';
 import styled from "styled-components";
 
 export default function Dashboard() {
+
   return (
     <>
     <WholePage>

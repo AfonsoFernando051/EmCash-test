@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { BsFillPencilFill, BsFillTrashFill} from 'react-icons/bs';
 import axios from 'axios';
 import styled from "styled-components";
+import ModalAddFuncionario from '../modals/AddWorker';
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
@@ -17,11 +18,35 @@ export default function WorkersTable() {
     const [count, setCount] = useState(0);
     const [isChecked, setIsChecked] = useState(false);
     const [selections, setSelections] = useState<any>([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    useEffect(() => {
+        // Adiciona uma classe ao elemento body quando o modal é aberto
+        if (isModalOpen) {
+          document.body.classList.add('modal-open');
+        } else {
+          // Remove a classe quando o modal é fechado
+          document.body.classList.remove('modal-open');
+        }
+    
+        // Certifique-se de remover a classe ao desmontar o componente para evitar vazamentos
+        return () => {
+          document.body.classList.remove('modal-open');
+        };
+      }, [isModalOpen]);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+        
+        return 0;
+    };
+  
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
 
     const handleCheckboxChange = (event:any, id:number) => {
-
         const Cheked = event.target.checked;
-        
         if(Cheked) {
             setIsChecked(true);
             // @ts-ignore
@@ -33,7 +58,6 @@ export default function WorkersTable() {
             setSelections(updatedSelections);
             setCount(count - 1);
         }
-        
     }
 
     useEffect(() => {        
@@ -60,10 +84,11 @@ export default function WorkersTable() {
             <NavSelectionTitle>
                 Lista de funcionários
             </NavSelectionTitle>
-            <NavSelectionButton>Adicionar novo</NavSelectionButton>
+            <NavSelectionButton onClick={openModal}>Adicionar novo</NavSelectionButton>
+            <ModalAddFuncionario isOpen={isModalOpen} onClose={closeModal}/>
             <Selection>
                 <Selected>Selecionados({count})</Selected>
-                <DeleteSelection>Apagar Seleção</DeleteSelection>
+                <DeleteSelection >Apagar Seleção</DeleteSelection>
             </Selection>
         </NavSelection>
         <Table>
@@ -227,6 +252,7 @@ const TbRowData = styled.tr`
 
 const BodyTable = styled.tbody`
     display: flex;
+    border-radius: 0px 11px;
     justify-content: space-around;
     flex-direction: column;
     background: #BABABA;

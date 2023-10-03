@@ -19,7 +19,6 @@ const NavSelection = styled.div`
 `
 const NavSelectionTitle = styled.h1`
     color: var(--dark-500, #1B1B1B);
-
     font-family: Manrope;
     font-size: 24px;
     font-style: normal;

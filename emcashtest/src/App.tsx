@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeLogin from './pages/HomeLogin';
+import Dashboard from './pages/Dashboard';
 import SecondHalfPage from './components/loginPage/SecondHalfPage';
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 
@@ -8,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomeLogin />}/>
-        <Route path="/dashboard" element={<SecondHalfPage />}/>
+        <Route path="/dashboard" element={<Dashboard />}/>
       </Routes>
     </BrowserRouter>
   );

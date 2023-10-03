@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import axios, { AxiosError, AxiosResponse } from 'axios';
-
+import { useNavigate } from "react-router-dom";
 type FormValues = {
     usuario: string,
     senha: string
@@ -17,6 +17,9 @@ export default function SecondHalfPage() {
   }
   
   const [loginError, setLoginError] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const navigate = useNavigate();
+
   const form = useForm<FormValues>();
   const {register, handleSubmit} = form;
 
@@ -26,13 +29,20 @@ export default function SecondHalfPage() {
     axios.post(url, data)
         .then((response: AxiosResponse) => {
             console.log('Resposta: ', response.data);
+            
+        })
+        .then(response => {
+            setLoggedIn(true)
         })
         .catch((error: AxiosError )=> {
             setLoginError(true);
             console.log('Erro: ', error);
         })
-    
   }
+
+  if (loggedIn) {
+    navigate('/dashboard')
+}
 
   return (
     <WholePage>

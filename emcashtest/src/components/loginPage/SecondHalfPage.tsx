@@ -1,22 +1,35 @@
-import * as React from "react";
+import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import {Router, Route} from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
+import { Axios, AxiosError, AxiosResponse } from 'axios';
 
 type FormValues = {
     usuario: string,
     senha: string
 }
 
-export default function App() {
+export default function SecondHalfPage() {
 
+  const [loginError, setLoginError] = useState(false);
   const form = useForm<FormValues>();
   const {register, control, handleSubmit} = form;
 
   const onSubmit = (data: FormValues) => {
-    console.log('submit', data);
+    const axios = require('axios');
+    const url = 'http://18.117.195.42/login';
+  
+    axios.post(url, data)
+        .then((response: AxiosResponse) => {
+            console.log('Resposta: ', response.data);
+            
+        })
+        .catch((error: AxiosError )=> {
+            setLoginError(true);
+            console.log('Erro: ', error);
+        })
     
   }
 
@@ -26,8 +39,8 @@ export default function App() {
             <TitleForm>Seja bem-vindo!</TitleForm>
             <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
             <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
-            <RegisterInput {...register("senha", { minLength: 2 })} placeholder="Senha" />
-            <LoginInvalid>
+            <RegisterInput {...register("senha", { required: true })} placeholder="Senha" />
+            <LoginInvalid style={{display: loginError ? 'block' : 'none'}}>
                 <LoginInvalidIconCheck>
                     <AiFillCheckCircle size={23}/>
                 </LoginInvalidIconCheck>
@@ -117,7 +130,6 @@ const RegisterInput = styled.input`
 `
 
 const LoginInvalid = styled.div`
-    display: none;
     border-radius: 4px;
     display: flex;
     width: 280px;

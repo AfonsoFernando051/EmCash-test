@@ -9,9 +9,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeLogin />}/>
         <Route path="/dashboard" element={<SecondHalfPage />}/>
-
       </Routes>
-      <HomeLogin/>
     </BrowserRouter>
   );
 }

@@ -2,9 +2,9 @@ import React, {useState} from "react";
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
-import {Router, Route} from 'react-router-dom'
+import {Router, Route, redirect} from 'react-router-dom'
 import { DevTool } from '@hookform/devtools'
-import { Axios, AxiosError, AxiosResponse } from 'axios';
+import axios, { Axios, AxiosError, AxiosResponse } from 'axios';
 
 type FormValues = {
     usuario: string,
@@ -13,18 +13,21 @@ type FormValues = {
 
 export default function SecondHalfPage() {
 
+  const handleClick = () => {   
+    setLoginError(false);
+    return 0;
+  }
+  
   const [loginError, setLoginError] = useState(false);
   const form = useForm<FormValues>();
   const {register, control, handleSubmit} = form;
 
   const onSubmit = (data: FormValues) => {
-    const axios = require('axios');
     const url = 'http://18.117.195.42/login';
-  
+    
     axios.post(url, data)
         .then((response: AxiosResponse) => {
             console.log('Resposta: ', response.data);
-            
         })
         .catch((error: AxiosError )=> {
             setLoginError(true);
@@ -40,15 +43,15 @@ export default function SecondHalfPage() {
             <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
             <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
             <RegisterInput {...register("senha", { required: true })} placeholder="Senha" />
-            <LoginInvalid style={{display: loginError ? 'block' : 'none'}}>
+            <LoginInvalid style={{display: loginError ? 'flex' : 'none'}}>
                 <LoginInvalidIconCheck>
                     <AiFillCheckCircle size={23}/>
                 </LoginInvalidIconCheck>
                 <LoginInvalidContent>
                     Usuário e/ou senha incorretos.
                 </LoginInvalidContent>
-                <LoginInvalidIconX>
-                    <AiOutlineClose size={13}/>
+                <LoginInvalidIconX >
+                    <AiOutlineClose size={13} onClick={handleClick}/>
                 </LoginInvalidIconX>
             </LoginInvalid>
             <ForgotPassword>
@@ -160,7 +163,7 @@ const LoginInvalidIconCheck = styled.i`
 
 `
 
-const LoginInvalidIconX = styled.i`
+const LoginInvalidIconX = styled.div`
     color: #AD2C55;
     padding: 15px 1px 0px 0px;
 `

@@ -28,8 +28,8 @@ export default function SecondHalfPage() {
     
     axios.post(url, data)
         .then((response: AxiosResponse) => {
-            console.log('Resposta: ', response.data);
-            
+            console.log('Resposta: ', response.data.access_token);
+            localStorage.setItem('token', response.data.access_token)
         })
         .then(response => {
             setLoggedIn(true)

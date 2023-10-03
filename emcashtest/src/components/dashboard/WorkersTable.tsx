@@ -16,11 +16,11 @@ export default function WorkersTable() {
         }
     ]) 
 
-    useEffect(() => {
-        const authToken = ' 7636c92ceb1061469919a375e10026b4'; // Substitua com o token real
+    useEffect(() => {        
+        const authToken = localStorage.getItem('token'); // Substitua com o token real
         const config = {
             headers: {
-              Authorization: `Bearer 7636c92ceb1061469919a375e10026b4`,
+              Authorization: `Bearer ${authToken}`,
             },
           };
 

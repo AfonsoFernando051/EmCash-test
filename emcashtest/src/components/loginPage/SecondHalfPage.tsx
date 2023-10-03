@@ -3,19 +3,26 @@ import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import {Router, Route} from 'react-router-dom'
+import { DevTool } from '@hookform/devtools'
+
+type FormValues = {
+    usuario: string,
+    senha: string
+}
 
 export default function App() {
 
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      usuario: '',
-      senha: '',
-    }
-  });
+  const form = useForm<FormValues>();
+  const {register, control, handleSubmit} = form;
+
+  const onSubmit = (data: FormValues) => {
+    console.log('submit', data);
+    
+  }
 
   return (
     <WholePage>
-        <Form onSubmit={handleSubmit(console.log)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
             <TitleForm>Seja bem-vindo!</TitleForm>
             <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
             <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
@@ -49,6 +56,7 @@ export default function App() {
                 Precisa de Ajuda?
             </OrangeLink>
         </NeedHelp>
+    <DevTool control={control}/>
     </WholePage>
     
   );

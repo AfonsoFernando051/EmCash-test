@@ -1,0 +1,365 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2022-05-04T18:17:23.481Z",
+    "__export_source": "insomnia.desktop.app:v2022.3.0",
+    "resources": [
+      {
+        "_id": "req_0df58ea1709045f3b4c11621c662fdc3",
+        "parentId": "fld_68de83263ff341b0bb71f6a03aa2e098",
+        "modified": 1651688165718,
+        "created": 1648044969198,
+        "url": "{{ _.baseUrl }}/cadastro",
+        "name": "Cadastrar",
+        "description": "",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"usuario\": \"joao\",\n\t\"senha\": \"123456\",\n\t\"nome\": \"Joao Oliveira\"\n}"
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "pair_422f0aef4195433a8e3803325a6f926d"
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1647083433526.25,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "fld_68de83263ff341b0bb71f6a03aa2e098",
+        "parentId": "wrk_10184a0d4409412da6499c1c72c953d4",
+        "modified": 1648058471268,
+        "created": 1648043535008,
+        "name": "Usuario",
+        "description": "",
+        "environment": {
+          
+        },
+        "environmentPropertyOrder": null,
+        "metaSortKey": -1648044957381,
+        "_type": "request_group"
+      },
+      {
+        "_id": "wrk_10184a0d4409412da6499c1c72c953d4",
+        "parentId": null,
+        "modified": 1647963447753,
+        "created": 1647963447753,
+        "name": "teste",
+        "description": "",
+        "scope": "collection",
+        "_type": "workspace"
+      },
+      {
+        "_id": "req_e3e2a27df18d4f03aff4e7363e5fa928",
+        "parentId": "fld_68de83263ff341b0bb71f6a03aa2e098",
+        "modified": 1651688157686,
+        "created": 1648043718407,
+        "url": "{{ _.baseUrl }}/login",
+        "name": "Login",
+        "description": "",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"usuario\": \"joao\",\n\t\"senha\": \"123456\"\n}"
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "pair_422f0aef4195433a8e3803325a6f926d"
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1646203412127.5,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_81b83533a962405aa275d907142c2383",
+        "parentId": "fld_d16249f92cc7445f8dd108133b7dd295",
+        "modified": 1651688224637,
+        "created": 1647963454925,
+        "url": "{{ _.baseUrl }}/funcionario/cadastro",
+        "name": "Cadastrar",
+        "description": "",
+        "method": "POST",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"nome\": \"funcionario\",\n\t\"cpf\": \"86853871081\",\n\t\"cnpj\": null,\n\t\"celular\": \"319876543210\",\n\t\"email\": \"funcionario@empresa.com\"\n}"
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "pair_422f0aef4195433a8e3803325a6f926d"
+          },
+          {
+            "id": "pair_3cc817fe923b456d85f39ff78e83d47d",
+            "name": "Authorization",
+            "value": "Bearer {{ _.tokenUsuario }}",
+            "description": ""
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1647963454925,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "fld_d16249f92cc7445f8dd108133b7dd295",
+        "parentId": "wrk_10184a0d4409412da6499c1c72c953d4",
+        "modified": 1648044957331,
+        "created": 1648044957331,
+        "name": "Funcionario",
+        "description": "",
+        "environment": {
+          
+        },
+        "environmentPropertyOrder": null,
+        "metaSortKey": -1648044957331,
+        "_type": "request_group"
+      },
+      {
+        "_id": "req_5539f1b567904a0c8776f5433e9aa435",
+        "parentId": "fld_d16249f92cc7445f8dd108133b7dd295",
+        "modified": 1651680825483,
+        "created": 1648056539587,
+        "url": "{{ _.baseUrl }}/funcionarios",
+        "name": "Listar Todos",
+        "description": "",
+        "method": "GET",
+        "body": {
+          
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "id": "pair_3cc817fe923b456d85f39ff78e83d47d",
+            "name": "Authorization",
+            "value": "Bearer {{ _.tokenUsuario }}",
+            "description": ""
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1647633446900.4688,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_a49ca739d7334fb880987a09718e42f3",
+        "parentId": "fld_d16249f92cc7445f8dd108133b7dd295",
+        "modified": 1651680824934,
+        "created": 1648058045964,
+        "url": "{{ _.baseUrl }}/funcionario/{% response 'body', 'req_5539f1b567904a0c8776f5433e9aa435', 'b64::JFswXS5pZA==::46b', 'never', 60 %}",
+        "name": "Funcionario",
+        "description": "",
+        "method": "GET",
+        "body": {
+          
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "id": "pair_3cc817fe923b456d85f39ff78e83d47d",
+            "name": "Authorization",
+            "value": "Bearer {{ _.tokenUsuario }}",
+            "description": ""
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1647303438875.9375,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_1a224f4d415d4c58925e99078bfd74a1",
+        "parentId": "fld_d16249f92cc7445f8dd108133b7dd295",
+        "modified": 1651680823808,
+        "created": 1648058672058,
+        "url": "{{ _.baseUrl }}/funcionario/{% response 'body', 'req_5539f1b567904a0c8776f5433e9aa435', 'b64::JFswXS5pZA==::46b', 'never', 60 %}",
+        "name": "Funcionario",
+        "description": "",
+        "method": "DELETE",
+        "body": {
+          
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "id": "pair_3cc817fe923b456d85f39ff78e83d47d",
+            "name": "Authorization",
+            "value": "Bearer {{ _.tokenUsuario }}",
+            "description": ""
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1647193436201.0938,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "req_9bde0c7c29434d49b84be0ab824939ce",
+        "parentId": "fld_d16249f92cc7445f8dd108133b7dd295",
+        "modified": 1651680817119,
+        "created": 1648130594662,
+        "url": "{{ _.baseUrl }}/funcionario/{% response 'body', 'req_5539f1b567904a0c8776f5433e9aa435', 'b64::JFswXS5pZA==::46b', 'never', 60 %}",
+        "name": "Funcionario",
+        "description": "",
+        "method": "PATCH",
+        "body": {
+          "mimeType": "application/json",
+          "text": "{\n\t\"nome\": \"funcionario\",\n\t\"celular\": \"319876543212\",\n\t\"email\": \"funcionario0@empresa.com\"\n}"
+        },
+        "parameters": [
+          
+        ],
+        "headers": [
+          {
+            "name": "Content-Type",
+            "value": "application/json",
+            "id": "pair_7df62166d0614cde84daf3b38a2b7338"
+          },
+          {
+            "id": "pair_3cc817fe923b456d85f39ff78e83d47d",
+            "name": "Authorization",
+            "value": "Bearer {{ _.tokenUsuario }}",
+            "description": ""
+          }
+        ],
+        "authentication": {
+          
+        },
+        "metaSortKey": -1647138434863.6719,
+        "isPrivate": false,
+        "settingStoreCookies": true,
+        "settingSendCookies": true,
+        "settingDisableRenderRequestBody": false,
+        "settingEncodeUrl": true,
+        "settingRebuildPath": true,
+        "settingFollowRedirects": "global",
+        "_type": "request"
+      },
+      {
+        "_id": "env_a7e582f9729f692935271106c3f3720144f8ceca",
+        "parentId": "wrk_10184a0d4409412da6499c1c72c953d4",
+        "modified": 1651688136228,
+        "created": 1647963447764,
+        "name": "Base Environment",
+        "data": {
+          "baseUrl": "http://3.137.143.125",
+          "tokenUsuario": "{% response 'body', 'req_e3e2a27df18d4f03aff4e7363e5fa928', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+        },
+        "dataPropertyOrder": {
+          "&": [
+            "baseUrl",
+            "tokenUsuario"
+          ]
+        },
+        "color": null,
+        "isPrivate": false,
+        "metaSortKey": 1647963447764,
+        "_type": "environment"
+      },
+      {
+        "_id": "jar_a7e582f9729f692935271106c3f3720144f8ceca",
+        "parentId": "wrk_10184a0d4409412da6499c1c72c953d4",
+        "modified": 1647966862493,
+        "created": 1647963447767,
+        "name": "Default Jar",
+        "cookies": [
+          {
+            "key": "_csrf",
+            "value": "apg1rCQS4m4uWXbIT_6dcQ_Ks_G2jVQ6",
+            "domain": "localhost",
+            "path": "/",
+            "httpOnly": true,
+            "extensions": [
+              "SameSite=Lax"
+            ],
+            "hostOnly": true,
+            "creation": "2022-03-22T16:34:22.488Z",
+            "lastAccessed": "2022-03-22T16:34:22.488Z",
+            "id": "07147300224069375"
+          }
+        ],
+        "_type": "cookie_jar"
+      },
+      {
+        "_id": "spc_fa800a66646d4c5ba8b9c2b98f3757ce",
+        "parentId": "wrk_10184a0d4409412da6499c1c72c953d4",
+        "modified": 1647963447756,
+        "created": 1647963447756,
+        "fileName": "teste",
+        "contents": "",
+        "contentType": "yaml",
+        "_type": "api_spec"
+      }
+    ]
+  }

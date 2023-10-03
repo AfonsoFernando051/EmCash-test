@@ -16,6 +16,7 @@ import Mastercard from "../../assets/login/mastercard.png";
 import LineCardAbout from "../../assets/login/lineCardAbout.png";
 // @ts-ignore
 import LineCardAbove from "../../assets/login/lineCardAbove.png";
+import FrontEndCash from "../FrontEndCash";
 
 export default function FirstHalfPage(){
 
@@ -23,8 +24,7 @@ export default function FirstHalfPage(){
         <>
             <WholePage>
                 <FrontLetter>
-                    <FrontEndCashBlack>front-end-</FrontEndCashBlack>
-                    <FrontEndCashOrange>emcash</FrontEndCashOrange>
+                    <FrontEndCash />
                 </FrontLetter>
                 <FrontImage>
                     <StyledVector src={Vector} alt="Vector"/> 
@@ -55,27 +55,6 @@ const FrontLetter = styled.div`
    margin-bottom: 10%;
 `
 
-const FrontEndCashBlack = styled.h1`
-    color: var(--dark-500, #1B1B1B);
-    /* subtitle2 */
-    font-family: Manrope;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
-    letter-spacing: -0.4px;
-`
-
-const FrontEndCashOrange = styled.h1`
-    color: var(--primary-500, #EF6F2B);
-    /* subtitle2 */
-    font-family: Manrope;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 23.5px;
-    letter-spacing: -0.4px;
-`
 const FrontImage = styled.div`
     position: relative;
     height: 80%

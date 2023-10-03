@@ -17,10 +17,10 @@ export default function WorkersTable() {
     ]) 
 
     useEffect(() => {
-        const authToken = ' 26ef9e4b3c472a254dc1cf99861046d4'; // Substitua com o token real
+        const authToken = ' 7636c92ceb1061469919a375e10026b4'; // Substitua com o token real
         const config = {
             headers: {
-              Authorization: `Bearer 3a52c47c393024b12475faee82837f20`,
+              Authorization: `Bearer 7636c92ceb1061469919a375e10026b4`,
             },
           };
 
@@ -38,25 +38,27 @@ export default function WorkersTable() {
     <>
         <Table>
             <HeadTable>
-                    <TableTh></TableTh>
-                    <TableTh>Nome completo</TableTh>
-                    <TableTh>CPF/CNPJ</TableTh>
-                    <TableTh>Celular</TableTh>
-                    <TableTh>E-mail</TableTh>
+                <TbRow>
+                    <EmptyTableTh></EmptyTableTh>
+                    <NameTableTh>Nome completo</NameTableTh>
+                    <CPFTableTh>CPF/CNPJ</CPFTableTh>
+                    <PhoneTableTh>Celular</PhoneTableTh>
+                    <EmailTableTh>E-mail</EmailTableTh>
                     <TableTh>Editar</TableTh>
                     <TableTh>Apagar</TableTh>
+                </TbRow>
             </HeadTable>
             <BodyTable>
                 {funcionarios.map((data) => (
-                <tr key={data.id}>
-                    <TableTd><CheckBox type="checkbox" name="" id="" /></TableTd>
+                <TbRowData key={data.id}>
+                    <TableTdCheck><CheckBox type="checkbox" name="" id="" /></TableTdCheck>
                     <TableTd>{data.nome}</TableTd>
                     <TableTd>{(data.cpf) ? data.cpf : data.cnpj}</TableTd>
                     <TableTd>{data.celular}</TableTd>
                     <TableTd>{data.email}</TableTd>
-                    <TableTd><BsFillPencilFill size={20} /></TableTd>
-                    <TableTd><BsFillTrashFill size={20} id="trash"/></TableTd>
-                </tr> 
+                    <TableTdIcon><BsFillPencilFill size={20} /></TableTdIcon>
+                    <TableTdIcon><BsFillTrashFill size={20} id="trash"/></TableTdIcon>
+                </TbRowData> 
                 ))}
             </BodyTable>
         </Table>
@@ -68,66 +70,88 @@ const Table = styled.table`
     margin-top: 3%;
     padding: 1% 0%;
     width: 100%;
-
 `
-
 const HeadTable = styled.thead`
     display: flex;
     border-radius: 12px 12px 4px 4px;
     background: var(--base-branco, #FFF);
-    padding: 12px 24px;
+    text-align: left;
+    justify-content: flex-start;
 `
+const TbRow = styled.tr`
+    display: flex;
+    border-radius: 12px 12px 4px 4px;
+    background: var(--base-branco, #FFF);
+    width: 100%;
+`
+
+const EmptyTableTh = styled.th`
+    padding-right: 2%
+`
+
+const TableTh = styled.th`
+    font-size: 16px;
+    padding: 14px 0px;
+    width: 12%;
+}
+
+`
+const NameTableTh = styled.th`
+    font-size: 16px;
+    padding: 14px 25px;
+    width: 15%;
+}
+`
+
+const CPFTableTh = styled.th`
+    margin-left: 4%;
+    font-size: 16px;
+    padding: 14px 20px;
+    width: 12%;
+    gap: 10px;
+}`
+
+const PhoneTableTh = styled.th`
+    margin-left: 5%;
+    font-size: 16px;
+    padding: 14px 20px;
+    width: 12%;
+}
+`
+const EmailTableTh = styled.th`
+    margin-left: 4%;
+    font-size: 16px;
+    padding: 14px 30px;
+    width: 13%;
+}
+`
+
+const TbRowData = styled.tr`
+    display: flex;
+    border-radius: 12px 12px 4px 4px;
+`
+
 const BodyTable = styled.tbody`
     display: flex;
+    justify-content: space-around;
     flex-direction: column;
     background: #BABABA;
-
 `
-const TableTh = styled.th`
-    padding: 12px 24px;
-    justify-content: right;
-    align-items: right
+
+const TableTdCheck = styled.td`
+    padding: 12px 12px;
+    width: 1%;
 `
 const TableTd = styled.td`
-    padding: 12px 30px;
-    align-items: center
+    padding: 12px 12px;
+    width: 20%;
 `
-
+const TableTdIcon = styled.td`
+    padding: 12px 12px;
+    width: 10%;
+`
 const CheckBox = styled.input`
     backgroung-color: #BABABA;
     display: flex;
-    align-items: flex-start;
+    align-items: left;
 `
-// const Table = styled.table`
-//     border: 1px solid #ccc;
-
-//     padding: 11px 11px;
-//     font-size: 18px;
-// `
-
-
-// const THeadTable = styled.th`
-// border: 1px solid #ccc;
-
-//     padding: 11px 11px;
-//     font-size: 18px;
-// `
-// const TableRowHead = styled.tr`
-
-//     display: flex;
-//     padding: 12px 24px;
-// `
-// const TableRowBody = styled.tr`
-//     gap: 32px;
-//     display: flex;
-//     padding: 12px 24px;
-//     background: #BABABA;
-// `
-
-// const TableData = styled.td` 
-// border: 1px solid #ccc;
-
-//     padding: 11px 11px;
-//     text-align: left;
-//     font-size: 18px;
-// `

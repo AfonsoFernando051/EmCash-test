@@ -21,7 +21,6 @@ export default function Dashboard() {
 }
 const WholePage = styled.div`
   background: var(--dark-200, #E8E8E8);
-  height: 100vh;
 
 `
 const DashboardComponents = styled.div`

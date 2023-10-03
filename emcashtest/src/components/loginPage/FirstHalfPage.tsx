@@ -1,21 +1,48 @@
 import React from "react";
 import styled from 'styled-components';
 // @ts-ignore
-import Vector from "../assets/vector.png";
+import Vector from "../../assets/login/vector.png";
 // @ts-ignore
-import Khaby from "../assets/vetor-khaby-lame.png";
+import Khaby from "../../assets/login/vetor-khaby-lame.png";
 // @ts-ignore
-import Card from "../assets/Card.png";
+import Card from "../../assets/login/Card.png";
 // @ts-ignore
-import LogoCash from "../assets/logoCash.png";
+import LogoCash from "../../assets/login/logoCash.png";
 // @ts-ignore
-import ChipCard from "../assets/ChipCard.png";
+import ChipCard from "../../assets/login/ChipCard.png";
 // @ts-ignore
-import Mastercard from "../assets/mastercard.png";
+import Mastercard from "../../assets/login/mastercard.png";
 // @ts-ignore
-import LineCardAbout from "../assets/lineCardAbout.png";
+import LineCardAbout from "../../assets/login/lineCardAbout.png";
 // @ts-ignore
-import LineCardAbove from "../assets/lineCardAbove.png";
+import LineCardAbove from "../../assets/login/lineCardAbove.png";
+
+export default function FirstHalfPage(){
+
+    return(
+        <>
+            <WholePage>
+                <FrontLetter>
+                    <FrontEndCashBlack>front-end-</FrontEndCashBlack>
+                    <FrontEndCashOrange>emcash</FrontEndCashOrange>
+                </FrontLetter>
+                <FrontImage>
+                    <StyledVector src={Vector} alt="Vector"/> 
+                    <ImageText>Seu mundo financeiro em um só lugar</ImageText>
+                    <CardImg src={Card}/>
+                    <LogoEmCash src={LogoCash}/>
+                    <ChipCardImg src={ChipCard}/>
+                    <MastercardImg src={Mastercard}/>
+                    <LineCardAboutImg src={LineCardAbout} />
+                    <LineCardAboveImg src={LineCardAbove}/>
+                    <KhabyImg src={Khaby}></KhabyImg>
+                </FrontImage>
+                <InvestText>O investimento evoluiu. O empréstimo também.</InvestText>  
+            </WholePage>
+        </>
+
+    )
+}
 
 const WholePage = styled.div`
     margin: 0% 2%;
@@ -126,30 +153,3 @@ const InvestText = styled.h1`
     line-height: 18.8px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-
-export default function FirstHalfPage(){
-
-    return(
-        <>
-            <WholePage>
-                <FrontLetter>
-                    <FrontEndCashBlack>front-end-</FrontEndCashBlack>
-                    <FrontEndCashOrange>emcash</FrontEndCashOrange>
-                </FrontLetter>
-                <FrontImage>
-                    <StyledVector src={Vector} alt="Vector"/> 
-                    <ImageText>Seu mundo financeiro em um só lugar</ImageText>
-                    <CardImg src={Card}/>
-                    <LogoEmCash src={LogoCash}/>
-                    <ChipCardImg src={ChipCard}/>
-                    <MastercardImg src={Mastercard}/>
-                    <LineCardAboutImg src={LineCardAbout} />
-                    <LineCardAboveImg src={LineCardAbove}/>
-                    <KhabyImg src={Khaby}></KhabyImg>
-                </FrontImage>
-                <InvestText>O investimento evoluiu. O empréstimo também.</InvestText>  
-            </WholePage>
-        </>
-
-    )
-}

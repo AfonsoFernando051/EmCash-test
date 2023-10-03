@@ -2,6 +2,58 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
+import {Router, Route} from 'react-router-dom'
+
+export default function App() {
+
+  const { register, handleSubmit } = useForm({
+    defaultValues: {
+      usuario: '',
+      senha: '',
+    }
+  });
+
+  return (
+    <WholePage>
+        <Form onSubmit={handleSubmit(console.log)}>
+            <TitleForm>Seja bem-vindo!</TitleForm>
+            <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
+            <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
+            <RegisterInput {...register("senha", { minLength: 2 })} placeholder="Senha" />
+            <LoginInvalid>
+                <LoginInvalidIconCheck>
+                    <AiFillCheckCircle size={23}/>
+                </LoginInvalidIconCheck>
+                <LoginInvalidContent>
+                    Usuário e/ou senha incorretos.
+                </LoginInvalidContent>
+                <LoginInvalidIconX>
+                    <AiOutlineClose size={13}/>
+                </LoginInvalidIconX>
+            </LoginInvalid>
+            <ForgotPassword>
+                <OrangeLink href="">Esqueci minha senha</OrangeLink>
+            </ForgotPassword>
+            <RegisterButton type="submit">Entrar</RegisterButton>
+            <NotYet>
+                <NotYetText>
+                    Ainda não tem uma conta?
+                </NotYetText>
+                <OrangeLink  href="">
+                    Cadastrar
+                </OrangeLink>
+            </NotYet>
+        </Form>
+        <NeedHelp>
+            <OrangeLink>
+                Precisa de Ajuda?
+            </OrangeLink>
+        </NeedHelp>
+    </WholePage>
+    
+  );
+}
+
 
 const WholePage = styled.div`
     background: linear-gradient(286deg, rgba(243, 243, 243, 0.16) 8.14%, rgba(243, 243, 243, 0.04) 38.39%, rgba(243, 243, 243, 0.16) 88.69%);
@@ -57,6 +109,7 @@ const RegisterInput = styled.input`
 `
 
 const LoginInvalid = styled.div`
+    display: none;
     border-radius: 4px;
     display: flex;
     width: 280px;
@@ -149,52 +202,3 @@ const NeedHelp = styled.div`
     padding: 5% 0% 6% 58%;
 
 `
-
-export default function App() {
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      usuario: '',
-      senha: '',
-    }
-  });
-
-  return (
-    <WholePage>
-        <Form onSubmit={handleSubmit(console.log)}>
-        <TitleForm>Seja bem-vindo!</TitleForm>
-        <SubTitleForm>Insira os seus dados nos campos abaixo para acessar sua conta.</SubTitleForm>
-        <RegisterInput {...register("usuario", { required: true })} placeholder="Usuário" />
-        <RegisterInput {...register("senha", { minLength: 2 })} placeholder="Senha" />
-        <LoginInvalid>
-            <LoginInvalidIconCheck>
-                <AiFillCheckCircle size={23}/>
-            </LoginInvalidIconCheck>
-            <LoginInvalidContent>
-                Usuário e/ou senha incorretos.
-            </LoginInvalidContent>
-            <LoginInvalidIconX>
-                <AiOutlineClose size={13}/>
-            </LoginInvalidIconX>
-        </LoginInvalid>
-        <ForgotPassword>
-            <OrangeLink href="">Esqueci minha senha</OrangeLink>
-        </ForgotPassword>
-        <RegisterButton type="submit">Entrar</RegisterButton>
-        <NotYet>
-            <NotYetText>
-                Ainda não tem uma conta?
-            </NotYetText>
-            <OrangeLink  href="">
-                Cadastrar
-            </OrangeLink>
-        </NotYet>
-        </Form>
-        <NeedHelp>
-            <OrangeLink>
-                Precisa de Ajuda?
-            </OrangeLink>
-        </NeedHelp>
-    </WholePage>
-    
-  );
-}

@@ -62,7 +62,7 @@ export default function WorkersTable() {
     }
 
     useEffect(() => {        
-        const authToken = localStorage.getItem('token'); // Substitua com o token real
+        const authToken = localStorage.getItem('token');
         const config = {
             headers: {
               Authorization: `Bearer ${authToken}`,

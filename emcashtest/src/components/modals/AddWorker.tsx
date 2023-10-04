@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
+import { DevTool } from '@hookform/devtools'
+import axios, { AxiosResponse, AxiosError } from 'axios';
 
 type FormValuesModal = {
     nome: string,
@@ -23,11 +25,31 @@ interface AddWorkerProps {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const form = useForm<FormValuesModal>();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {register, handleSubmit} = form;
+    const {register, control, handleSubmit} = form;
+
+    const onSubmit = (data: FormValuesModal) => {
+        const authToken = localStorage.getItem('token');
+        const config = {
+            headers: {
+              Authorization: `Bearer ${authToken}`,
+            },
+          };
+        const url = 'http://18.117.195.42/funcionario/cadastro';
+        
+        axios.post(url, data, config)
+            .then((response: AxiosResponse) => {
+                console.log('Resposta: ', response);
+            })
+            .catch((error: AxiosError )=> {
+                console.log('Erro: ', error);
+            })
+
+            onClose(true);
+      }
 
     return (
        <WholeModal>
-            <FormModal>
+            <FormModal onSubmit={handleSubmit(onSubmit)}>
                 <div className="modal-content">
                     <h2>Adicionar novo funcionário</h2>
                     <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
@@ -36,10 +58,11 @@ interface AddWorkerProps {
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd>Adicionar</ButtonAdd>
+                        <ButtonAdd type='submit'>Adicionar</ButtonAdd>
                     </ButtonModal>
                 </div>
             </FormModal>
+            <DevTool control={control}/>
         </WholeModal>
     )
 }
@@ -60,13 +83,14 @@ const FormModal = styled.form`
     border-radius: 12px;
     background: var(--base-branco, #FFF);
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
+    height: 400px;
 `
 const InputName = styled.input`
     display: flex;
     width: 350px;
     padding: 12px;
     align-items: flex-start;
-    margin: 1% 0%;
+    margin: 4% 0%;
     border-radius: 4px;
 `
 const InputCPF = styled.input`
@@ -74,7 +98,7 @@ const InputCPF = styled.input`
     width: 350px;
     padding: 12px;
     align-items: flex-start;
-    margin: 1% 0%;
+    margin: 4% 0%;
     border-radius: 4px;
 
 `
@@ -83,7 +107,7 @@ const InputPhone = styled.input`
     width: 350px;
     padding: 12px;
     align-items: flex-start;
-    margin: 1% 0%;
+    margin: 4% 0%;
     border-radius: 4px;
 
 `
@@ -92,7 +116,7 @@ const InputEmail = styled.input`
     width: 350px;
     padding: 12px;
     align-items: flex-start;
-    margin: 1% 0%;
+    margin: 4% 0%;
     border-radius: 4px;
 
 `

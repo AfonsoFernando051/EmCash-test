@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
+import { Alert } from '@mui/material';
 
 type FormValues = {
     usuario: string,
@@ -29,7 +30,6 @@ export default function SecondHalfPage() {
     
     axios.post(url, data)
         .then((response: AxiosResponse) => {
-            console.log('Resposta: ', response.data.access_token);
             localStorage.setItem('token', response.data.access_token)
         })
         .then(response => {

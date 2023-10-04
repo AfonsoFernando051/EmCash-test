@@ -3,6 +3,7 @@ import { BsFillPencilFill, BsFillTrashFill} from 'react-icons/bs';
 import axios from 'axios';
 import styled from "styled-components";
 import ModalAddFuncionario from '../modals/AddWorker';
+import ModalDropFuncionario from '../modals/DeleteWorker';
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
@@ -19,11 +20,13 @@ export default function WorkersTable() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isChecked, setIsChecked] = useState(false);
     const [selections, setSelections] = useState<any>([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalAddFuncOpen, setIsModalAddFuncOpen] = useState(false);
+    const [isModalDropFuncOpen, setIsModalDropFuncOpen] = useState(false);
+    const [idFuncionario, setIdFuncionario] = useState(0);
 
     useEffect(() => {
         // Adiciona uma classe ao elemento body quando o modal é aberto
-        if (isModalOpen) {
+        if (isModalAddFuncOpen || isModalDropFuncOpen) {
           document.body.classList.add('modal-open');
         } else {
           // Remove a classe quando o modal é fechado
@@ -34,16 +37,26 @@ export default function WorkersTable() {
         return () => {
           document.body.classList.remove('modal-open');
         };
-      }, [isModalOpen]);
+      }, [isModalAddFuncOpen, isModalDropFuncOpen]);
 
-    const openModal = () => {
-        setIsModalOpen(true);
+    const openModalAddFunc = () => {
+        setIsModalAddFuncOpen(true);
         
         return 0;
     };
   
-    const closeModal = () => {
-        setIsModalOpen(false);
+    const closeModalAddFunc = () => {
+        setIsModalAddFuncOpen(false);
+    };
+
+    const openModalDropFunc = (id: React.SetStateAction<number>) => {
+        setIdFuncionario(id)
+        setIsModalDropFuncOpen(true);
+        return 0;
+    };
+  
+    const closeModalDropFunc = () => {
+        setIsModalDropFuncOpen(false);
     };
 
     const handleCheckboxChange = (event:any, id:number) => {
@@ -85,8 +98,9 @@ export default function WorkersTable() {
             <NavSelectionTitle>
                 Lista de funcionários
             </NavSelectionTitle>
-            <NavSelectionButton onClick={openModal}>Adicionar novo</NavSelectionButton>
-            <ModalAddFuncionario isOpen={isModalOpen} onClose={closeModal}/>
+            <NavSelectionButton onClick={openModalAddFunc}>Adicionar novo</NavSelectionButton>
+            <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
+            <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
             <Selection>
                 <Selected>Selecionados({count})</Selected>
                 <DeleteSelection >Apagar Seleção</DeleteSelection>
@@ -112,8 +126,8 @@ export default function WorkersTable() {
                     <TableTd>{(data.cpf) ? data.cpf : data.cnpj}</TableTd>
                     <TableTd>{data.celular}</TableTd>
                     <TableTd>{data.email}</TableTd>
-                    <TableTdIcon><BsFillPencilFill size={20} /></TableTdIcon>
-                    <TableTdIcon><BsFillTrashFill size={20} id="trash"/></TableTdIcon>
+                    <TableTdIcon><BsFillPencilFill size={20} style={{cursor: 'pointer'}}/></TableTdIcon>
+                    <TableTdIcon onClick={() => openModalDropFunc(data.id)}><BsFillTrashFill size={20} id="trash" style={{cursor: 'pointer'}}/></TableTdIcon>
                 </TbRowData> 
                 ))}
             </BodyTable>

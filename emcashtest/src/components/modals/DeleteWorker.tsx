@@ -14,13 +14,14 @@ type FormValuesModal = {
 
 interface AddWorkerProps {
     isOpen: boolean;
-    onClose : any
+    onClose : any,
+    id: number
   }
 
-  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose }) => {
+const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} ) => {
     if (!isOpen) {
         return null;
-    }
+    }    
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const form = useForm<FormValuesModal>();
@@ -34,9 +35,9 @@ interface AddWorkerProps {
               Authorization: `Bearer ${authToken}`,
             },
           };
-        const url = 'http://18.117.195.42/funcionario/cadastro';
+        const url = `http://18.117.195.42/funcionario/${id}`;
         
-        axios.post(url, data, config)
+        axios.delete(url, config)
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
             })
@@ -51,14 +52,13 @@ interface AddWorkerProps {
        <WholeModal>
             <FormModal onSubmit={handleSubmit(onSubmit)}>
                 <div className="modal-content">
-                    <h2>Adicionar novo funcionário</h2>
-                    <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
-                    <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
-                    <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
-                    <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
+                    <h2>Apagar funcionário(s)</h2>
+                    <h3>Esta ação é irreversível. Tem certeza que deseja Apagar
+                        este(s) funcionário(s) do sistema?
+                    </h3>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd type='submit'>Adicionar</ButtonAdd>
+                        <ButtonAdd type='submit'>Apagar</ButtonAdd>
                     </ButtonModal>
                 </div>
             </FormModal>
@@ -67,12 +67,13 @@ interface AddWorkerProps {
     )
 }
 
-export default ModalAddFuncionario;
+export default ModalDropFuncionario;
 
 const WholeModal = styled.div`
-    left: 37%;
-    top: 21%;
+    left: 24%;
+    top: 18%;
     position: absolute;
+
 `
 const FormModal = styled.form`
     display: inline-flex;
@@ -84,41 +85,6 @@ const FormModal = styled.form`
     background: var(--base-branco, #FFF);
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
     height: 400px;
-`
-const InputName = styled.input`
-    display: flex;
-    width: 350px;
-    padding: 12px;
-    align-items: flex-start;
-    margin: 4% 0%;
-    border-radius: 4px;
-`
-const InputCPF = styled.input`
-    display: flex;
-    width: 350px;
-    padding: 12px;
-    align-items: flex-start;
-    margin: 4% 0%;
-    border-radius: 4px;
-
-`
-const InputPhone = styled.input`
-    display: flex;
-    width: 350px;
-    padding: 12px;
-    align-items: flex-start;
-    margin: 4% 0%;
-    border-radius: 4px;
-
-`
-const InputEmail = styled.input`
-    display: flex;
-    width: 350px;
-    padding: 12px;
-    align-items: flex-start;
-    margin: 4% 0%;
-    border-radius: 4px;
-
 `
 const ButtonAdd = styled.button`
     display: flex;

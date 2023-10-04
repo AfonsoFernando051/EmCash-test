@@ -2,19 +2,13 @@ import React from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
-
-type FormValuesModal = {
-    nome: string,
-    cpf: string,
-    cnpj: string,
-    celular: string,
-    email: string,
-}
+import AuthConfig from '../../services/AuthConfig';
+import { FormValuesModal } from '../types/FormType';
 
 interface AddWorkerProps {
     isOpen: boolean;
     onClose : any
-  }
+}
 
   const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose }) => {
     
@@ -26,12 +20,9 @@ interface AddWorkerProps {
     }
 
     const onSubmit = (data: FormValuesModal) => {
-        const authToken = localStorage.getItem('token');
-        const config = {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          };
+   
+        const {config} = AuthConfig();
+
         const url = 'http://18.117.195.42/funcionario/cadastro';
         
         axios.post(url, data, config)

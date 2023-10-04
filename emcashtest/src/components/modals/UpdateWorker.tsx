@@ -2,14 +2,8 @@ import React, {useEffect} from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
-
-type FormValuesModal = {
-    nome: string,
-    cpf: string,
-    cnpj: string,
-    celular: string,
-    email: string,
-}
+import AuthConfig from '../../services/AuthConfig';
+import { FormValuesModal } from '../types/FormType';
 
 interface AddWorkerProps {
     id: number;
@@ -20,20 +14,13 @@ interface AddWorkerProps {
   const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose }) => {
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
-    const authToken = localStorage.getItem('token');
+    const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario/${id}`;
-    
-    const config = {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      };
 
     useEffect(() => {        
       if(isOpen){
         axios.get(url, config)
         .then(response => {
-            console.log(response.data);
             reset(response.data);
         })
         .catch(error => {
@@ -48,7 +35,6 @@ interface AddWorkerProps {
     }
 
     const onSubmit = (data: FormValuesModal) => {
-      
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response.data);

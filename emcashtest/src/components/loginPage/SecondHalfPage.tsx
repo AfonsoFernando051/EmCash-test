@@ -85,7 +85,6 @@ export default function SecondHalfPage() {
   );
 }
 
-
 const WholePage = styled.div`
     background: linear-gradient(286deg, rgba(243, 243, 243, 0.16) 8.14%, rgba(243, 243, 243, 0.04) 38.39%, rgba(243, 243, 243, 0.16) 88.69%);
     box-shadow: 0px 0px 30px 0px rgba(12, 5, 7, 0.10);

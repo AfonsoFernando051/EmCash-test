@@ -1,20 +1,12 @@
 import React from "react";
 import styled from 'styled-components';
-// @ts-ignore
 import Vector from "../../assets/login/vector.png";
-// @ts-ignore
 import Khaby from "../../assets/login/vetor-khaby-lame.png";
-// @ts-ignore
 import Card from "../../assets/login/Card.png";
-// @ts-ignore
 import LogoCash from "../../assets/login/logoCash.png";
-// @ts-ignore
 import ChipCard from "../../assets/login/ChipCard.png";
-// @ts-ignore
 import Mastercard from "../../assets/login/mastercard.png";
-// @ts-ignore
 import LineCardAbout from "../../assets/login/lineCardAbout.png";
-// @ts-ignore
 import LineCardAbove from "../../assets/login/lineCardAbove.png";
 import FrontEndCash from "../FrontEndCash";
 

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
+import AuthConfig from '../../services/AuthConfig';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -18,13 +19,9 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
     }    
 
     const onSubmit = () => {
-        const authToken = localStorage.getItem('token');
-        const config = {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          };
-        const url = `http://18.117.195.42/funcionario/${id}`;
+   
+       const {config} = AuthConfig();
+       const url = `http://18.117.195.42/funcionario/${id}`;
         
         axios.delete(url, config)
             .then((response: AxiosResponse) => {

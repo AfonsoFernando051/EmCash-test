@@ -7,16 +7,15 @@ export default function HomeLogin(){
 
     return(
         <>
-        <WholePage>
-        <HalfPage>
-          <FirstHalfPage />  
-        </HalfPage>  
-        <HalfPage>
-            <SecondtHalfPage />  
-        </HalfPage>   
-        </WholePage>       
+            <WholePage>
+                <HalfPage>
+                    <FirstHalfPage />  
+                </HalfPage>  
+                <HalfPage>
+                    <SecondtHalfPage />  
+                </HalfPage>   
+            </WholePage>       
         </>
-
     )
 }
 

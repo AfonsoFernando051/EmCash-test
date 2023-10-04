@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ModalAddFuncionario from '../modals/AddWorker';
 import ModalDropFuncionario from '../modals/DeleteWorker';
 import ModalUpdateFuncionario from '../modals/UpdateWorker';
+import AuthConfig from '../../services/AuthConfig';
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
@@ -27,8 +28,7 @@ export default function WorkersTable() {
     const [idFuncionario, setIdFuncionario] = useState(0);
 
     useEffect(() => {
-
-        if (isModalAddFuncOpen || isModalDropFuncOpen) {
+        if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
           document.body.classList.add('modal-open');
         } else {
           document.body.classList.remove('modal-open');
@@ -37,11 +37,10 @@ export default function WorkersTable() {
         return () => {
           document.body.classList.remove('modal-open');
         };
-      }, [isModalAddFuncOpen, isModalDropFuncOpen]);
+    }, [isModalAddFuncOpen, isModalDropFuncOpen, isModalUpdateFuncOpen]);
 
     const openModalAddFunc = () => {
         setIsModalAddFuncOpen(true);
-        
         return 0;
     };
   
@@ -52,7 +51,6 @@ export default function WorkersTable() {
     const openModalDropFunc = (id: React.SetStateAction<number>) => {
         setIdFuncionario(id)
         setIsModalDropFuncOpen(true);
-        return 0;
     };
   
     const closeModalDropFunc = () => {
@@ -62,7 +60,6 @@ export default function WorkersTable() {
     const openModalUpdateFunc = (id: React.SetStateAction<number>) => {
         setIdFuncionario(id)
         setIsModalUpdateFuncOpen(true);
-        return 0;
     };
   
     const closeModalUpdateFunc = () => {
@@ -73,7 +70,6 @@ export default function WorkersTable() {
         const Cheked = event.target.checked;
         if(Cheked) {
             setIsChecked(true);
-            // @ts-ignore
             setSelections([...selections, id]);
             setCount(count + 1);
         } else {
@@ -85,21 +81,16 @@ export default function WorkersTable() {
     }
 
     useEffect(() => {        
-        const authToken = localStorage.getItem('token');
-        const config = {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          };
+        const {config} = AuthConfig();
 
         axios.get('http://18.117.195.42/funcionarios', config)
-                .then(response => {
-                    setFuncionarios(response.data)
-                })
-                .catch(error => {
-                    console.error('Erro na solicitação: ', error);
+            .then(response => {
+                setFuncionarios(response.data)
+            })
+            .catch(error => {
+                console.error('Erro na solicitação: ', error);
                     
-                })
+            })
     }, [])
   
   return (

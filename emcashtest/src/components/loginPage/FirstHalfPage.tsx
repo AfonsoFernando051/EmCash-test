@@ -8,7 +8,7 @@ import ChipCard from "../../assets/login/ChipCard.png";
 import Mastercard from "../../assets/login/mastercard.png";
 import LineCardAbout from "../../assets/login/lineCardAbout.png";
 import LineCardAbove from "../../assets/login/lineCardAbove.png";
-import FrontEndCash from "../FrontEndCash";
+import FrontEndCash from "../generics/FrontEndCash";
 
 export default function FirstHalfPage(){
 

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
+import OrangeButton from '../generics/OrangeButton';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -31,7 +32,7 @@ const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
                     </DropSubTitle>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd type='submit'>Sair</ButtonAdd>
+                        <OrangeButton size='large' type='submit' customStyles={{width: '43%'}}>Sair</OrangeButton>
                     </ButtonModal>
                 </div>
             </FormModal>
@@ -111,7 +112,8 @@ const ButtonCancel = styled.button`
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    
+    width: 55%;
+
     color: var(--primary-500, #EF6F2B);
     text-align: center;
     /* button1 */
@@ -124,6 +126,7 @@ const ButtonCancel = styled.button`
     
 `
 const ButtonModal = styled.div`
+width: 110%;
 display: flex;
 justify-content: flex-end;
 align-items: flex-start;

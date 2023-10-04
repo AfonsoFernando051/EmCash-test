@@ -5,7 +5,7 @@ import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
 import { Alert } from '@mui/material';
-
+import OrangeButton from "../generics/OrangeButton";
 type FormValues = {
     usuario: string,
     senha: string
@@ -66,7 +66,7 @@ export default function SecondHalfPage() {
             <ForgotPassword>
                 <OrangeLink href="">Esqueci minha senha</OrangeLink>
             </ForgotPassword>
-            <RegisterButton type="submit">Entrar</RegisterButton>
+            <OrangeButton size='large' type='submit' customStyles={{margin: '0% 13%'}}>Entrar</OrangeButton>
             <NotYet>
                 <NotYetText>
                     Ainda não tem uma conta?

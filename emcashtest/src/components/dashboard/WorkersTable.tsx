@@ -6,6 +6,8 @@ import ModalAddFuncionario from '../modals/AddWorker';
 import ModalDropFuncionario from '../modals/DeleteWorker';
 import ModalUpdateFuncionario from '../modals/UpdateWorker';
 import AuthConfig from '../../services/AuthConfig';
+import OrangeButton from '../generics/OrangeButton';
+import GrayButton from '../generics/GrayButton';
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
@@ -99,14 +101,13 @@ export default function WorkersTable() {
             <NavSelectionTitle>
                 Lista de funcionários
             </NavSelectionTitle>
-            <NavSelectionButton onClick={openModalAddFunc}>Adicionar novo</NavSelectionButton>
+            <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
             <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
             <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
             <ModalUpdateFuncionario id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
-            <Selection>
-                <Selected>Selecionados({count})</Selected>
-                <DeleteSelection onClick={() => openModalDropFunc(1)}>Apagar Seleção</DeleteSelection>
-            </Selection>
+            <Selected>Selecionados({count})</Selected>
+            <GrayButton size='small' customStyles={{marginLeft: '7px', boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)'}} onClick={() => openModalDropFunc(1)}>Apagar Seleção</GrayButton>
+         
         </NavSelection>
         <Table>
             <HeadTable>
@@ -146,9 +147,8 @@ const NavSelection = styled.div`
 `
 const NavSelectionTitle = styled.h1`
     color: var(--dark-500, #1B1B1B);
-
     font-family: Manrope;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: 23.5px; /* 117.5% */
@@ -178,6 +178,7 @@ const Selection = styled.div`
 `
 
 const Selected = styled.h1`
+    margin-left: 40%;
     color: #1B1B1B;
     text-align: center;
     font-size: 20px;

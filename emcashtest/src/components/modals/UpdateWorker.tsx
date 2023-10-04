@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import AuthConfig from '../../services/AuthConfig';
 import { FormValuesModal } from '../types/FormType';
+import OrangeButton from '../generics/OrangeButton';
 
 interface AddWorkerProps {
     id: number;
@@ -57,7 +58,7 @@ interface AddWorkerProps {
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd type='submit'>Salvar alterações</ButtonAdd>
+                        <OrangeButton size='large' type='submit'>Salvar alterações</OrangeButton>
                     </ButtonModal>
                 </div>
             </FormModal>
@@ -155,5 +156,5 @@ const ButtonModal = styled.div`
     display: flex;
     flex-direction:row;
     justify-content: flex-end;
-
+    gap: 2%
 `

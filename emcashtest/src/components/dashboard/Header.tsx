@@ -1,6 +1,6 @@
 import React, {useState, useEffect}  from "react";
 import styled from 'styled-components';
-import FrontEndCash from "../FrontEndCash";
+import FrontEndCash from "../generics/FrontEndCash";
 import User from "../../assets/dashboard/avatarUser.png";
 import { GoSignOut } from "react-icons/go"
 import ModalOutSystem from "../modals/OutSystem";

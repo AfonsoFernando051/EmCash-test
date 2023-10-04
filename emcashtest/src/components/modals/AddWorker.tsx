@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import AuthConfig from '../../services/AuthConfig';
 import { FormValuesModal } from '../types/FormType';
+import OrangeButton from '../generics/OrangeButton';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -47,7 +48,7 @@ interface AddWorkerProps {
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd type='submit'>Adicionar</ButtonAdd>
+                        <OrangeButton size='medium' type='submit'>Adicionar</OrangeButton>
                     </ButtonModal>
                 </div>
             </FormModal>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import AuthConfig from '../../services/AuthConfig';
+import OrangeButton from '../generics/OrangeButton';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -44,7 +45,7 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
                     </DropSubTitle>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd type='submit'>Apagar</ButtonAdd>
+                        <OrangeButton size='medium' type='submit'>Apagar</OrangeButton>
                     </ButtonModal>
                 </div>
             </FormModal>

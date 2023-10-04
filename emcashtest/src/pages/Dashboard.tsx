@@ -5,6 +5,7 @@ import WorkersTable from '../components/dashboard/WorkersTable';
 import styled from "styled-components";
 
 export default function Dashboard() {
+  
 
   return (
     <>

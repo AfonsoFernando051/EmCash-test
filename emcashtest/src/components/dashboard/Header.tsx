@@ -1,13 +1,38 @@
-import React from "react";
+import React, {useState, useEffect}  from "react";
 import styled from 'styled-components';
 import FrontEndCash from "../FrontEndCash";
 import User from "../../assets/dashboard/avatarUser.png";
 import { GoSignOut } from "react-icons/go"
+import ModalOutSystem from "../modals/OutSystem";
 
 export default function Header(){
 
+    const [isModalOutSystem, setModalOutSystem] = useState(false);
+
+    useEffect(() => {
+      if (isModalOutSystem) {
+        document.body.classList.add('modal-open');
+      } else {
+        document.body.classList.remove('modal-open');
+      }
+  
+      return () => {
+        document.body.classList.remove('modal-open');
+      };
+    }, [isModalOutSystem]);
+  
+    const openModalOutSystem = () => {
+      setModalOutSystem(true);
+      return 0;
+    };
+  
+    const closeModalOutSystem = () => {
+      setModalOutSystem(false);
+    };
+
     return(
         <>
+          <ModalOutSystem isOpen={isModalOutSystem} onClose={closeModalOutSystem}/>
             <HeaderDashboard>
                 <FrontLetter>
                     <FrontEndCash />
@@ -16,8 +41,8 @@ export default function Header(){
                     <UserImg src={User}/>
                     <UserText> Olá, EmCasher</UserText>
                 </UserLogo>
-                <GoOutIcon href="/">
-                    <GoSignOut/>
+                <GoOutIcon >
+                    <GoSignOut onClick={openModalOutSystem}/>
                 </GoOutIcon>
             </HeaderDashboard>
         </>
@@ -62,7 +87,7 @@ const UserText = styled.h1`
     line-height: 18.8px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-const GoOutIcon = styled.a`
+const GoOutIcon = styled.div`
     color: #EF6F2B;
     display: flex;
     font-size: 20px;

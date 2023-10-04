@@ -9,6 +9,8 @@ import AuthConfig from '../../services/AuthConfig';
 import OrangeButton from '../generics/OrangeButton';
 import GrayButton from '../generics/GrayButton';
 
+const PAGE_SIZE = 1; // Número de itens por página
+
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
         {
@@ -28,6 +30,8 @@ export default function WorkersTable() {
     const [isModalDropFuncOpen, setIsModalDropFuncOpen] = useState(false);
     const [isModalUpdateFuncOpen, setIsModalUpdateFuncOpen] = useState(false);
     const [idFuncionario, setIdFuncionario] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
@@ -87,22 +91,32 @@ export default function WorkersTable() {
     useEffect(() => {        
         const {config} = AuthConfig();
 
-        axios.get('http://18.117.195.42/funcionarios', config)
+        axios.get(`http://18.117.195.42/funcionarios?page=${currentPage}&pageSize=${PAGE_SIZE}`, config)
             .then(response => {
-                setFuncionarios(response.data)
+                setFuncionarios(response.data)                
+                setTotalPages(Math.ceil(response.data.length / PAGE_SIZE));
+
             })
             .catch(error => {
                 console.error('Erro na solicitação: ', error);
                     
             })
-    }, [])
+    }, [currentPage])
   
+    const handlePageChange = (newPage: number) => {
+        setCurrentPage(newPage);
+      };
+
   return (
     <>
         <NavSelection>
             <NavSelectionTitle>
                 Lista de funcionários
             </NavSelectionTitle>
+            <p>
+        Página {currentPage} de {totalPages}
+      </p>
+      
             <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
             <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
             <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
@@ -114,6 +128,14 @@ export default function WorkersTable() {
                     Apagar Seleção
             </GrayButton>
         </NavSelection>
+        <div>
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+          Anterior
+        </button>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
+          Próxima
+        </button>
+      </div>
         <Table>
             <HeadTable>
                 <TbRow>

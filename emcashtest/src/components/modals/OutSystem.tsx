@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import OrangeButton from '../generics/OrangeButton';
+import GrayButton from '../generics/GrayButton';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -31,7 +32,7 @@ const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
                     <DropSubTitle>Tem certeza que deseja sair?
                     </DropSubTitle>
                     <ButtonModal>
-                        <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
+                        <GrayButton onClick={onClose}>Cancelar</GrayButton>
                         <OrangeButton size='large' type='submit' customStyles={{width: '43%'}}>Sair</OrangeButton>
                     </ButtonModal>
                 </div>
@@ -57,9 +58,8 @@ const FormModal = styled.form`
     border-radius: 12px;
     background: var(--base-branco, #FFF);
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
-    display: flex;
-    width: 414px;
-    padding: 32px;
+    width: 75%;
+    padding: 10%;
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
@@ -88,49 +88,11 @@ const DropSubTitle = styled.h3`
     letter-spacing: -0.4px;
 `
 
-const ButtonAdd = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    background: var(--primary-500, #EF6F2B);
-
-    color: var(--base-branco, #FFF);
-    text-align: center;
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-    
-`
-const ButtonCancel = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    width: 55%;
-
-    color: var(--primary-500, #EF6F2B);
-    text-align: center;
-    /* button1 */
-    font-family: Poppins;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-    
-`
 const ButtonModal = styled.div`
-width: 110%;
-display: flex;
-justify-content: flex-end;
-align-items: flex-start;
-gap: 12px;
-align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 12px;
+    align-self: stretch;
 
 `

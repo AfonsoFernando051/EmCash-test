@@ -34,9 +34,7 @@ export default function Header(){
         <>
           <ModalOutSystem isOpen={isModalOutSystem} onClose={closeModalOutSystem}/>
             <HeaderDashboard>
-                <FrontLetter>
-                    <FrontEndCash />
-                </FrontLetter>
+              <FrontEndCash />
                 <UserLogo>
                     <UserImg src={User}/>
                     <UserText> Olá, EmCasher</UserText>
@@ -59,9 +57,7 @@ const HeaderDashboard = styled.header`
     justify-content: center;
     align-items: center;
 `
-const FrontLetter = styled.div`
-    padding-left:10%
-`
+
 const UserLogo = styled.div`
     display: flex;
     align-items:center;

@@ -5,6 +5,7 @@ import axios, { AxiosResponse, AxiosError } from 'axios';
 import AuthConfig from '../../services/AuthConfig';
 import { FormValuesModal } from '../types/FormType';
 import OrangeButton from '../generics/OrangeButton';
+import GrayButton from '../generics/GrayButton';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -41,13 +42,13 @@ interface AddWorkerProps {
        <WholeModal>
             <FormModal onSubmit={handleSubmit(onSubmit)}>
                 <div className="modal-content">
-                    <h2>Adicionar novo funcionário</h2>
+                    <ModalTitle>Adicionar novo funcionário</ModalTitle>
                     <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
                     <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
                     <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
                     <ButtonModal>
-                        <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
+                        <GrayButton size='medium' onClick={onClose}>Cancelar</GrayButton>
                         <OrangeButton size='medium' type='submit'>Adicionar</OrangeButton>
                     </ButtonModal>
                 </div>
@@ -74,77 +75,63 @@ const FormModal = styled.form`
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
     height: 400px;
 `
+const ModalTitle = styled.h2`
+    margin: auto;
+    color: var(--dark-400, #767676);
+    /* subtitle2 */
+    font-family: Manrope;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 23.5px; /* 117.5% */
+    letter-spacing: -0.4px;
+`
+
 const InputName = styled.input`
     display: flex;
     width: 350px;
-    padding: 12px;
+    padding: 16px;
     align-items: flex-start;
-    margin: 4% 0%;
+    margin: 6% 0%;
     border-radius: 4px;
+    font-size: 15px;
 `
 const InputCPF = styled.input`
     display: flex;
     width: 350px;
-    padding: 12px;
+    padding: 16px;
     align-items: flex-start;
-    margin: 4% 0%;
+    margin: 6% 0%;
     border-radius: 4px;
+    font-size: 15px;
 
 `
 const InputPhone = styled.input`
     display: flex;
     width: 350px;
-    padding: 12px;
+    padding: 16px;
     align-items: flex-start;
-    margin: 4% 0%;
+    margin: 6% 0%;
     border-radius: 4px;
+    font-size: 15px;
 
 `
 const InputEmail = styled.input`
     display: flex;
     width: 350px;
-    padding: 12px;
+    padding: 16px;
     align-items: flex-start;
-    margin: 4% 0%;
+    margin: 6% 0%;
     border-radius: 4px;
+    font-size: 15px;
 
 `
-const ButtonAdd = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    background: var(--primary-500, #EF6F2B);
 
-    color: var(--base-branco, #FFF);
-    text-align: center;
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-`
-const ButtonCancel = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    color: var(--primary-500, #EF6F2B);
-    text-align: center;
-    /* button1 */
-    font-family: Poppins;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-`
 const ButtonModal = styled.div`
+    margin: 6% 0%;
     display: flex;
     flex-direction:row;
     justify-content: flex-end;
+    gap: 2%;
 
 `

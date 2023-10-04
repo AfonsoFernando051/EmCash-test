@@ -72,7 +72,9 @@ export default function WorkersTable() {
         const Cheked = event.target.checked;
         if(Cheked) {
             setIsChecked(true);
+            console.log(selections);
             setSelections([...selections, id]);
+            
             setCount(count + 1);
         } else {
             // @ts-ignore
@@ -106,8 +108,11 @@ export default function WorkersTable() {
             <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
             <ModalUpdateFuncionario id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             <Selected>Selecionados({count})</Selected>
-            <GrayButton size='small' customStyles={{marginLeft: '7px', boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)'}} onClick={() => openModalDropFunc(1)}>Apagar Seleção</GrayButton>
-         
+            <GrayButton size='small'
+                customStyles={{marginLeft: '7px', boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)',  color: '#F3F3F3'}}
+                onClick={() => openModalDropFunc(selections)}>
+                    Apagar Seleção
+            </GrayButton>
         </NavSelection>
         <Table>
             <HeadTable>
@@ -154,28 +159,6 @@ const NavSelectionTitle = styled.h1`
     line-height: 23.5px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-const NavSelectionButton = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    background: var(--primary-500, #EF6F2B);
-
-    color: var(--base-branco, #FFF);
-    text-align: center;
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-`
-
-const Selection = styled.div`
-    display: flex;
-    padding-left: 42%
-`
 
 const Selected = styled.h1`
     margin-left: 40%;
@@ -188,21 +171,6 @@ const Selected = styled.h1`
     letter-spacing: -0.4px;
 `
 
-const DeleteSelection = styled.button`
-    padding: 12px 16px;
-    color: #767676;
-    text-align: center;
-
-    /* Button1 */
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 150% */
-    letter-spacing: -0.2px;
-    margin-left: 1%;
-    width: 145px;
-
-`
 const Table = styled.table`
     margin-top: 3%;
     padding: 1% 0%;

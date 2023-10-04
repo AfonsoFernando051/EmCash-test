@@ -31,8 +31,8 @@ const StyledGrayButton = styled.button<{ size: 'small' | 'medium' |'large'; cust
     ${(props) => getButtonSize(props.size)};
     ${(props) => props.customStyles};
     padding: 15px 16px; 
-    color: #767676;
     background: #F3F3F3;
+    color: var(--primary-500, #EF6F2B);
     border: 20px;
     border-radius: 4px;
     font-size: 13px;

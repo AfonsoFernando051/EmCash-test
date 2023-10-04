@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
 import AuthConfig from '../../services/AuthConfig';
 import OrangeButton from '../generics/OrangeButton';
+import GrayButton from '../generics/GrayButton';
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -14,25 +15,47 @@ interface AddWorkerProps {
 const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} ) => {
 
     const {handleSubmit} = useForm();
-    
+    const {config} = AuthConfig();
+    const url = `http://18.117.195.42/funcionario`;
+
     if (!isOpen) {
         return null;
     }    
 
-    const onSubmit = () => {
-   
-       const {config} = AuthConfig();
-       const url = `http://18.117.195.42/funcionario/${id}`;
-        
-        axios.delete(url, config)
-            .then((response: AxiosResponse) => {
-                console.log('Resposta: ', response);
-            })
-            .catch((error: AxiosError )=> {
-                console.log('Erro: ', error);
-            })
 
-            onClose(true);
+    const onSubmit = () => {
+        
+        if(Array.isArray(id)){
+            const deleteMultipleElements = async (idArray: number[]) => {
+                try {
+                  const deletePromises = idArray.map(async (id) => {
+                    const response = await axios.delete(url+`/${id}`, config)
+                        .then((response: AxiosResponse) => {
+                            console.log(url+`/${id}`);
+                            console.log('Resposta: ', response);
+                        })
+                  })
+              
+                  const results = await Promise.all(deletePromises);
+                  console.log('Elementos excluídos com sucesso:', results);
+                } catch (error) {
+                  console.error('Erro ao excluir elementos:', error);
+                }
+              };
+              deleteMultipleElements(id);
+        }else{
+
+            const urlDel = url+`/${id}`;
+            axios.delete(urlDel, config)
+                .then((response: AxiosResponse) => {
+                    console.log('Resposta: ', response);
+                })
+                .catch((error: AxiosError )=> {
+                    console.log('Erro: ', error);
+                })
+        }
+
+        onClose(true);
       }
 
     return (
@@ -44,7 +67,7 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
                         este(s) funcionário(s) do sistema?
                     </DropSubTitle>
                     <ButtonModal>
-                        <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
+                        <GrayButton size='medium' onClick={onClose}>Cancelar</GrayButton>
                         <OrangeButton size='medium' type='submit'>Apagar</OrangeButton>
                     </ButtonModal>
                 </div>
@@ -101,47 +124,11 @@ const DropSubTitle = styled.h3`
     letter-spacing: -0.4px;
 `
 
-const ButtonAdd = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    background: var(--primary-500, #EF6F2B);
-
-    color: var(--base-branco, #FFF);
-    text-align: center;
-
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-    
-`
-const ButtonCancel = styled.button`
-    display: flex;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    
-    color: var(--primary-500, #EF6F2B);
-    text-align: center;
-    /* button1 */
-    font-family: Poppins;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-    
-`
 const ButtonModal = styled.div`
 display: flex;
 justify-content: flex-end;
 align-items: flex-start;
-gap: 12px;
+gap: 2%;
 align-self: stretch;
 
 `

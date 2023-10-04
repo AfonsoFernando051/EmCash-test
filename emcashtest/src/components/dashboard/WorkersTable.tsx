@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from "styled-components";
 import ModalAddFuncionario from '../modals/AddWorker';
 import ModalDropFuncionario from '../modals/DeleteWorker';
+import ModalUpdateFuncionario from '../modals/UpdateWorker';
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
@@ -22,18 +23,17 @@ export default function WorkersTable() {
     const [selections, setSelections] = useState<any>([]);
     const [isModalAddFuncOpen, setIsModalAddFuncOpen] = useState(false);
     const [isModalDropFuncOpen, setIsModalDropFuncOpen] = useState(false);
+    const [isModalUpdateFuncOpen, setIsModalUpdateFuncOpen] = useState(false);
     const [idFuncionario, setIdFuncionario] = useState(0);
 
     useEffect(() => {
-        // Adiciona uma classe ao elemento body quando o modal é aberto
+
         if (isModalAddFuncOpen || isModalDropFuncOpen) {
           document.body.classList.add('modal-open');
         } else {
-          // Remove a classe quando o modal é fechado
           document.body.classList.remove('modal-open');
         }
     
-        // Certifique-se de remover a classe ao desmontar o componente para evitar vazamentos
         return () => {
           document.body.classList.remove('modal-open');
         };
@@ -57,6 +57,16 @@ export default function WorkersTable() {
   
     const closeModalDropFunc = () => {
         setIsModalDropFuncOpen(false);
+    };
+
+    const openModalUpdateFunc = (id: React.SetStateAction<number>) => {
+        setIdFuncionario(id)
+        setIsModalUpdateFuncOpen(true);
+        return 0;
+    };
+  
+    const closeModalUpdateFunc = () => {
+        setIsModalUpdateFuncOpen(false);
     };
 
     const handleCheckboxChange = (event:any, id:number) => {
@@ -101,9 +111,10 @@ export default function WorkersTable() {
             <NavSelectionButton onClick={openModalAddFunc}>Adicionar novo</NavSelectionButton>
             <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
             <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
+            <ModalUpdateFuncionario id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             <Selection>
                 <Selected>Selecionados({count})</Selected>
-                <DeleteSelection >Apagar Seleção</DeleteSelection>
+                <DeleteSelection onClick={() => openModalDropFunc(1)}>Apagar Seleção</DeleteSelection>
             </Selection>
         </NavSelection>
         <Table>
@@ -126,7 +137,7 @@ export default function WorkersTable() {
                     <TableTd>{(data.cpf) ? data.cpf : data.cnpj}</TableTd>
                     <TableTd>{data.celular}</TableTd>
                     <TableTd>{data.email}</TableTd>
-                    <TableTdIcon><BsFillPencilFill size={20} style={{cursor: 'pointer'}}/></TableTdIcon>
+                    <TableTdIcon onClick={() => openModalUpdateFunc(data.id)}><BsFillPencilFill size={20} style={{cursor: 'pointer'}}/></TableTdIcon>
                     <TableTdIcon onClick={() => openModalDropFunc(data.id)}><BsFillTrashFill size={20} id="trash" style={{cursor: 'pointer'}}/></TableTdIcon>
                 </TbRowData> 
                 ))}

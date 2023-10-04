@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
-import { DevTool } from '@hookform/devtools'
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
 type FormValuesModal = {
@@ -13,31 +12,46 @@ type FormValuesModal = {
 }
 
 interface AddWorkerProps {
+    id: number;
     isOpen: boolean;
-    onClose : any
+    onClose : any;
   }
 
-  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose }) => {
-    
+  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose }) => {
     const form = useForm<FormValuesModal>();
-    const {register, handleSubmit} = form;
+    const {register, reset, handleSubmit} = form;
+    const authToken = localStorage.getItem('token');
+    const url = `http://18.117.195.42/funcionario/${id}`;
+    
+    const config = {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      };
+
+    useEffect(() => {        
+      if(isOpen){
+        axios.get(url, config)
+        .then(response => {
+            console.log(response.data);
+            reset(response.data);
+        })
+        .catch(error => {
+            console.error('Erro na solicitação: ', error);
+                
+        })
+      }
+    }, [isOpen]);
 
     if (!isOpen) {
         return null;
     }
 
     const onSubmit = (data: FormValuesModal) => {
-        const authToken = localStorage.getItem('token');
-        const config = {
-            headers: {
-              Authorization: `Bearer ${authToken}`,
-            },
-          };
-        const url = 'http://18.117.195.42/funcionario/cadastro';
-        
-        axios.post(url, data, config)
+      
+        axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
-                console.log('Resposta: ', response);
+                console.log('Resposta: ', response.data);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
@@ -50,14 +64,14 @@ interface AddWorkerProps {
        <WholeModal>
             <FormModal onSubmit={handleSubmit(onSubmit)}>
                 <div className="modal-content">
-                    <h2>Adicionar novo funcionário</h2>
+                    <h2>Editar funcionário</h2>
                     <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
                     <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
                     <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
-                        <ButtonAdd type='submit'>Adicionar</ButtonAdd>
+                        <ButtonAdd type='submit'>Salvar alterações</ButtonAdd>
                     </ButtonModal>
                 </div>
             </FormModal>
@@ -65,7 +79,7 @@ interface AddWorkerProps {
     )
 }
 
-export default ModalAddFuncionario;
+export default ModalUpdateFuncionario;
 
 const WholeModal = styled.div`
     left: 37%;

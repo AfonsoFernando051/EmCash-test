@@ -1,16 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
-import { DevTool } from '@hookform/devtools'
 import axios, { AxiosResponse, AxiosError } from 'axios';
-
-type FormValuesModal = {
-    nome: string,
-    cpf: string,
-    cnpj: string,
-    celular: string,
-    email: string,
-}
 
 interface AddWorkerProps {
     isOpen: boolean;
@@ -19,16 +10,14 @@ interface AddWorkerProps {
   }
 
 const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} ) => {
+
+    const {handleSubmit} = useForm();
+    
     if (!isOpen) {
         return null;
     }    
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const form = useForm<FormValuesModal>();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const {register, control, handleSubmit} = form;
-
-    const onSubmit = (data: FormValuesModal) => {
+    const onSubmit = () => {
         const authToken = localStorage.getItem('token');
         const config = {
             headers: {
@@ -52,17 +41,16 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
        <WholeModal>
             <FormModal onSubmit={handleSubmit(onSubmit)}>
                 <div className="modal-content">
-                    <h2>Apagar funcionário(s)</h2>
-                    <h3>Esta ação é irreversível. Tem certeza que deseja Apagar
+                    <DropTitle>Apagar funcionário(s)</DropTitle>
+                    <DropSubTitle>Esta ação é irreversível. Tem certeza que deseja Apagar
                         este(s) funcionário(s) do sistema?
-                    </h3>
+                    </DropSubTitle>
                     <ButtonModal>
                         <ButtonCancel onClick={onClose}>Cancelar</ButtonCancel>
                         <ButtonAdd type='submit'>Apagar</ButtonAdd>
                     </ButtonModal>
                 </div>
             </FormModal>
-            <DevTool control={control}/>
         </WholeModal>
     )
 }
@@ -70,22 +58,51 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
 export default ModalDropFuncionario;
 
 const WholeModal = styled.div`
-    left: 24%;
-    top: 18%;
+    left: 33%;
+    top: 20%;
     position: absolute;
-
-`
-const FormModal = styled.form`
-    display: inline-flex;
+    display: flex;
+    width: 414px;
     padding: 32px;
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
+`
+const FormModal = styled.form`
     border-radius: 12px;
     background: var(--base-branco, #FFF);
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
-    height: 400px;
+    display: flex;
+    width: 414px;
+    padding: 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
 `
+const DropTitle = styled.h2`
+    color: #000;
+
+    /* subtitle2 */
+    font-family: Manrope;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 23.5px; /* 117.5% */
+    letter-spacing: -0.4px;
+`
+
+const DropSubTitle = styled.h3`
+    color: #000;
+
+    /* body1 */
+    font-family: Public Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18.8px; /* 117.5% */
+    letter-spacing: -0.4px;
+`
+
 const ButtonAdd = styled.button`
     display: flex;
     padding: 12px 16px;
@@ -102,6 +119,7 @@ const ButtonAdd = styled.button`
     font-weight: 600;
     line-height: 19.5px; /* 139.286% */
     letter-spacing: -0.2px;
+    
 `
 const ButtonCancel = styled.button`
     display: flex;
@@ -109,6 +127,7 @@ const ButtonCancel = styled.button`
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    
     color: var(--primary-500, #EF6F2B);
     text-align: center;
     /* button1 */
@@ -118,10 +137,13 @@ const ButtonCancel = styled.button`
     font-weight: 600;
     line-height: 19.5px; /* 139.286% */
     letter-spacing: -0.2px;
+    
 `
 const ButtonModal = styled.div`
-    display: flex;
-    flex-direction:row;
-    justify-content: flex-end;
+display: flex;
+justify-content: flex-end;
+align-items: flex-start;
+gap: 12px;
+align-self: stretch;
 
 `

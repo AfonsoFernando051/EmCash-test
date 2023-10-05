@@ -156,14 +156,14 @@ export default function WorkersTable() {
                 ))}
                  
             </BodyTable>
-            <Paginator>
+        </Table>
+        <Paginator>
                 <PaginatorContent >
                     <BsChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage - 1)}/>
                     <CurrentPaginator>{currentPage}</CurrentPaginator> de {totalPages}
                     <BsChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage + 1)}/>
                 </PaginatorContent>
-            </Paginator>
-        </Table>
+        </Paginator>
     </>
   );
 }
@@ -173,6 +173,7 @@ const Paginator = styled.div`
     align-items: center;
     gap: 4px;
     align-self: stretch;
+    margin-top: -1%;
 `
 const PaginatorContent = styled.p`
     display: flex;
@@ -294,7 +295,7 @@ const TableTdCheck = styled.td`
         background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
         background-image: url('../../assets/dashboard/Listchoice.svg');
         background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
-        border: none
+        border: none;
     }
 `
 const TableTd = styled.td`
@@ -309,7 +310,7 @@ const CheckBox = styled.input`
   appearance: none;
   width: 20px;
   height: 20px;
-  border: none
+  border: none;
   background-color: #BABABA; /* Cor de fundo do checkbox quando marcado */
   border-radius: 4px;
   outline: none;

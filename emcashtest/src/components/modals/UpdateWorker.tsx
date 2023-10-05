@@ -31,7 +31,7 @@ interface AddWorkerProps {
                 
         })
       }
-    }, [isOpen]);
+    }, [isOpen, reset, url]);
 
     if (!isOpen) {
         return null;
@@ -56,19 +56,19 @@ interface AddWorkerProps {
                     <ModalTitle>Editar funcionário</ModalTitle>
                     <Container>
                         <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
-                        <Label isActive={true}>Nome</Label>
+                        <Label>Nome</Label>
                     </Container>
                     <Container>
                         <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
-                        <Label isActive={true}>CPF/CNPJ</Label>
+                        <Label>CPF/CNPJ</Label>
                     </Container>
                     <Container>
                     <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
-                        <Label isActive={true}>Celular</Label>
+                        <Label>Celular</Label>
                     </Container>
                     <Container>
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
-                        <Label isActive={true}>E-mail</Label>
+                        <Label>E-mail</Label>
                     </Container>
                     <ButtonModal>
                         <GrayButton size='medium' onClick={onClose}>Cancelar</GrayButton>
@@ -87,15 +87,15 @@ const Container = styled.div`
   margin: 16px 0;
 `;
 
-const Label = styled.label<{ isActive: boolean }>`
+const Label = styled.label`
   position: absolute;
-  top: ${(props) => (props.isActive ? '-10px' : '12px')};
+  top: -10px; //'-10px' : '12px'
   left: 10px;
-  font-size: ${(props) => (props.isActive ? '12px' : '16px')};
+  font-size: 12px; //12px' : '16px'
   color: #333;
   transition: top 0.2s, font-size 0.2s;
   background-color: white;
-  padding: ${(props) => (props.isActive ? '0 5px' : '0')};
+  padding: 0 5px; //'0 5px' : '0'
 `;
 
 const ModalTitle = styled.h2`

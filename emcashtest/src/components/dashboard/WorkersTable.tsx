@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { BsFillPencilFill, BsFillTrashFill} from 'react-icons/bs';
+import { BsFillPencilFill, BsFillTrashFill, BsChevronLeft, BsChevronRight} from 'react-icons/bs';
 import axios from 'axios';
 import styled from "styled-components";
 import ModalAddFuncionario from '../modals/AddWorker';
@@ -9,7 +9,7 @@ import AuthConfig from '../../services/AuthConfig';
 import OrangeButton from '../generics/OrangeButton';
 import GrayButton from '../generics/GrayButton';
 
-const PAGE_SIZE = 1; // Número de itens por página
+const perPage = 8; // Número de itens por página
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([
@@ -31,7 +31,7 @@ export default function WorkersTable() {
     const [isModalUpdateFuncOpen, setIsModalUpdateFuncOpen] = useState(false);
     const [idFuncionario, setIdFuncionario] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
@@ -90,17 +90,19 @@ export default function WorkersTable() {
 
     useEffect(() => {        
         const {config} = AuthConfig();
-
-        axios.get(`http://18.117.195.42/funcionarios?page=${currentPage}&pageSize=${PAGE_SIZE}`, config)
-            .then(response => {
-                setFuncionarios(response.data)                
-                setTotalPages(Math.ceil(response.data.length / PAGE_SIZE));
-
-            })
-            .catch(error => {
+        const fetchData = async () => {
+            try{
+                const response = await axios.get(`http://18.117.195.42/funcionarios`, config);
+                setTotalPages(Math.ceil(response.data.length / perPage));
+                const startIndex = (currentPage - 1) * perPage;
+                const endIndex = startIndex + perPage;
+                const currentEmployees = response.data.slice(startIndex, endIndex);
+                setFuncionarios(currentEmployees)                
+            }catch(error){
                 console.error('Erro na solicitação: ', error);
-                    
-            })
+            }
+        }
+        fetchData()
     }, [currentPage])
   
     const handlePageChange = (newPage: number) => {
@@ -113,10 +115,6 @@ export default function WorkersTable() {
             <NavSelectionTitle>
                 Lista de funcionários
             </NavSelectionTitle>
-            <p>
-        Página {currentPage} de {totalPages}
-      </p>
-      
             <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
             <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
             <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
@@ -128,14 +126,6 @@ export default function WorkersTable() {
                     Apagar Seleção
             </GrayButton>
         </NavSelection>
-        <div>
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Anterior
-        </button>
-        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Próxima
-        </button>
-      </div>
         <Table>
             <HeadTable>
                 <TbRow>
@@ -160,11 +150,36 @@ export default function WorkersTable() {
                     <TableTdIcon onClick={() => openModalDropFunc(data.id)}><BsFillTrashFill size={20} id="trash" style={{cursor: 'pointer'}}/></TableTdIcon>
                 </TbRowData> 
                 ))}
+                 
             </BodyTable>
+            <Paginator>
+                <PaginatorContent >
+                    <BsChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage - 1)}/>
+                    <CurrentPaginator>{currentPage}</CurrentPaginator> de {totalPages}
+                    <BsChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage + 1)}/>
+                </PaginatorContent>
+            </Paginator>
         </Table>
     </>
   );
 }
+
+const Paginator = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+`
+const PaginatorContent = styled.p`
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+    color: #767676
+`
+const CurrentPaginator = styled.span`
+    color: #EF6F2B
+`
 
 const NavSelection = styled.div`
     display: flex;
@@ -263,7 +278,7 @@ const BodyTable = styled.tbody`
     border-radius: 0px 11px;
     justify-content: space-around;
     flex-direction: column;
-    background: #BABABA;
+    background: #E8E8E8;
 `
 
 const TableTdCheck = styled.td`
@@ -279,7 +294,19 @@ const TableTdIcon = styled.td`
     width: 10%;
 `
 const CheckBox = styled.input`
-    backgroung-color: #BABABA;
-    display: flex;
-    align-items: left;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid ; /* Cor da borda do checkbox quando não marcado */
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+
+  &:checked {
+   
+      background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
+      background-image: url('../../assets/dashboard/Listchoice.svg');
+      background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
+
+  }
 `

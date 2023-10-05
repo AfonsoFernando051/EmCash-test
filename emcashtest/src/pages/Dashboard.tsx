@@ -11,9 +11,9 @@ export default function Dashboard() {
     <WholePage>
       <Header/>
       <DashboardComponents>
-        <WorkersList>
+        <div>
           <WorkersTable />
-        </WorkersList>
+        </div>
       </DashboardComponents>
       </WholePage>
     </>
@@ -25,7 +25,4 @@ const WholePage = styled.div`
 `
 const DashboardComponents = styled.div`
   padding: 2% 10%
-`
-const WorkersList = styled.div`
-
 `

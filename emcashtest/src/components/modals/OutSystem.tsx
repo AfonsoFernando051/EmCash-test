@@ -32,8 +32,8 @@ const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
                     <DropSubTitle>Tem certeza que deseja sair?
                     </DropSubTitle>
                     <ButtonModal>
-                        <GrayButton onClick={onClose}>Cancelar</GrayButton>
-                        <OrangeButton size='large' type='submit' customStyles={{width: '43%'}}>Sair</OrangeButton>
+                        <GrayButton onClick={onClose} customStyles={{width: '30%'}}>Cancelar</GrayButton>
+                        <OrangeButton size='small' type='submit' customStyles={{width: '30%'}}>Sair</OrangeButton>
                     </ButtonModal>
                 </div>
             </FormModal>

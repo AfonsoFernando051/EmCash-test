@@ -25,7 +25,7 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
 
     const onSubmit = () => {
         
-        if(Array.isArray(id)){
+        if(Array.isArray(id)){            
             const deleteMultipleElements = async (idArray: number[]) => {
                 try {
                   const deletePromises = idArray.map(async (id) => {

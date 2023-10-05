@@ -78,12 +78,21 @@ export default function WorkersTable() {
 
     const handleCheckboxChange = (event:any, id:any) => {
         const Cheked = event.target.checked;
+        
         if(Array.isArray(id)){
-            
+            if(Cheked){                
+                setIsAllChecked(true);
+                setSelections(id);
+                setCount(id.length);  
+            }else{
+                setIsAllChecked(false);
+                setSelections([]);
+                setCount(0);
+            }
         }else{
             if(Cheked) {
                 setIsChecked(true);
-                setSelections([...selections, id]);
+                setSelections([...selections, id]);    
                 setCount(count + 1);          
             } else {
                 // @ts-ignore
@@ -92,6 +101,8 @@ export default function WorkersTable() {
                 setCount(count - 1);
             }
         }
+        
+        
     }
 
     useEffect(() => {        
@@ -136,7 +147,7 @@ export default function WorkersTable() {
             <HeadTable>
                 <TbRow>
                     <EmptyTableTh>
-                        <CheckBox type="checkbox" name="" id="" checked={isAllChecked} onChange={e => handleCheckboxChange(e, (funcionarios.map((data) => data.id)))}/>
+                        <CheckBox type="checkbox" checked={isAllChecked} onChange={e => handleCheckboxChange(e, (funcionarios.map((data) => data.id)))}/>
                     </EmptyTableTh>
                     <NameTableTh>Nome completo</NameTableTh>
                     <CPFTableTh>CPF/CNPJ</CPFTableTh>
@@ -150,7 +161,7 @@ export default function WorkersTable() {
                 {funcionarios.map((data) => (
                 <TbRowData key={data.id}>
                     <TableTdCheck>                        
-                        <CheckBox type="checkbox" name="" id="" checked={selections.includes(data.id)} onChange={e => handleCheckboxChange(e, data.id)}/></TableTdCheck>
+                        <CheckBox type="checkbox" checked={selections.includes(data.id)} onChange={e => handleCheckboxChange(e, data.id)}/></TableTdCheck>
                     <TableTd>{data.nome}</TableTd>
                     <TableTd>{(data.cpf) ? data.cpf : data.cnpj}</TableTd>
                     <TableTd>{data.celular}</TableTd>
@@ -299,13 +310,6 @@ const BodyTable = styled.tbody`
 const TableTdCheck = styled.td`
     padding: 12px 12px;
     width: 1%;
-
-    input:checked{
-        background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
-        background-image: url('../../assets/dashboard/Listchoice.svg');
-        background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
-        border: none;
-    }
 `
 const TableTd = styled.td`
     padding: 12px 12px;
@@ -325,4 +329,10 @@ const CheckBox = styled.input`
   outline: none;
   cursor: pointer;
 
+ &:checked{
+    background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
+    background-image: url('../../assets/dashboard/Listchoice.svg');
+    background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
+    border: none;
+}
 `

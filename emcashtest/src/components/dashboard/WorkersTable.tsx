@@ -27,6 +27,7 @@ export default function WorkersTable() {
     const [count, setCount] = useState(0);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isChecked, setIsChecked] = useState(false);
+    const [isAllChecked, setIsAllChecked] = useState(false);
     const [selections, setSelections] = useState<any>([]);
     const [isModalAddFuncOpen, setIsModalAddFuncOpen] = useState(false);
     const [isModalDropFuncOpen, setIsModalDropFuncOpen] = useState(false);
@@ -38,6 +39,7 @@ export default function WorkersTable() {
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
           document.body.classList.add('modal-open');
+          
         } else {
           document.body.classList.remove('modal-open');
         }
@@ -74,20 +76,21 @@ export default function WorkersTable() {
         setIsModalUpdateFuncOpen(false);
     };
 
-    const handleCheckboxChange = (event:any, id:number) => {
+    const handleCheckboxChange = (event:any, id:any) => {
         const Cheked = event.target.checked;
-        if(Cheked) {
-            setIsChecked(true);
-            setSelections([...selections, id]);
-            setCount(count + 1);
-            if(selections.includes(id)){
-
-            }            
-        } else {
-            // @ts-ignore
-            const updatedSelections = selections.filter(data => data !== id);
-            setSelections(updatedSelections);
-            setCount(count - 1);
+        if(Array.isArray(id)){
+            
+        }else{
+            if(Cheked) {
+                setIsChecked(true);
+                setSelections([...selections, id]);
+                setCount(count + 1);          
+            } else {
+                // @ts-ignore
+                const updatedSelections = selections.filter(data => data !== id);
+                setSelections(updatedSelections);
+                setCount(count - 1);
+            }
         }
     }
 
@@ -132,7 +135,9 @@ export default function WorkersTable() {
         <Table>
             <HeadTable>
                 <TbRow>
-                    <EmptyTableTh></EmptyTableTh>
+                    <EmptyTableTh>
+                        <CheckBox type="checkbox" name="" id="" checked={isAllChecked} onChange={e => handleCheckboxChange(e, (funcionarios.map((data) => data.id)))}/>
+                    </EmptyTableTh>
                     <NameTableTh>Nome completo</NameTableTh>
                     <CPFTableTh>CPF/CNPJ</CPFTableTh>
                     <PhoneTableTh>Celular</PhoneTableTh>
@@ -234,41 +239,45 @@ const TbRow = styled.tr`
 `
 
 const EmptyTableTh = styled.th`
-    padding-right: 2%
+    width: 1%;
+    padding: 12px 12px;
 `
 
 const TableTh = styled.th`
-    font-size: 16px;
+    font-weight: 500;
+    font-size: 17px;
     padding: 14px 0px;
     width: 12%;
-}
-
 `
 const NameTableTh = styled.th`
-    font-size: 16px;
-    padding: 14px 25px;
+    font-weight: 500;
+    font-size: 17px;
+    padding: 14px 16px;
     width: 15%;
 }
 `
 
 const CPFTableTh = styled.th`
+    font-weight: 500;
     margin-left: 1%;
-    font-size: 16px;
+    font-size: 17px;
     padding: 14px 20px;
     width: 12%;
     gap: 10px;
 }`
 
 const PhoneTableTh = styled.th`
+    font-weight: 500;
     margin-left: 5%;
-    font-size: 16px;
+    font-size: 17px;
     padding: 14px 20px;
     width: 12%;
 }
 `
 const EmailTableTh = styled.th`
+    font-weight: 500;    
     margin-left: 4%;
-    font-size: 16px;
+    font-size: 17px;
     padding: 14px 30px;
     width: 13%;
     margin-right: 4%;

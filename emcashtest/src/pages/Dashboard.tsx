@@ -20,7 +20,7 @@ export default function Dashboard() {
   );
 }
 const WholePage = styled.div`
-  background: var(--dark-200, #E8E8E8);
+  background: #E8E8E8;
 
 `
 const DashboardComponents = styled.div`

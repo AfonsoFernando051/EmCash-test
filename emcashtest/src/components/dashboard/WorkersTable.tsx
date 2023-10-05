@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import { BsFillPencilFill, BsFillTrashFill, BsChevronLeft, BsChevronRight} from 'react-icons/bs';
+import { BsChevronLeft, BsChevronRight} from 'react-icons/bs';
+import { PiTrash} from 'react-icons/pi';
+import { GoPencil } from 'react-icons/go';
 import axios from 'axios';
 import styled from "styled-components";
 import ModalAddFuncionario from '../modals/AddWorker';
@@ -76,10 +78,11 @@ export default function WorkersTable() {
         const Cheked = event.target.checked;
         if(Cheked) {
             setIsChecked(true);
-            console.log(selections);
             setSelections([...selections, id]);
-            
             setCount(count + 1);
+            if(selections.includes(id)){
+
+            }            
         } else {
             // @ts-ignore
             const updatedSelections = selections.filter(data => data !== id);
@@ -141,13 +144,14 @@ export default function WorkersTable() {
             <BodyTable>
                 {funcionarios.map((data) => (
                 <TbRowData key={data.id}>
-                    <TableTdCheck><CheckBox type="checkbox" name="" id="" checked={selections.includes(data.id)} onChange={e => handleCheckboxChange(e, data.id)}/></TableTdCheck>
+                    <TableTdCheck>                        
+                        <CheckBox type="checkbox" name="" id="" checked={selections.includes(data.id)} onChange={e => handleCheckboxChange(e, data.id)}/></TableTdCheck>
                     <TableTd>{data.nome}</TableTd>
                     <TableTd>{(data.cpf) ? data.cpf : data.cnpj}</TableTd>
                     <TableTd>{data.celular}</TableTd>
                     <TableTd>{data.email}</TableTd>
-                    <TableTdIcon onClick={() => openModalUpdateFunc(data.id)}><BsFillPencilFill size={20} style={{cursor: 'pointer'}}/></TableTdIcon>
-                    <TableTdIcon onClick={() => openModalDropFunc(data.id)}><BsFillTrashFill size={20} id="trash" style={{cursor: 'pointer'}}/></TableTdIcon>
+                    <TableTdIcon onClick={() => openModalUpdateFunc(data.id)}><GoPencil size={23} style={{cursor: 'pointer', color: '#EF6F2B'}}/></TableTdIcon>
+                    <TableTdIcon onClick={() => openModalDropFunc(data.id)}><PiTrash size={23} id="trash" style={{cursor: 'pointer', color: '#EF6F2B'}}/></TableTdIcon>
                 </TbRowData> 
                 ))}
                  
@@ -188,6 +192,7 @@ const NavSelection = styled.div`
     align-self: stretch;
 `
 const NavSelectionTitle = styled.h1`
+    margin-right: 1%;
     color: var(--dark-500, #1B1B1B);
     font-family: Manrope;
     font-size: 20px;
@@ -198,7 +203,7 @@ const NavSelectionTitle = styled.h1`
 `
 
 const Selected = styled.h1`
-    margin-left: 40%;
+    margin-left: 39%;
     color: #1B1B1B;
     text-align: center;
     font-size: 20px;
@@ -246,7 +251,7 @@ const NameTableTh = styled.th`
 `
 
 const CPFTableTh = styled.th`
-    margin-left: 4%;
+    margin-left: 1%;
     font-size: 16px;
     padding: 14px 20px;
     width: 12%;
@@ -265,6 +270,7 @@ const EmailTableTh = styled.th`
     font-size: 16px;
     padding: 14px 30px;
     width: 13%;
+    margin-right: 4%;
 }
 `
 
@@ -278,12 +284,18 @@ const BodyTable = styled.tbody`
     border-radius: 0px 11px;
     justify-content: space-around;
     flex-direction: column;
-    background: #E8E8E8;
-`
+    background: var(--dark-200, #F3F3F3);`
 
 const TableTdCheck = styled.td`
     padding: 12px 12px;
     width: 1%;
+
+    input:checked{
+        background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
+        background-image: url('../../assets/dashboard/Listchoice.svg');
+        background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
+        border: none
+    }
 `
 const TableTd = styled.td`
     padding: 12px 12px;
@@ -297,16 +309,10 @@ const CheckBox = styled.input`
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 1px solid ; /* Cor da borda do checkbox quando não marcado */
+  border: none
+  background-color: #BABABA; /* Cor de fundo do checkbox quando marcado */
   border-radius: 4px;
   outline: none;
   cursor: pointer;
 
-  &:checked {
-   
-      background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
-      background-image: url('../../assets/dashboard/Listchoice.svg');
-      background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
-
-  }
 `

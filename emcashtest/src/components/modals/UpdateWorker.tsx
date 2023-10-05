@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
@@ -14,6 +14,16 @@ interface AddWorkerProps {
   }
 
   const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose }) => {
+    const [isFocused, setIsFocused] = useState(false);
+
+    const handleFocus = () => {
+      setIsFocused(true);
+    };
+  
+    const handleBlur = () => {
+      setIsFocused(false);
+    };
+  
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
     const {config} = AuthConfig();
@@ -53,10 +63,26 @@ interface AddWorkerProps {
             <FormModal onSubmit={handleSubmit(onSubmit)}>
                 <div className="modal-content">
                     <ModalTitle>Editar funcionário</ModalTitle>
-                    <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
-                    <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
-                    <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
-                    <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
+                    <Container>
+                        <InputName  {...register("nome", { required: true })} placeholder="Nome Completo" onFocus={handleFocus}
+                            onBlur={handleBlur}/>
+                        <Label isActive={true}>Nome</Label>
+                    </Container>
+                    <Container>
+                        <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ" onFocus={handleFocus}
+                            onBlur={handleBlur}/>
+                        <Label isActive={true}>Cpf</Label>
+                    </Container>
+                    <Container>
+                    <InputPhone {...register("celular", { required: true })} placeholder="Celular" onFocus={handleFocus}
+                            onBlur={handleBlur}/>
+                        <Label isActive={true }>Celular</Label>
+                    </Container>
+                    <Container>
+                    <InputEmail {...register("email", { required: true })} placeholder="E-mail" onFocus={handleFocus}
+                            onBlur={handleBlur}/>
+                        <Label isActive={true }>E-mail</Label>
+                    </Container>
                     <ButtonModal>
                         <GrayButton size='medium' onClick={onClose}>Cancelar</GrayButton>
                         <OrangeButton size='large' type='submit'>Salvar alterações</OrangeButton>
@@ -68,6 +94,23 @@ interface AddWorkerProps {
 }
 
 export default ModalUpdateFuncionario;
+
+const Container = styled.div`
+  position: relative;
+  margin: 16px 0;
+`;
+
+const Label = styled.label<{ isActive: boolean }>`
+  position: absolute;
+  top: ${(props) => (props.isActive ? '-10px' : '12px')};
+  left: 10px;
+  font-size: ${(props) => (props.isActive ? '12px' : '16px')};
+  color: #333;
+  transition: top 0.2s, font-size 0.2s;
+  background-color: white;
+  padding: ${(props) => (props.isActive ? '0 5px' : '0')};
+`;
+
 
 const ModalTitle = styled.h2`
     margin: auto;

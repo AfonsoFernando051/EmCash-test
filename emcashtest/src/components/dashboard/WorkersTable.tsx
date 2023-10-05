@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BsChevronLeft, BsChevronRight} from 'react-icons/bs';
+import { AiOutlineEye } from 'react-icons/ai';
 import { PiTrash} from 'react-icons/pi';
 import { GoPencil } from 'react-icons/go';
 import axios from 'axios';
@@ -35,6 +36,7 @@ export default function WorkersTable() {
     const [idFuncionario, setIdFuncionario] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+    const [hideCPF, setHideCPF] = useState(false);
 
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
@@ -101,8 +103,10 @@ export default function WorkersTable() {
                 setCount(count - 1);
             }
         }
-        
-        
+    }
+
+    const showCPF = () => {
+        hideCPF ? setHideCPF(false) : setHideCPF(true)
     }
 
     useEffect(() => {        
@@ -150,7 +154,7 @@ export default function WorkersTable() {
                         <CheckBox type="checkbox" checked={isAllChecked} onChange={e => handleCheckboxChange(e, (funcionarios.map((data) => data.id)))}/>
                     </EmptyTableTh>
                     <NameTableTh>Nome completo</NameTableTh>
-                    <CPFTableTh>CPF/CNPJ</CPFTableTh>
+                    <CPFTableTh>CPF/CNPJ <EyeIcon onClick={showCPF}><AiOutlineEye/></EyeIcon></CPFTableTh>
                     <PhoneTableTh>Celular</PhoneTableTh>
                     <EmailTableTh>E-mail</EmailTableTh>
                     <TableTh>Editar</TableTh>
@@ -163,7 +167,7 @@ export default function WorkersTable() {
                     <TableTdCheck>                        
                         <CheckBox type="checkbox" checked={selections.includes(data.id)} onChange={e => handleCheckboxChange(e, data.id)}/></TableTdCheck>
                     <TableTd>{data.nome}</TableTd>
-                    <TableTd>{(data.cpf) ? data.cpf : data.cnpj}</TableTd>
+                    <TableTdCPF> {(hideCPF) ? '************' : (data.cpf) ? data.cpf : data.cnpj}</TableTdCPF>
                     <TableTd>{data.celular}</TableTd>
                     <TableTd>{data.email}</TableTd>
                     <TableTdIcon onClick={() => openModalUpdateFunc(data.id)}><GoPencil size={23} style={{cursor: 'pointer', color: '#EF6F2B'}}/></TableTdIcon>
@@ -277,6 +281,12 @@ const CPFTableTh = styled.th`
     gap: 10px;
 }`
 
+const EyeIcon = styled.span`
+    padding-left: 7%;
+    vertical-align: middle;
+    cursor: pointer;
+`
+
 const PhoneTableTh = styled.th`
     font-weight: 500;
     margin-left: 5%;
@@ -315,6 +325,11 @@ const TableTd = styled.td`
     padding: 12px 12px;
     width: 20%;
 `
+const TableTdCPF = styled.td`
+    padding: 12px 12px;
+    width: 20%;
+`
+
 const TableTdIcon = styled.td`
     padding: 12px 12px;
     width: 10%;
@@ -324,14 +339,14 @@ const CheckBox = styled.input`
   width: 20px;
   height: 20px;
   border: none;
-  background-color: #BABABA; /* Cor de fundo do checkbox quando marcado */
+  background-color: #BABABA;
   border-radius: 4px;
   outline: none;
   cursor: pointer;
 
  &:checked{
     background-color: #EF6F2B; /* Cor de fundo do checkbox quando marcado */
-    background-image: url('../../assets/dashboard/Listchoice.svg');
+    background-image: url('../../assets/dashboard/Icon.png');
     background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
     border: none;
 }

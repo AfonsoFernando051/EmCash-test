@@ -14,15 +14,6 @@ interface AddWorkerProps {
   }
 
   const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose }) => {
-    const [isFocused, setIsFocused] = useState(false);
-
-    const handleFocus = () => {
-      setIsFocused(true);
-    };
-  
-    const handleBlur = () => {
-      setIsFocused(false);
-    };
   
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
@@ -64,24 +55,20 @@ interface AddWorkerProps {
                 <div className="modal-content">
                     <ModalTitle>Editar funcionário</ModalTitle>
                     <Container>
-                        <InputName  {...register("nome", { required: true })} placeholder="Nome Completo" onFocus={handleFocus}
-                            onBlur={handleBlur}/>
+                        <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
                         <Label isActive={true}>Nome</Label>
                     </Container>
                     <Container>
-                        <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ" onFocus={handleFocus}
-                            onBlur={handleBlur}/>
-                        <Label isActive={true}>Cpf</Label>
+                        <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
+                        <Label isActive={true}>CPF/CNPJ</Label>
                     </Container>
                     <Container>
-                    <InputPhone {...register("celular", { required: true })} placeholder="Celular" onFocus={handleFocus}
-                            onBlur={handleBlur}/>
-                        <Label isActive={true }>Celular</Label>
+                    <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
+                        <Label isActive={true}>Celular</Label>
                     </Container>
                     <Container>
-                    <InputEmail {...register("email", { required: true })} placeholder="E-mail" onFocus={handleFocus}
-                            onBlur={handleBlur}/>
-                        <Label isActive={true }>E-mail</Label>
+                    <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
+                        <Label isActive={true}>E-mail</Label>
                     </Container>
                     <ButtonModal>
                         <GrayButton size='medium' onClick={onClose}>Cancelar</GrayButton>
@@ -110,7 +97,6 @@ const Label = styled.label<{ isActive: boolean }>`
   background-color: white;
   padding: ${(props) => (props.isActive ? '0 5px' : '0')};
 `;
-
 
 const ModalTitle = styled.h2`
     margin: auto;

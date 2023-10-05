@@ -9,10 +9,12 @@ import GrayButton from '../generics/GrayButton';
 interface AddWorkerProps {
     isOpen: boolean;
     onClose : any,
-    id: number
+    id: number;
+    workApi: any;
   }
 
-const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} ) => {
+const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, workApi}) => {
+    workApi(false);
 
     const {handleSubmit} = useForm();
     const {config} = AuthConfig();
@@ -38,17 +40,18 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id} )
               
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
+                  workApi(true);
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);
                 }
               };
               deleteMultipleElements(id);
         }else{
-
             const urlDel = url+`/${id}`;
             axios.delete(urlDel, config)
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
+                    workApi(true);
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);

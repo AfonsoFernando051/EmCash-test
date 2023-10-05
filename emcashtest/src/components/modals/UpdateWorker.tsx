@@ -11,10 +11,12 @@ interface AddWorkerProps {
     id: number;
     isOpen: boolean;
     onClose : any;
+    workApi: any;
   }
 
-  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose }) => {
-  
+  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose, workApi }) => {
+    workApi(false);
+
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
     const {config} = AuthConfig();
@@ -41,6 +43,7 @@ interface AddWorkerProps {
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response.data);
+                workApi(true);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);

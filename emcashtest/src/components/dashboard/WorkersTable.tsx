@@ -37,6 +37,7 @@ export default function WorkersTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [hideCPF, setHideCPF] = useState(false);
+    const [modalWork, setModalWork] = useState(false);
 
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
@@ -124,7 +125,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage])
+    }, [currentPage, modalWork])
   
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
@@ -137,9 +138,9 @@ export default function WorkersTable() {
                 Lista de funcionários
             </NavSelectionTitle>
             <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
-            <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
-            <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
-            <ModalUpdateFuncionario id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
+            <ModalAddFuncionario workApi={setModalWork} isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
+            <ModalDropFuncionario workApi={setModalWork} isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
+            <ModalUpdateFuncionario workApi={setModalWork} id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             <Selected>Selecionados({count})</Selected>
             <GrayButton size='small'
                 customStyles={{marginLeft: '7px', boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)',  color: '#F3F3F3'}}

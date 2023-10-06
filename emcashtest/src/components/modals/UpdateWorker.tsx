@@ -130,7 +130,6 @@ const Label = styled.label`
 const ModalTitle = styled.h2`
     margin: auto;
     color: var(--dark-400, #767676);
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 22px;
     font-style: normal;

@@ -5,12 +5,11 @@ export default function FrontEndCash(){
 
     return(
         <>
-        <FrontLetter>
-            <FrontEndCashBlack>front-end-</FrontEndCashBlack>
-            <FrontEndCashOrange>emcash</FrontEndCashOrange>
-        </FrontLetter>
+            <FrontLetter>
+                <FrontEndCashBlack>front-end-</FrontEndCashBlack>
+                <FrontEndCashOrange>emcash</FrontEndCashOrange>
+            </FrontLetter>
         </>
-
     )
 }
 
@@ -20,7 +19,6 @@ const FrontLetter = styled.div`
 
 const FrontEndCashBlack = styled.h1`
     color: var(--dark-500, #1B1B1B);
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 20px;
     font-style: normal;

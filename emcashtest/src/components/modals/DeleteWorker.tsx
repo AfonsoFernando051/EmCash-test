@@ -108,8 +108,6 @@ const FormModal = styled.form`
 `
 const DropTitle = styled.h2`
     color: #000;
-
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 20px;
     font-style: normal;
@@ -120,8 +118,6 @@ const DropTitle = styled.h2`
 
 const DropSubTitle = styled.h3`
     color: #000;
-
-    /* body1 */
     font-family: Public Sans;
     font-size: 16px;
     font-style: normal;
@@ -131,10 +127,10 @@ const DropSubTitle = styled.h3`
 `
 
 const ButtonModal = styled.div`
-display: flex;
-justify-content: flex-end;
-align-items: flex-start;
-gap: 2%;
-align-self: stretch;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 2%;
+    align-self: stretch;
 
 `

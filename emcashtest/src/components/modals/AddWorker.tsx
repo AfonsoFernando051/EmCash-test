@@ -26,7 +26,6 @@ interface AddWorkerProps {
         }else{
             setUsarCpf(true);
         }
-        
       };
 
     if (!isOpen) {
@@ -34,11 +33,9 @@ interface AddWorkerProps {
     }
 
     const onSubmit = (data: FormValuesModal) => {
-        modalCase('Add')
-
         const {config} = AuthConfig();
-
         const url = 'http://18.117.195.42/funcionario/cadastro';
+        modalCase('Add')
 
         if(data.cnpj){
             data.cpf = ''
@@ -104,7 +101,6 @@ const FormModal = styled.form`
 const ModalTitle = styled.h2`
     margin: auto;
     color: var(--dark-400, #767676);
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 22px;
     font-style: normal;

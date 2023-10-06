@@ -42,12 +42,12 @@ interface AddWorkerProps {
         axios.post(url, data, config)        
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
-                respostWork(200);
+                respostWork(0);
                 mostrarAlerta(true)
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
-                respostWork(400);
+                respostWork(-1);
                 mostrarAlerta(true)
             })
             console.log(respost);

@@ -44,11 +44,11 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
                   count(0)
-                  respostWork(200);
+                  respostWork(1);
                   mostrarAlerta(true)
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);
-                  respostWork(400);
+                  respostWork(-2);
                   mostrarAlerta(true)
                 }
               };
@@ -58,12 +58,12 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
             axios.delete(urlDel, config)
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
-                    respostWork(200);
+                    respostWork(0);
                     mostrarAlerta(true)
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);
-                    respostWork(400);
+                    respostWork(-1);
                     mostrarAlerta(true)
                 })
         }

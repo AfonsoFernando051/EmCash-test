@@ -95,57 +95,74 @@ export default function WorkersTable() {
         switch (respost) {
             case 'Add':
                 if(mostrarAlerta){                                        
-                    if(modalWorkAdd === 400){      
+                    if(modalWorkAdd === 0){
+                        setMessageAlert('Funcionário adicionado com sucesso!');
+                        setSeverity('success')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+                    }else if(modalWorkAdd === -1){      
                         setMessageAlert('Erro ao adicionar funcionário.');
                         setSeverity('error')
                         setTimeout(() => {
                             setMostrarAlerta(false);
                         }, 3000);
             
-                    }else if(modalWorkAdd === 200){
-                        console.log('chega no ceto');
-                        setMessageAlert('Funcionário Adicionado com sucesso!');
-                        setSeverity('success')
-                        setTimeout(() => {
-                            setMostrarAlerta(false);
-                        }, 3000);
                     }        
                 }  
                 break;
             case 'Update':
                 if(mostrarAlerta){
-                    if(modalWorkUpdate === 400){      
+                    if(modalWorkUpdate === 0){
+                        setMessageAlert('Funcionário atualizado com sucesso!');
+                        setSeverity('success')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+                    }else if(modalWorkUpdate === -1){      
                         setMessageAlert('Erro ao atualizar funcionário.');
                         setSeverity('error')
                         setTimeout(() => {
                             setMostrarAlerta(false);
                         }, 3000);
             
-                    }else if(modalWorkUpdate === 200){
-                        setMessageAlert('Funcionário atualizado com sucesso!');
-                        setSeverity('success')
-                        setTimeout(() => {
-                            setMostrarAlerta(false);
-                        }, 3000);
-                    }        
+                    }     
                 }     
             break;
             case 'Delete':
                 if(mostrarAlerta){
-                    if(modalWorkDelete === 400){      
-                        setMessageAlert('Erro ao excluir funcionário.');
-                        setSeverity('error')
-                        setTimeout(() => {
-                            setMostrarAlerta(false);
-                        }, 3000);
-            
-                    }else if(modalWorkDelete === 200){
-                        setMessageAlert('Funcionário Excluído com sucesso!');
+                    switch (modalWorkDelete) {
+                        case 0:
+                        setMessageAlert('Funcionário excluído com sucesso!');
                         setSeverity('success')
                         setTimeout(() => {
                             setMostrarAlerta(false);
                         }, 3000);
-                    }        
+                            break;
+                        case 1:
+                            setMessageAlert('Funcionários excluídos com sucesso!');
+                            setSeverity('success')
+                            setTimeout(() => {
+                                setMostrarAlerta(false);
+                            }, 3000);
+                                break; 
+                        case -1:
+                            setMessageAlert('Erro ao excluir funcionário.');
+                            setSeverity('error')
+                            setTimeout(() => {
+                                setMostrarAlerta(false);
+                            }, 3000);
+                            break;
+                        case -2:
+                            setMessageAlert('Erro ao excluir funcionários.');
+                            setSeverity('error')
+                            setTimeout(() => {
+                                setMostrarAlerta(false);
+                            }, 3000);
+                            break;
+                        default:
+                            break;
+                    }      
                 } 
                 break;
             default:
@@ -202,7 +219,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage, modalWorkAdd, modalWorkDelete, modalWorkUpdate])
+    }, [currentPage, funcionarios])
     
   return (
     <>

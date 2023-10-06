@@ -59,13 +59,13 @@ interface AddWorkerProps {
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log(response.status);
-                respostWork(200);
+                respostWork(0);
                 mostrarAlerta(true)
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
                 console.log( error.request.status);
-                respostWork(400);
+                respostWork(-1);
                 mostrarAlerta(true)
             })
 

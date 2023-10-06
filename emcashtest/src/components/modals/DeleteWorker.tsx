@@ -68,7 +68,6 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
     return (
        <WholeModal>
             <FormModal onSubmit={handleSubmit(onSubmit)}>
-                <div className="modal-content">
                     <DropTitle>Apagar funcionário(s)</DropTitle>
                     <DropSubTitle>Esta ação é irreversível. Tem certeza que deseja Apagar
                         este(s) funcionário(s) do sistema?
@@ -77,7 +76,6 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
                         <GrayButton size='medium' onClick={onClose}>Cancelar</GrayButton>
                         <OrangeButton size='medium' type='submit'>Apagar</OrangeButton>
                     </ButtonModal>
-                </div>
             </FormModal>
         </WholeModal>
     )
@@ -105,7 +103,6 @@ const FormModal = styled.form`
     padding: 32px;
     flex-direction: column;
     align-items: flex-start;
-    gap: 32px;
 `
 const DropTitle = styled.h2`
     color: #000;

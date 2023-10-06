@@ -76,7 +76,7 @@ const UserText = styled.h1`
     text-align: center;
     /* Body1 */
     font-family: Public Sans;
-    font-size: 16px;
+    font-size: 19px;
     font-style: normal;
     font-weight: 500;
     line-height: 18.8px; /* 117.5% */
@@ -85,10 +85,10 @@ const UserText = styled.h1`
 const GoOutIcon = styled.div`
     color: #EF6F2B;
     display: flex;
-    font-size: 20px;
+    font-size: 24px;
     width: 24px;
     height: 24px;
-    padding: 3px 2.997px 3px 3px;
     justify-content: center;
     align-items: center;
+    margin-right: 1%;
 `

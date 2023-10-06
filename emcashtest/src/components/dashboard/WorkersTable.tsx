@@ -11,7 +11,8 @@ import ModalUpdateFuncionario from '../modals/UpdateWorker';
 import AuthConfig from '../../services/AuthConfig';
 import OrangeButton from '../generics/OrangeButton';
 import GrayButton from '../generics/GrayButton';
-import AlertGreen from '../generics/AlertGreen';
+import {AlertGreen} from '../generics/AlertGreen';
+import { AlertColor } from '@mui/material';
 
 const perPage = 8; // Número de itens por página
 
@@ -41,6 +42,7 @@ export default function WorkersTable() {
     const [modalWork, setModalWork] = useState(0);
     const [mostrarAlerta, setMostrarAlerta] = useState(false);
     const [messageAlert, setMessageAlert] = useState('');
+    const [severity, setSeverity] = useState<AlertColor>("error");
 
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
@@ -64,19 +66,20 @@ export default function WorkersTable() {
         setIsModalAddFuncOpen(false);
         setModalWork(response)
         if(modalWork === 400){            
+            setSeverity('error')
             setMessageAlert('Erro ao adicionar funcionário.');
             setMostrarAlerta(true);
             setTimeout(() => {
                 setMostrarAlerta(false);
             }, 3000);
         }else if(modalWork === 200){
+            setSeverity('success')
             setMessageAlert('Funcionário Adicionado com sucesso!');
             setMostrarAlerta(true);
             setTimeout(() => {
                 setMostrarAlerta(false);
             }, 3000);
         }
-        setModalWork(modalWork+1)
     };
 
     const openModalDropFunc = (id: React.SetStateAction<number>) => {
@@ -88,12 +91,14 @@ export default function WorkersTable() {
         setIsModalDropFuncOpen(false);
         setModalWork(response)
         if(modalWork === 400){            
+            setSeverity('error')
             setMessageAlert('Erro ao excluir funcionário.');
             setMostrarAlerta(true);
             setTimeout(() => {
                 setMostrarAlerta(false);
             }, 3000);
         }else if(modalWork === 200){
+            setSeverity('success')
             setMessageAlert('Funcionário Excluído com sucesso!');
             setMostrarAlerta(true);
             setTimeout(() => {
@@ -113,6 +118,7 @@ export default function WorkersTable() {
         setModalWork(response)        
         if(modalWork === 400){      
             setMessageAlert('Erro ao atualizar funcionário.');
+            setSeverity('error')
             setMostrarAlerta(true);
             setTimeout(() => {
                 setMostrarAlerta(false);
@@ -120,6 +126,7 @@ export default function WorkersTable() {
 
         }else if(modalWork === 200){
             setMessageAlert('Funcionário atualizado com sucesso!');
+            setSeverity('success')
             setMostrarAlerta(true);
             setTimeout(() => {
                 setMostrarAlerta(false);
@@ -191,7 +198,7 @@ export default function WorkersTable() {
             <ModalUpdateFuncionario id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             {mostrarAlerta === true ? (
                 <AlertSpace>
-                    <AlertGreen message={messageAlert} onClick={setMostrarAlerta}/>
+                    <AlertGreen severity={severity} message={messageAlert} onClick={setMostrarAlerta}/>
                 </AlertSpace>
             ) : (
             <>

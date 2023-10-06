@@ -40,12 +40,12 @@ interface AddWorkerProps {
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log(response.status);
-                onClose(true, response.status);
+                onClose(true, 200);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
                 console.log( error.request.status);
-                onClose(true, error.request.status);
+                onClose(true, 400);
             })
       }
 

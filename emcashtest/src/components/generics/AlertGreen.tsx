@@ -1,18 +1,28 @@
 import React from 'react';
-import { Alert, Button } from '@mui/material';
+import { Alert, AlertColor, Button } from '@mui/material';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
 interface AddAlertProps {
     message: string;
     onClick : any;
+    severity: AlertColor;
 }
 
-const AlertGreen: React.FC<AddAlertProps> = ({message, onClick}) => {
+const AlertGreen: React.FC<AddAlertProps> = ({severity, message, onClick}) => {
 
     return(
-        <Alert icon={<BsFillCheckCircleFill fontSize="inherit" />} onClick={(onClose) => {return true}} onClose={(onClose) => {}}>{message}</Alert>
+        <Alert icon={<BsFillCheckCircleFill fontSize="inherit" />} severity={severity} onClick={() => {return false}}>{message}</Alert>
     )
 }
 
-export default AlertGreen;
+const AlertRed: React.FC<AddAlertProps> = ({message, onClick}) => {
+
+    return(
+        <Alert severity="error">This is an error alert — check it out!</Alert>
+    )
+}
+
+
+
+export {AlertGreen, AlertRed};

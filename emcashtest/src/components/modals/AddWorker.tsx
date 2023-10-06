@@ -29,11 +29,11 @@ interface AddWorkerProps {
         axios.post(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
-                onClose(true, response.status);
+                onClose(true, 200);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
-                onClose(true, error.request.status);
+                onClose(true, 400);
             })
       }
 

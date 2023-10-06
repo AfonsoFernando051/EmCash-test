@@ -49,11 +49,11 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id}) 
             axios.delete(urlDel, config)
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
-                    onClose(true, response.status);
+                    onClose(true, 200);
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);
-                    onClose(true, error.request.status);
+                    onClose(true, 400);
                 })
         }
 

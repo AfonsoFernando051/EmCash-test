@@ -192,9 +192,11 @@ export default function WorkersTable() {
         fetchData()
     }, [currentPage, modalWork])
     
-    const handlePageChange = (newPage: number) => {
-        setCurrentPage(newPage);
-      };
+    const handlePageChange = (newPage: number, totalPages: number) => {
+        if((newPage <= totalPages) && (newPage >= 1)){
+            setCurrentPage(newPage);
+        }
+    };
 
   return (
     <>
@@ -254,9 +256,9 @@ export default function WorkersTable() {
         </Table>
         <Paginator>
                 <PaginatorContent >
-                    <BsChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage - 1)}/>
+                    <BsChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage - 1, 1)}/>
                     <CurrentPaginator>{currentPage}</CurrentPaginator> de {totalPages}
-                    <BsChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage + 1)}/>
+                    <BsChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage + 1, totalPages)}/>
                 </PaginatorContent>
         </Paginator>
     </>

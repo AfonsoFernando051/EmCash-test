@@ -10,12 +10,9 @@ import GrayButton from '../generics/GrayButton';
 interface AddWorkerProps {
     isOpen: boolean;
     onClose : any;
-    workApi: any;
 }
 
-  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, workApi }) => {
-    workApi(false);
-
+  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose }) => {
     const form = useForm<FormValuesModal>();
     const {register, handleSubmit} = form;
 
@@ -32,13 +29,12 @@ interface AddWorkerProps {
         axios.post(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
-                workApi(workApi+1);
+                onClose(true, response.status);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
+                onClose(true, error.request.status);
             })
-
-            onClose(true);
       }
 
     return (

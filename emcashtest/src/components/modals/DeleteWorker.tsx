@@ -10,12 +10,9 @@ interface AddWorkerProps {
     isOpen: boolean;
     onClose : any,
     id: number;
-    workApi: any;
   }
 
-const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, workApi}) => {
-    workApi(false);
-
+const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id}) => {
     const {handleSubmit} = useForm();
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario`;
@@ -40,9 +37,10 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, w
               
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
-                  workApi(true);
+                  onClose(true, 200);
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);
+                  onClose(true, 400);
                 }
               };
               deleteMultipleElements(id);
@@ -51,10 +49,11 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, w
             axios.delete(urlDel, config)
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
-                    workApi(true);
+                    onClose(true, response.status);
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);
+                    onClose(true, error.request.status);
                 })
         }
 

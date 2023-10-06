@@ -11,6 +11,7 @@ import ModalUpdateFuncionario from '../modals/UpdateWorker';
 import AuthConfig from '../../services/AuthConfig';
 import OrangeButton from '../generics/OrangeButton';
 import GrayButton from '../generics/GrayButton';
+import AlertGreen from '../generics/AlertGreen';
 
 const perPage = 8; // Número de itens por página
 
@@ -37,7 +38,9 @@ export default function WorkersTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [hideCPF, setHideCPF] = useState(false);
-    const [modalWork, setModalWork] = useState(false);
+    const [modalWork, setModalWork] = useState(0);
+    const [mostrarAlerta, setMostrarAlerta] = useState(false);
+    const [messageAlert, setMessageAlert] = useState('');
 
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
@@ -57,8 +60,23 @@ export default function WorkersTable() {
         return 0;
     };
   
-    const closeModalAddFunc = () => {
+    const closeModalAddFunc = (event: boolean, response: any) => {
         setIsModalAddFuncOpen(false);
+        setModalWork(response)
+        if(modalWork === 400){            
+            setMessageAlert('Erro ao adicionar funcionário.');
+            setMostrarAlerta(true);
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 3000);
+        }else if(modalWork === 200){
+            setMessageAlert('Funcionário Adicionado com sucesso!');
+            setMostrarAlerta(true);
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 3000);
+        }
+        setModalWork(modalWork+1)
     };
 
     const openModalDropFunc = (id: React.SetStateAction<number>) => {
@@ -66,8 +84,23 @@ export default function WorkersTable() {
         setIsModalDropFuncOpen(true);
     };
   
-    const closeModalDropFunc = () => {
+    const closeModalDropFunc = (event: boolean, response: any) => {
         setIsModalDropFuncOpen(false);
+        setModalWork(response)
+        if(modalWork === 400){            
+            setMessageAlert('Erro ao excluir funcionário.');
+            setMostrarAlerta(true);
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 3000);
+        }else if(modalWork === 200){
+            setMessageAlert('Funcionário Excluído com sucesso!');
+            setMostrarAlerta(true);
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 3000);
+        }
+        setModalWork(modalWork+1)
     };
 
     const openModalUpdateFunc = (id: React.SetStateAction<number>) => {
@@ -75,8 +108,24 @@ export default function WorkersTable() {
         setIsModalUpdateFuncOpen(true);
     };
   
-    const closeModalUpdateFunc = () => {
+    const closeModalUpdateFunc = (event: boolean ,response: number) => {
         setIsModalUpdateFuncOpen(false);
+        setModalWork(response)        
+        if(modalWork === 400){      
+            setMessageAlert('Erro ao atualizar funcionário.');
+            setMostrarAlerta(true);
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 3000);
+
+        }else if(modalWork === 200){
+            setMessageAlert('Funcionário atualizado com sucesso!');
+            setMostrarAlerta(true);
+            setTimeout(() => {
+                setMostrarAlerta(false);
+            }, 3000);
+        }
+        setModalWork(modalWork+1)
     };
 
     const handleCheckboxChange = (event:any, id:any) => {
@@ -126,11 +175,10 @@ export default function WorkersTable() {
         }
         fetchData()
     }, [currentPage, modalWork])
-  
+    
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);
       };
-
   return (
     <>
         <NavSelection>
@@ -138,15 +186,24 @@ export default function WorkersTable() {
                 Lista de funcionários
             </NavSelectionTitle>
             <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
-            <ModalAddFuncionario workApi={setModalWork} isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
-            <ModalDropFuncionario workApi={setModalWork} isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
-            <ModalUpdateFuncionario workApi={setModalWork} id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
-            <Selected>Selecionados({count})</Selected>
-            <GrayButton size='small'
-                customStyles={{marginLeft: '7px', boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)',  color: '#F3F3F3'}}
-                onClick={() => openModalDropFunc(selections)}>
-                    Apagar Seleção
-            </GrayButton>
+            <ModalAddFuncionario isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
+            <ModalDropFuncionario isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
+            <ModalUpdateFuncionario id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
+            {mostrarAlerta === true ? (
+                <AlertSpace>
+                    <AlertGreen message={messageAlert} onClick={setMostrarAlerta}/>
+                </AlertSpace>
+            ) : (
+            <>
+                <Selected>Selecionados({count})</Selected>
+                    <GrayButton size='small'
+                        customStyles={{marginLeft: '7px', boxShadow: '0px 4px 16px 0px rgba(0, 0, 0, 0.08)',  color: '#F3F3F3'}}
+                        onClick={() => openModalDropFunc(selections)}>
+                        Apagar Seleção
+                    </GrayButton>
+            </>
+            )
+        }
         </NavSelection>
         <Table>
             <HeadTable>
@@ -351,4 +408,11 @@ const CheckBox = styled.input`
     background-size: cover; /* Ajuste o tamanho do ícone conforme necessário */
     border: none;
 }
+`
+const AlertSpace = styled.div`
+    position: absolute;
+    left: 74%;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
 `

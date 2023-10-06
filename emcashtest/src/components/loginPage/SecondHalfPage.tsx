@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
-import { Alert } from '@mui/material';
 import OrangeButton from "../generics/OrangeButton";
 type FormValues = {
     usuario: string,
@@ -174,28 +173,6 @@ const LoginInvalidIconX = styled.div`
     padding: 15px 1px 0px 0px;
 `
 
-const RegisterButton = styled.button`
-    display: flex;
-    width: 200px;
-    padding: 12px 16px;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    background: var(--primary-500, #EF6F2B);
-
-    /* Dropshodow2 */
-    box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
-    margin: 0% 12%;
-
-    color: var(--base-branco, #FFF);
-    text-align: center;
-    /* button1 */
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-`
 const ForgotPassword = styled.div`
     color: var(--primary-500, #EF6F2B);
     text-align: right;

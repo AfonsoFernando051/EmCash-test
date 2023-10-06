@@ -206,11 +206,11 @@ export default function WorkersTable() {
             </NavSelectionTitle>
             <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
             <ModalAddFuncionario respostWork={setModalWork} modalCase={setRespost} isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
-            <ModalDropFuncionario respostWork={setModalWork} modalCase={setRespost} isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
+            <ModalDropFuncionario count={setCount} respostWork={setModalWork} modalCase={setRespost} isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
             <ModalUpdateFuncionario respostWork={setModalWork} modalCase={setRespost} id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             {mostrarAlerta === true ? (
                 <AlertSpace>
-                    <AlertGreen severity={severity} message={messageAlert} onClick={setMostrarAlerta}/>
+                    <AlertGreen severity={severity} message={messageAlert} onClick={() => setMostrarAlerta(false)}/>
                 </AlertSpace>
             ) : (
             <>
@@ -430,7 +430,8 @@ const CheckBox = styled.input`
 `
 const AlertSpace = styled.div`
     position: absolute;
-    left: 74%;
+    width: 521px;
+    left: 60%;
     display: flex;
     align-items: flex-start;
     gap: 12px;

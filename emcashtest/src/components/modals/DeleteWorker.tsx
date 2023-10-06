@@ -12,9 +12,10 @@ interface AddWorkerProps {
     id: number;
     respostWork: any;
     modalCase: any;
+    count: any
   }
 
-const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, respostWork, modalCase}) => {
+const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, respostWork, modalCase, count}) => {
     const {handleSubmit} = useForm();
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario`;
@@ -41,6 +42,7 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
               
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
+                  count(0)
                   setRespost(200);
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);

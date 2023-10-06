@@ -60,15 +60,14 @@ interface AddWorkerProps {
             .then((response: AxiosResponse) => {
                 console.log(response.status);
                 setRespost(200);
-                respostWork(respost);                
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
                 console.log( error.request.status);
                 setRespost(400);
-                respostWork(respost);
             })
-            
+            respostWork(respost);
+
             respost !== 0 ? onClose(true): alert('Altere para salvar!');          
       }
 

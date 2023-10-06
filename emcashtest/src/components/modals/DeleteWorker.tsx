@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
@@ -20,7 +20,6 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
     const {handleSubmit} = useForm();
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario`;
-    const [respost, setRespost] = useState(0);
 
     if (!isOpen) {
         return null;
@@ -45,10 +44,12 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
                   count(0)
-                  setRespost(200);
+                  respostWork(200);
+                  mostrarAlerta(true)
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);
-                  setRespost(400);
+                  respostWork(400);
+                  mostrarAlerta(true)
                 }
               };
               deleteMultipleElements(id);

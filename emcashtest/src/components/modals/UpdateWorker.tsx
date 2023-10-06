@@ -21,7 +21,6 @@ interface AddWorkerProps {
     const {register, reset, handleSubmit} = form;
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario/${id}`;
-    const [respost, setRespost] = useState(0);
     const [usarCpf, setUsarCpf] = useState(true);
 
     const toggleInputName = (event: any) => {
@@ -69,7 +68,6 @@ interface AddWorkerProps {
                 respostWork(400);
                 mostrarAlerta(true)
             })
-            respostWork(respost);
 
             onClose(true);          
       }

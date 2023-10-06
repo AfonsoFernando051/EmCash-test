@@ -21,7 +21,16 @@ interface AddWorkerProps {
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario/${id}`;
     const [respost, setRespost] = useState(0);
+    const [usarCpf, setUsarCpf] = useState(true);
 
+    const toggleInputName = (event: any) => {
+        if(event > 11){
+            setUsarCpf(false);
+        }else{
+            setUsarCpf(true);
+        }
+        
+    }
     useEffect(() => {        
       if(isOpen){
         axios.get(url, config)
@@ -41,6 +50,11 @@ interface AddWorkerProps {
     }
 
     const onSubmit = (data: FormValuesModal) => {
+
+        if(data.cnpj){
+            data.cpf = ''
+        }
+                
         modalCase('Update')
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
@@ -67,10 +81,17 @@ interface AddWorkerProps {
                         <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
                         <Label>Nome</Label>
                     </Container>
-                    <Container>
-                        <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
-                        <Label>CPF/CNPJ</Label>
-                    </Container>
+                    {usarCpf ? (
+                        <Container>
+                            <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ" onChange={e => toggleInputName(e.target.value.length)}/>
+                            <Label>CPF/CNPJ</Label>
+                        </Container>
+                    ) : (
+                        <Container>
+                            <InputCPF {...register("cnpj", { required: true })} placeholder="CPF/CNPJ" onChange={e => toggleInputName(e.target.value.length)}/>
+                            <Label>CPF/CNPJ</Label>
+                        </Container> 
+                    )}                   
                     <Container>
                     <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
                         <Label>Celular</Label>

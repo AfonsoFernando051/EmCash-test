@@ -39,15 +39,11 @@ interface AddWorkerProps {
         const {config} = AuthConfig();
 
         const url = 'http://18.117.195.42/funcionario/cadastro';
-        
-        if(data.cpf.length > 11){
-            data.cpf = data.cnpj
-        }
-        console.log(data.cpf.length );
-        console.log(data.cpf);
-        console.log(data.cnpj );
-        console.log(data);
 
+        if(data.cnpj){
+            data.cpf = ''
+        }
+        
         axios.post(url, data, config)        
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);

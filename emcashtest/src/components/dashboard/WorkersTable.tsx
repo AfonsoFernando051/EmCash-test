@@ -233,7 +233,7 @@ export default function WorkersTable() {
             <ModalUpdateFuncionario mostrarAlerta={setMostrarAlerta} respostWork={setModalWorkUpdate} modalCase={setRespost} id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             {mostrarAlerta === true ? (
                 <AlertSpace>
-                    <AlertGreen severity={severity} message={messageAlert} onClick={() => setMostrarAlerta(false)}/>
+                    <AlertGreen severity={severity} message={messageAlert} onClicked={() => setMostrarAlerta(false)}/>
                 </AlertSpace>
             ) : (
             <>

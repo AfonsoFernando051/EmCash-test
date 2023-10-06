@@ -6,15 +6,15 @@ import styled from 'styled-components';
 
 interface AddAlertProps {
     message: string;
-    onClick : any;
+    onClicked : any;
     severity: AlertColor;
 }
 
-const AlertGreen: React.FC<AddAlertProps> = ({severity, message, onClick}) => {
+const AlertGreen: React.FC<AddAlertProps> = ({severity, message, onClicked}) => {
 
     return(
         <Alert style={{width: '521px'}} icon={<BsFillCheckCircleFill fontSize="inherit" />} severity={severity} >
-            {message} <CloseIcon onClick={() => {return false}}><GrFormClose/></CloseIcon>
+            {message} <CloseIcon onClick={() => {onClicked(false)}}><GrFormClose/></CloseIcon>
         </Alert>
     )
 }

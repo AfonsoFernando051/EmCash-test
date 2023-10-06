@@ -13,9 +13,10 @@ interface AddWorkerProps {
     onClose : any;
     respostWork: any;
     modalCase: any;
+    mostrarAlerta: any
   }
 
-  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, respostWork,onClose, modalCase }) => {
+  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, respostWork,onClose, modalCase, mostrarAlerta }) => {
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
     const {config} = AuthConfig();
@@ -59,16 +60,18 @@ interface AddWorkerProps {
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log(response.status);
-                setRespost(200);
+                respostWork(200);
+                mostrarAlerta(true)
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
                 console.log( error.request.status);
-                setRespost(400);
+                respostWork(400);
+                mostrarAlerta(true)
             })
             respostWork(respost);
 
-            respost !== 0 ? onClose(true): alert('Altere para salvar!');          
+            onClose(true);          
       }
 
     return (

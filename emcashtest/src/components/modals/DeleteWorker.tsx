@@ -12,10 +12,11 @@ interface AddWorkerProps {
     id: number;
     respostWork: any;
     modalCase: any;
-    count: any
+    count: any;
+    mostrarAlerta: any
   }
 
-const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, respostWork, modalCase, count}) => {
+const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, respostWork, modalCase, count, mostrarAlerta}) => {
     const {handleSubmit} = useForm();
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario`;
@@ -25,9 +26,10 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
         return null;
     }    
 
-
     const onSubmit = () => {
         
+        modalCase('Delete');
+
         if(Array.isArray(id)){            
             const deleteMultipleElements = async (idArray: number[]) => {
                 try {
@@ -55,15 +57,15 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
             axios.delete(urlDel, config)
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
-                    setRespost(200);
+                    respostWork(200);
+                    mostrarAlerta(true)
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);
-                    setRespost(400);
+                    respostWork(400);
+                    mostrarAlerta(true)
                 })
         }
-        modalCase('Delete')
-        respostWork(respost);
         onClose(true);
       }
 

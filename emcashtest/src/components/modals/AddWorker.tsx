@@ -12,9 +12,10 @@ interface AddWorkerProps {
     onClose : any;
     respostWork: any;
     modalCase: any;
+    mostrarAlerta: any
 }
 
-  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, respostWork, modalCase }) => {
+  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, respostWork, modalCase, mostrarAlerta}) => {
     const form = useForm<FormValuesModal>();
     const {register, handleSubmit} = form;
     const [respost, setRespost] = useState(0);
@@ -28,34 +29,35 @@ interface AddWorkerProps {
         }
       };
 
-    if (!isOpen) {
-        return null;
-    }
-
     const onSubmit = (data: FormValuesModal) => {
         const {config} = AuthConfig();
         const url = 'http://18.117.195.42/funcionario/cadastro';
-        modalCase('Add')
 
         if(data.cnpj){
             data.cpf = ''
         }
-        
+
+        modalCase('Add')
+        setRespost(400);
         axios.post(url, data, config)        
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
-                setRespost(200);
-                respostWork(respost);
+                respostWork(200);
+                mostrarAlerta(true)
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
-                setRespost(400);
-                respostWork(respost);
+                respostWork(400);
+                mostrarAlerta(true)
             })
-            console.log('respost'+respost);
+            console.log(respost);
 
-            respost !== 0 ? onClose(true): alert('Altere para adicionar!');          
-      }
+            onClose(true)
+    }
+
+    if (!isOpen) {
+        return null;
+    }
 
     return (
        <WholeModal>

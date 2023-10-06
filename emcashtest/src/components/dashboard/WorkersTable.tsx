@@ -39,7 +39,10 @@ export default function WorkersTable() {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
     const [hideCPF, setHideCPF] = useState(false);
-    const [modalWork, setModalWork] = useState(0);
+    const [modalWorkAdd, setModalWorkAdd] = useState(0);
+    const [modalWorkUpdate, setModalWorkUpdate] = useState(0);
+    const [modalWorkDelete, setModalWorkDelete] = useState(0);
+
     const [respost, setRespost] = useState('');
     const [mostrarAlerta, setMostrarAlerta] = useState(false);
     const [messageAlert, setMessageAlert] = useState('');
@@ -91,61 +94,64 @@ export default function WorkersTable() {
     useEffect(() => {
         switch (respost) {
             case 'Add':
-                if(modalWork === 400){            
-                    setSeverity('error')
-                    setMessageAlert('Erro ao adicionar funcionário.');
-                    setMostrarAlerta(true);
-                    setTimeout(() => {
-                        setMostrarAlerta(false);
-                    }, 3000);
-                }else if(modalWork === 200){
-                    setSeverity('success')
-                    setMessageAlert('Funcionário Adicionado com sucesso!');
-                    setMostrarAlerta(true);
-                    setTimeout(() => {
-                        setMostrarAlerta(false);
-                    }, 3000);
-                }
+                if(mostrarAlerta){                                        
+                    if(modalWorkAdd === 400){      
+                        setMessageAlert('Erro ao adicionar funcionário.');
+                        setSeverity('error')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+            
+                    }else if(modalWorkAdd === 200){
+                        console.log('chega no ceto');
+                        setMessageAlert('Funcionário Adicionado com sucesso!');
+                        setSeverity('success')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+                    }        
+                }  
                 break;
             case 'Update':
-                if(modalWork === 400){      
-                    setMessageAlert('Erro ao atualizar funcionário.');
-                    setSeverity('error')
-                    setMostrarAlerta(true);
-                    setTimeout(() => {
-                        setMostrarAlerta(false);
-                    }, 3000);
-        
-                }else if(modalWork === 200){
-                    setMessageAlert('Funcionário atualizado com sucesso!');
-                    setSeverity('success')
-                    setMostrarAlerta(true);
-                    setTimeout(() => {
-                        setMostrarAlerta(false);
-                    }, 3000);
-                }        
+                if(mostrarAlerta){
+                    if(modalWorkUpdate === 400){      
+                        setMessageAlert('Erro ao atualizar funcionário.');
+                        setSeverity('error')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+            
+                    }else if(modalWorkUpdate === 200){
+                        setMessageAlert('Funcionário atualizado com sucesso!');
+                        setSeverity('success')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+                    }        
+                }     
             break;
             case 'Delete':
-                if(modalWork === 400){            
-                    setSeverity('error')
-                    setMessageAlert('Erro ao excluir funcionário.');
-                    setMostrarAlerta(true);
-                    setTimeout(() => {
-                        setMostrarAlerta(false);
-                    }, 3000);
-                }else if(modalWork === 200){
-                    setSeverity('success')
-                    setMessageAlert('Funcionário Excluído com sucesso!');
-                    setMostrarAlerta(true);
-                    setTimeout(() => {
-                        setMostrarAlerta(false);
-                    }, 3000);
-                }
+                if(mostrarAlerta){
+                    if(modalWorkDelete === 400){      
+                        setMessageAlert('Erro ao excluir funcionário.');
+                        setSeverity('error')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+            
+                    }else if(modalWorkDelete === 200){
+                        setMessageAlert('Funcionário Excluído com sucesso!');
+                        setSeverity('success')
+                        setTimeout(() => {
+                            setMostrarAlerta(false);
+                        }, 3000);
+                    }        
+                } 
                 break;
             default:
                 break;
         }
-    }, [modalWork, respost])
+    }, [modalWorkAdd, modalWorkDelete, modalWorkUpdate, mostrarAlerta, respost])
 
     //Função que controla os eventos do checkbox
     const handleCheckboxChange = (event:any, id:any) => {
@@ -196,7 +202,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage, modalWork])
+    }, [currentPage, modalWorkAdd, modalWorkDelete, modalWorkUpdate])
     
   return (
     <>
@@ -205,9 +211,9 @@ export default function WorkersTable() {
                 Lista de funcionários
             </NavSelectionTitle>
             <OrangeButton size='small' onClick={openModalAddFunc}>Adicionar novo</OrangeButton>
-            <ModalAddFuncionario respostWork={setModalWork} modalCase={setRespost} isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
-            <ModalDropFuncionario count={setCount} respostWork={setModalWork} modalCase={setRespost} isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
-            <ModalUpdateFuncionario respostWork={setModalWork} modalCase={setRespost} id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
+            <ModalAddFuncionario mostrarAlerta={setMostrarAlerta} respostWork={setModalWorkAdd} modalCase={setRespost} isOpen={isModalAddFuncOpen} onClose={closeModalAddFunc}/>
+            <ModalDropFuncionario  mostrarAlerta={setMostrarAlerta} count={setCount} respostWork={setModalWorkDelete} modalCase={setRespost} isOpen={isModalDropFuncOpen} onClose={closeModalDropFunc} id={idFuncionario}/>
+            <ModalUpdateFuncionario mostrarAlerta={setMostrarAlerta} respostWork={setModalWorkUpdate} modalCase={setRespost} id={idFuncionario} isOpen={isModalUpdateFuncOpen} onClose={closeModalUpdateFunc}/>
             {mostrarAlerta === true ? (
                 <AlertSpace>
                     <AlertGreen severity={severity} message={messageAlert} onClick={() => setMostrarAlerta(false)}/>

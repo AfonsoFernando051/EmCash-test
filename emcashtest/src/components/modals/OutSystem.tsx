@@ -20,6 +20,7 @@ const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
     }    
 
     const onSubmit = () => {
+        localStorage.removeItem('token');
         navigate('/');
         onClose(true);
     }

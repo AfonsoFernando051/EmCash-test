@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function AuthConfig(){
     const authToken = localStorage.getItem('token');
     const config = {

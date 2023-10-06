@@ -68,7 +68,6 @@ export default function WorkersTable() {
     };
 
     useEffect(() => {
-        console.log('useeffect' + modalWork);
         switch (respost) {
             case 'Add':
                 if(modalWork === 400){            
@@ -121,7 +120,6 @@ export default function WorkersTable() {
                         setMostrarAlerta(false);
                     }, 3000);
                 }
-                setCount(0);
                 break;
             default:
                 break;

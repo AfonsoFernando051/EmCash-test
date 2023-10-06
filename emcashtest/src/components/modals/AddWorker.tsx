@@ -18,6 +18,16 @@ interface AddWorkerProps {
     const form = useForm<FormValuesModal>();
     const {register, handleSubmit} = form;
     const [respost, setRespost] = useState(0);
+    const [usarCpf, setUsarCpf] = useState(true);
+
+    const toggleInputName = (event: any) => {
+        if(event > 11){
+            setUsarCpf(false);
+        }else{
+            setUsarCpf(true);
+        }
+        
+      };
 
     if (!isOpen) {
         return null;
@@ -30,7 +40,15 @@ interface AddWorkerProps {
 
         const url = 'http://18.117.195.42/funcionario/cadastro';
         
-        axios.post(url, data, config)
+        if(data.cpf.length > 11){
+            data.cpf = data.cnpj
+        }
+        console.log(data.cpf.length );
+        console.log(data.cpf);
+        console.log(data.cnpj );
+        console.log(data);
+
+        axios.post(url, data, config)        
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
                 setRespost(200);
@@ -52,7 +70,11 @@ interface AddWorkerProps {
                 <div className="modal-content">
                     <ModalTitle>Adicionar novo funcionário</ModalTitle>
                     <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
-                    <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ"/>
+                    {usarCpf ? (
+                        <InputCPF {...register("cpf", { required: true })} placeholder="CPF/CNPJ" onChange={e => toggleInputName(e.target.value.length)}/>
+                    ) : (
+                        <InputCPF {...register("cnpj", { required: true })} placeholder="CPF/CNPJ" onChange={e => toggleInputName(e.target.value.length)}/>
+                    )}
                     <InputPhone {...register("celular", { required: true })} placeholder="Celular"/>
                     <InputEmail {...register("email", { required: true })} placeholder="E-mail"/>
                     <ButtonModal>

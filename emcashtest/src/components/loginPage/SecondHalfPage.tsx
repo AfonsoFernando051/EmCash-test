@@ -5,6 +5,7 @@ import { AiFillCheckCircle, AiOutlineClose } from 'react-icons/ai'
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { useNavigate } from "react-router-dom";
 import OrangeButton from "../generics/OrangeButton";
+
 type FormValues = {
     usuario: string,
     senha: string
@@ -14,7 +15,6 @@ export default function SecondHalfPage() {
 
   const handleClick = () => {   
     setLoginError(false);
-    return 0;
   }
   
   const [loginError, setLoginError] = useState(false);
@@ -128,7 +128,6 @@ const RegisterInput = styled.input`
     flex: 1 0 0;
     margin: 6% 2%;
     color: var(--dark-500, #1B1B1B);
-    /* body2 */
     font-family: Manrope;
     font-size: 16px;
     font-style: normal;
@@ -141,20 +140,15 @@ const LoginInvalid = styled.div`
     border-radius: 4px;
     display: flex;
     width: 280px;
-    align-items: flex-start;
     justify-content:center;
     margin: 6% 2%;
     gap: 12px;
-    align-self: stretch;
     border: 1px solid #FEBFB8;
     background: var(--red-100, #FFE1DB);
-    /* Dropshodow2 */
     box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
 `
 const LoginInvalidContent = styled.h3`
     color: #AD2C55;
-
-    /* Button1 */
     font-family: Poppins;
     font-size: 15px;
     font-style: normal;
@@ -165,18 +159,17 @@ const LoginInvalidContent = styled.h3`
 const LoginInvalidIconCheck = styled.i`
     color: #AD2C55;
     padding: 14px 1px 0px 0px;
-
 `
 
 const LoginInvalidIconX = styled.div`
     color: #AD2C55;
     padding: 15px 1px 0px 0px;
+    cursor: pointer;
 `
 
 const ForgotPassword = styled.div`
     color: var(--primary-500, #EF6F2B);
     text-align: right;
-    /* button2 */
     font-size: 17px;
     margin:5% 21%;
     font-style: normal;
@@ -191,7 +184,6 @@ const OrangeLink = styled.a`
 
 const NotYet = styled.div`
     margin: 6% 6%;
-
     font-family: Poppins;
     font-size: 17px;
     font-style: normal;
@@ -206,5 +198,4 @@ const NotYetText = styled.span`
 
 const NeedHelp = styled.div`
     padding: 5% 0% 6% 58%;
-
 `

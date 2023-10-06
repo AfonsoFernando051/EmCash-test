@@ -28,9 +28,9 @@ const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
     return (
        <WholeModal>
             <FormModal onSubmit={handleSubmit(onSubmit)}>
-            <DropTitle>Sair</DropTitle>
-                    <DropSubTitle>Tem certeza que deseja sair?
-                    </DropSubTitle>
+            <OutTitle>Sair</OutTitle>
+                    <OutSubTitle>Tem certeza que deseja sair?
+                    </OutSubTitle>
                     <ButtonModal>
                         <GrayButton onClick={onClose} customStyles={{width: '30%'}}>Cancelar</GrayButton>
                         <OrangeButton size='small' type='submit' customStyles={{width: '30%'}}>Sair</OrangeButton>
@@ -49,8 +49,6 @@ const WholeModal = styled.div`
     display: flex;
     width: 40%;
     padding: 32px;
-    flex-direction: column;
-    align-items: flex-start;
 `
 const FormModal = styled.form`
     border-radius: 12px;
@@ -58,13 +56,10 @@ const FormModal = styled.form`
     box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.25);
     width: 75%;
     padding: 5%;
-    flex-direction: column;
-    align-items: flex-start;
 `
-const DropTitle = styled.h2`
+const OutTitle = styled.h2`
     color: #000;
     margin: 0%;
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 20px;
     font-style: normal;
@@ -73,11 +68,9 @@ const DropTitle = styled.h2`
     letter-spacing: -0.4px;
 `
 
-const DropSubTitle = styled.h3`
+const OutSubTitle = styled.h3`
     color: #000;
     padding: 4% 0%;
-
-    /* body1 */
     font-family: Public Sans;
     font-size: 16px;
     font-style: normal;
@@ -89,8 +82,5 @@ const DropSubTitle = styled.h3`
 const ButtonModal = styled.div`
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
     gap: 12px;
-    align-self: stretch;
-
 `

@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import { BsChevronLeft, BsChevronRight} from 'react-icons/bs';
 import { AiOutlineEye } from 'react-icons/ai';
 import { PiTrash} from 'react-icons/pi';
 import { GoPencil } from 'react-icons/go';
@@ -13,6 +12,7 @@ import OrangeButton from '../generics/OrangeButton';
 import GrayButton from '../generics/GrayButton';
 import AlertGreen from '../generics/AlertGreen';
 import { AlertColor } from '@mui/material';
+import Pagination from '../generics/Paginator';
 
 const perPage = 8; // Número de itens por página
 
@@ -45,6 +45,7 @@ export default function WorkersTable() {
     const [messageAlert, setMessageAlert] = useState('');
     const [severity, setSeverity] = useState<AlertColor>("error");
 
+    //Coloca background transparente na página quando o modal está aberto
     useEffect(() => {
         if (isModalAddFuncOpen || isModalDropFuncOpen || isModalUpdateFuncOpen) {
           document.body.classList.add('modal-open');
@@ -58,6 +59,7 @@ export default function WorkersTable() {
         };
     }, [isModalAddFuncOpen, isModalDropFuncOpen, isModalUpdateFuncOpen]);
 
+    //Estas operações abaixo são de controle de abertura e fechamento dos modais
     const openModalAddFunc = () => {
         setIsModalAddFuncOpen(true);
         return 0;
@@ -67,6 +69,25 @@ export default function WorkersTable() {
         setIsModalAddFuncOpen(false);
     };
 
+    const openModalDropFunc = (id: React.SetStateAction<number>) => {
+        setIdFuncionario(id)
+        setIsModalDropFuncOpen(true);
+    };
+  
+    const closeModalDropFunc = (event: boolean, response: any) => {
+        setIsModalDropFuncOpen(false);
+    };
+
+    const openModalUpdateFunc = (id: React.SetStateAction<number>) => {
+        setIdFuncionario(id)
+        setIsModalUpdateFuncOpen(true);
+    };
+  
+    const closeModalUpdateFunc = (event: boolean ,response: number) => {
+        setIsModalUpdateFuncOpen(false);
+    };
+
+    //Caso a requisição do modal retorne um erro ou sucesso, exibe um alert componentizado com a mensagem da operação.
     useEffect(() => {
         switch (respost) {
             case 'Add':
@@ -126,24 +147,7 @@ export default function WorkersTable() {
         }
     }, [modalWork, respost])
 
-    const openModalDropFunc = (id: React.SetStateAction<number>) => {
-        setIdFuncionario(id)
-        setIsModalDropFuncOpen(true);
-    };
-  
-    const closeModalDropFunc = (event: boolean, response: any) => {
-        setIsModalDropFuncOpen(false);
-    };
-
-    const openModalUpdateFunc = (id: React.SetStateAction<number>) => {
-        setIdFuncionario(id)
-        setIsModalUpdateFuncOpen(true);
-    };
-  
-    const closeModalUpdateFunc = (event: boolean ,response: number) => {
-        setIsModalUpdateFuncOpen(false);
-    };
-
+    //Função que controla os eventos do checkbox
     const handleCheckboxChange = (event:any, id:any) => {
         const Cheked = event.target.checked;
         
@@ -171,10 +175,12 @@ export default function WorkersTable() {
         }
     }
 
+    //Função que esconde ou mostra CPF/CNPJ
     const showCPF = () => {
         hideCPF ? setHideCPF(false) : setHideCPF(true)
     }
 
+    //Funcionários vêm da URL via promise para parginar.
     useEffect(() => {        
         const {config} = AuthConfig();
         const fetchData = async () => {
@@ -192,12 +198,6 @@ export default function WorkersTable() {
         fetchData()
     }, [currentPage, modalWork])
     
-    const handlePageChange = (newPage: number, totalPages: number) => {
-        if((newPage <= totalPages) && (newPage >= 1)){
-            setCurrentPage(newPage);
-        }
-    };
-
   return (
     <>
         <NavSelection>
@@ -251,37 +251,12 @@ export default function WorkersTable() {
                     <TableTdIcon onClick={() => openModalDropFunc(data.id)}><PiTrash size={23} id="trash" style={{cursor: 'pointer', color: '#EF6F2B'}}/></TableTdIcon>
                 </TbRowData> 
                 ))}
-                 
             </BodyTable>
         </Table>
-        <Paginator>
-                <PaginatorContent >
-                    <BsChevronLeft style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage - 1, 1)}/>
-                    <CurrentPaginator>{currentPage}</CurrentPaginator> de {totalPages}
-                    <BsChevronRight style={{cursor: 'pointer'}} onClick={() => handlePageChange(currentPage + 1, totalPages)}/>
-                </PaginatorContent>
-        </Paginator>
+        <Pagination currentPage={currentPage} totalPages={totalPages} nextPage={setCurrentPage}/>
     </>
   );
 }
-
-const Paginator = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    align-self: stretch;
-    margin-top: -1%;
-`
-const PaginatorContent = styled.p`
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    align-self: stretch;
-    color: #767676
-`
-const CurrentPaginator = styled.span`
-    color: #EF6F2B
-`
 
 const NavSelection = styled.div`
     display: flex;
@@ -381,7 +356,6 @@ const EmailTableTh = styled.th`
     margin-right: 4%;
 }
 `
-
 const TbRowData = styled.tr`
     display: flex;
     border-radius: 12px 12px 4px 4px;

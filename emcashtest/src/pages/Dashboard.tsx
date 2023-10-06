@@ -5,7 +5,6 @@ import styled from "styled-components";
 
 export default function Dashboard() {
   
-
   return (
     <>
     <WholePage>
@@ -21,7 +20,6 @@ export default function Dashboard() {
 }
 const WholePage = styled.div`
   background: #E8E8E8;
-
 `
 const DashboardComponents = styled.div`
   padding: 1% 10%;

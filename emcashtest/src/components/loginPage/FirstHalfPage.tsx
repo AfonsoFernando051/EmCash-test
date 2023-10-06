@@ -64,7 +64,6 @@ const ImageText = styled.h1`
     left:125px;
     width: 27%;
     color: var(--dark-500, #1B1B1B);
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 20px;
     font-style: normal;

@@ -48,47 +48,46 @@ export default function Header(){
 }
 
 const HeaderDashboard = styled.header`
-    display: flex;
-    padding: 10px 12px;
-    align-items: center;
-    gap: 24px;
-    background: var(--base-branco, #FFF);
-    box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.15);
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  padding: 10px 12px;
+  align-items: center;
+  gap: 24px;
+  background: var(--base-branco, #FFF);
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  align-items: center;
 `
 
 const UserLogo = styled.div`
-    display: flex;
-    align-items:center;
-    gap:5px;
-    padding-left: 55%
+  display: flex;
+  align-items:center;
+  gap:5px;
+  padding-left: 55%
 `
 
 const UserImg = styled.img`
-    width: 32px;
-    height: 32px;
-    flex-shrink: 0; 
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0; 
 `
 
 const UserText = styled.h1`
-    color: var(--dark-500, #1B1B1B);
-    text-align: center;
-    /* Body1 */
-    font-family: Public Sans;
-    font-size: 19px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 18.8px; /* 117.5% */
-    letter-spacing: -0.4px;
+  color: var(--dark-500, #1B1B1B);
+  text-align: center;
+  font-family: Public Sans;
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18.8px; /* 117.5% */
+  letter-spacing: -0.4px;
 `
 const GoOutIcon = styled.div`
-    color: #EF6F2B;
-    display: flex;
-    font-size: 24px;
-    width: 24px;
-    height: 24px;
-    justify-content: center;
-    align-items: center;
-    margin-right: 1%;
+  color: #EF6F2B;
+  display: flex;
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1%;
 `

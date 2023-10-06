@@ -28,6 +28,7 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id}) 
             const deleteMultipleElements = async (idArray: number[]) => {
                 try {
                   const deletePromises = idArray.map(async (id) => {
+                    // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const response = await axios.delete(url+`/${id}`, config)
                         .then((response: AxiosResponse) => {
                             console.log(url+`/${id}`);

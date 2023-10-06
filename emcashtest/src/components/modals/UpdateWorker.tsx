@@ -30,6 +30,7 @@ interface AddWorkerProps {
                 
         })
       }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isOpen, reset, url]);
 
     if (!isOpen) {

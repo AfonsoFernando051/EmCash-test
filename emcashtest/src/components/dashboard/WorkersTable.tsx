@@ -11,7 +11,7 @@ import ModalUpdateFuncionario from '../modals/UpdateWorker';
 import AuthConfig from '../../services/AuthConfig';
 import OrangeButton from '../generics/OrangeButton';
 import GrayButton from '../generics/GrayButton';
-import {AlertGreen} from '../generics/AlertGreen';
+import AlertGreen from '../generics/AlertGreen';
 import { AlertColor } from '@mui/material';
 
 const perPage = 8; // Número de itens por página
@@ -181,7 +181,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage, modalWork])
+    })
     
     const handlePageChange = (newPage: number) => {
         setCurrentPage(newPage);

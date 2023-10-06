@@ -79,7 +79,7 @@ interface AddWorkerProps {
                     <ModalTitle>Editar funcionário</ModalTitle>
                     <Container>
                         <InputName  {...register("nome", { required: true })} placeholder="Nome Completo"/>
-                        <Label>Nome</Label>
+                        <Label>Nome Completo</Label>
                     </Container>
                     {usarCpf ? (
                         <Container>
@@ -130,6 +130,7 @@ const Label = styled.label`
 
 const ModalTitle = styled.h2`
     margin: auto;
+    padding-bottom: 4%;
     color: var(--dark-400, #767676);
     font-family: Manrope;
     font-size: 22px;
@@ -140,13 +141,13 @@ const ModalTitle = styled.h2`
 `
 
 const WholeModal = styled.div`
-    left: 37%;
-    top: 21%;
+    left: 34%;
+    top: 23%;
     position: absolute;
 `
 const FormModal = styled.form`
     display: inline-flex;
-    padding: 32px;
+    padding:40px 30px;
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
@@ -156,6 +157,8 @@ const FormModal = styled.form`
     height: 400px;
 `
 const InputName = styled.input`
+    margin: -2% 0%;
+    padding-bottom: 4%;
     display: flex;
     width: 350px;
     padding: 16px;
@@ -196,6 +199,7 @@ const InputEmail = styled.input`
 `
 
 const ButtonModal = styled.div`
+    margin: 7% 0%;
     display: flex;
     flex-direction:row;
     justify-content: flex-end;

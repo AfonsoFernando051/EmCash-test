@@ -85,13 +85,13 @@ interface AddWorkerProps {
 export default ModalAddFuncionario;
 
 const WholeModal = styled.div`
-    left: 37%;
-    top: 21%;
+    left: 34%;
+    top: 23%;
     position: absolute;
 `
 const FormModal = styled.form`
     display: inline-flex;
-    padding: 32px;
+    padding:40px 30px;
     flex-direction: column;
     align-items: flex-start;
     gap: 32px;
@@ -101,7 +101,8 @@ const FormModal = styled.form`
     height: 400px;
 `
 const ModalTitle = styled.h2`
-    margin: auto;
+    margin: -2% 0%;
+    padding-bottom: 4%;
     color: var(--dark-400, #767676);
     font-family: Manrope;
     font-size: 22px;
@@ -152,7 +153,7 @@ const InputEmail = styled.input`
 `
 
 const ButtonModal = styled.div`
-    margin: 6% 0%;
+    margin: 7% 0%;
     display: flex;
     flex-direction:row;
     justify-content: flex-end;

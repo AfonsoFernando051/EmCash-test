@@ -23,5 +23,6 @@ const WholePage = styled.div`
 `
 const DashboardComponents = styled.div`
   padding: 1% 10%;
-  height: 100vh;
+  height: 105vh;
+
 `

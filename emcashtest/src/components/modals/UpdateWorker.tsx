@@ -116,7 +116,6 @@ const Container = styled.div`
   position: relative;
   margin: 16px 0;
 `;
-
 const Label = styled.label`
   position: absolute;
   top: -10px; //'-10px' : '12px'
@@ -127,7 +126,6 @@ const Label = styled.label`
   background-color: white;
   padding: 0 5px; //'0 5px' : '0'
 `;
-
 const ModalTitle = styled.h2`
     margin: auto;
     padding-bottom: 4%;
@@ -139,7 +137,6 @@ const ModalTitle = styled.h2`
     line-height: 23.5px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-
 const WholeModal = styled.div`
     left: 34%;
     top: 23%;
@@ -197,7 +194,6 @@ const InputEmail = styled.input`
     font-size: 15px;
 
 `
-
 const ButtonModal = styled.div`
     margin: 7% 0%;
     display: flex;

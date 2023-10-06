@@ -14,7 +14,7 @@ import AlertGreen from '../generics/AlertGreen';
 import { AlertColor } from '@mui/material';
 import Pagination from '../generics/Paginator';
 
-const perPage = 10; // Número de itens por página
+const perPage = 9; // Número de itens por página
 
 export default function WorkersTable() {
     const [funcionarios, setFuncionarios] = useState([

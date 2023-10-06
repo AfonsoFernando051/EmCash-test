@@ -28,26 +28,26 @@ const getButtonSize = (size: 'small' | 'medium' | 'large'): CSSObject => {
   };
 
 const StyledOrangeButton = styled.button<{ size: 'small' | 'medium' |'large'; customStyles?: CSSObject | undefined}>`
-    ${(props) => getButtonSize(props.size)};
-    ${(props) => props.customStyles};
-    padding: 15px 16px; 
-    color: #fff;
-    background: var(--primary-500, #EF6F2B);
-    border: 8px;
-    border-radius: 4px;
-    font-weight: 700;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    line-height: 19.5px; /* 139.286% */
-    letter-spacing: -0.2px;
-    
-    &:hover{
-        background-color: #eb6105;
-        color: #fff;  
-    }
+  ${(props) => getButtonSize(props.size)};
+  ${(props) => props.customStyles};
+  padding: 15px 16px; 
+  color: #fff;
+  background: var(--primary-500, #EF6F2B);
+  border: 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  line-height: 19.5px; /* 139.286% */
+  letter-spacing: -0.2px;
+  
+  &:hover{
+      background-color: #eb6105;
+      color: #fff;  
+  }
 `
 
 

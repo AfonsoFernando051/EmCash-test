@@ -67,7 +67,6 @@ const OutTitle = styled.h2`
     line-height: 23.5px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-
 const OutSubTitle = styled.h3`
     color: #000;
     padding: 4% 0%;
@@ -78,7 +77,6 @@ const OutSubTitle = styled.h3`
     line-height: 18.8px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-
 const ButtonModal = styled.div`
     display: flex;
     justify-content: flex-end;

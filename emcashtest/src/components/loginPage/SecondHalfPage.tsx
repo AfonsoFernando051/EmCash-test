@@ -40,9 +40,9 @@ export default function SecondHalfPage() {
         })
   }
 
-  if (loggedIn) {
-    navigate('/dashboard')
-}
+    if (loggedIn) {
+        navigate('/dashboard')
+    }
 
   return (
     <WholePage>
@@ -89,11 +89,9 @@ const WholePage = styled.div`
     box-shadow: 0px 0px 30px 0px rgba(12, 5, 7, 0.10);
     backdrop-filter: blur(5px);
 `
-
 const Form = styled.form`
     padding: 22% 23% 0% 23%;
 `
-
 const TitleForm = styled.h1`
     color: var(--primary-500, #EF6F2B);
     /* title */
@@ -135,7 +133,6 @@ const RegisterInput = styled.input`
     line-height: 18.8px; /* 117.5% */
     letter-spacing: -0.2px;
 `
-
 const LoginInvalid = styled.div`
     border-radius: 4px;
     display: flex;
@@ -166,7 +163,6 @@ const LoginInvalidIconX = styled.div`
     padding: 15px 1px 0px 0px;
     cursor: pointer;
 `
-
 const ForgotPassword = styled.div`
     color: var(--primary-500, #EF6F2B);
     text-align: right;
@@ -181,7 +177,6 @@ const OrangeLink = styled.a`
     color: var(--primary-500, #EF6F2B);
     text-decoration: none;
 `
-
 const NotYet = styled.div`
     margin: 6% 6%;
     font-family: Poppins;
@@ -191,11 +186,9 @@ const NotYet = styled.div`
     line-height: 19.5px; /* 139.286% */
     letter-spacing: -0.2px;
 `
-
 const NotYetText = styled.span`
     padding-right: 4px
 `
-
 const NeedHelp = styled.div`
     padding: 5% 0% 6% 58%;
 `

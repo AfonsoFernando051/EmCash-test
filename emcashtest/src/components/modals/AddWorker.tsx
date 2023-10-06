@@ -18,7 +18,6 @@ interface AddWorkerProps {
   const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, respostWork, modalCase, mostrarAlerta}) => {
     const form = useForm<FormValuesModal>();
     const {register, handleSubmit} = form;
-    const [respost, setRespost] = useState(0);
     const [usarCpf, setUsarCpf] = useState(true);
 
     const toggleInputName = (event: any) => {
@@ -38,7 +37,6 @@ interface AddWorkerProps {
         }
 
         modalCase('Add')
-        setRespost(400);
         axios.post(url, data, config)        
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
@@ -50,8 +48,6 @@ interface AddWorkerProps {
                 respostWork(-1);
                 mostrarAlerta(true)
             })
-            console.log(respost);
-
             onClose(true)
     }
 
@@ -111,7 +107,6 @@ const ModalTitle = styled.h2`
     line-height: 23.5px; /* 117.5% */
     letter-spacing: -0.4px;
 `
-
 const InputName = styled.input`
     display: flex;
     width: 350px;
@@ -129,7 +124,6 @@ const InputCPF = styled.input`
     margin: 6% 0%;
     border-radius: 4px;
     font-size: 15px;
-
 `
 const InputPhone = styled.input`
     display: flex;
@@ -139,7 +133,6 @@ const InputPhone = styled.input`
     margin: 6% 0%;
     border-radius: 4px;
     font-size: 15px;
-
 `
 const InputEmail = styled.input`
     display: flex;
@@ -149,14 +142,11 @@ const InputEmail = styled.input`
     margin: 6% 0%;
     border-radius: 4px;
     font-size: 15px;
-
 `
-
 const ButtonModal = styled.div`
     margin: 7% 0%;
     display: flex;
     flex-direction:row;
     justify-content: flex-end;
     gap: 2%;
-
 `

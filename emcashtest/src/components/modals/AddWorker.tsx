@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
@@ -10,18 +10,22 @@ import GrayButton from '../generics/GrayButton';
 interface AddWorkerProps {
     isOpen: boolean;
     onClose : any;
+    respostWork: any;
+    modalCase: any;
 }
 
-  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose }) => {
+  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, respostWork, modalCase }) => {
     const form = useForm<FormValuesModal>();
     const {register, handleSubmit} = form;
+    const [respost, setRespost] = useState(0);
 
     if (!isOpen) {
         return null;
     }
 
     const onSubmit = (data: FormValuesModal) => {
-   
+        modalCase('Add')
+
         const {config} = AuthConfig();
 
         const url = 'http://18.117.195.42/funcionario/cadastro';
@@ -29,12 +33,17 @@ interface AddWorkerProps {
         axios.post(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
-                onClose(true, 200);
+                setRespost(200);
+                respostWork(respost);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
-                onClose(true, 400);
+                setRespost(400);
+                respostWork(respost);
             })
+            console.log('respost'+respost);
+
+            respost !== 0 ? onClose(true): alert('Altere para adicionar!');          
       }
 
     return (

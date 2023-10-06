@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
@@ -10,12 +10,15 @@ interface AddWorkerProps {
     isOpen: boolean;
     onClose : any,
     id: number;
+    respostWork: any;
+    modalCase: any;
   }
 
-const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id}) => {
+const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, respostWork, modalCase}) => {
     const {handleSubmit} = useForm();
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario`;
+    const [respost, setRespost] = useState(0);
 
     if (!isOpen) {
         return null;
@@ -38,10 +41,10 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id}) 
               
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
-                  onClose(true, 200);
+                  setRespost(200);
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);
-                  onClose(true, 400);
+                  setRespost(400);
                 }
               };
               deleteMultipleElements(id);
@@ -50,14 +53,15 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id}) 
             axios.delete(urlDel, config)
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
-                    onClose(true, 200);
+                    setRespost(200);
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);
-                    onClose(true, 400);
+                    setRespost(400);
                 })
         }
-
+        modalCase('Delete')
+        respostWork(respost);
         onClose(true);
       }
 

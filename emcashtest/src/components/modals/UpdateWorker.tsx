@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components';
 import { useForm } from "react-hook-form";
 import axios, { AxiosResponse, AxiosError } from 'axios';
@@ -11,13 +11,16 @@ interface AddWorkerProps {
     id: number;
     isOpen: boolean;
     onClose : any;
+    respostWork: any;
+    modalCase: any;
   }
 
-  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, onClose }) => {
+  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, respostWork,onClose, modalCase }) => {
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
     const {config} = AuthConfig();
     const url = `http://18.117.195.42/funcionario/${id}`;
+    const [respost, setRespost] = useState(0);
 
     useEffect(() => {        
       if(isOpen){
@@ -38,16 +41,21 @@ interface AddWorkerProps {
     }
 
     const onSubmit = (data: FormValuesModal) => {
+        modalCase('Update')
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log(response.status);
-                onClose(true, 200);
+                setRespost(200);
+                respostWork(respost);                
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
                 console.log( error.request.status);
-                onClose(true, 400);
+                setRespost(400);
+                respostWork(respost);
             })
+            
+            respost !== 0 ? onClose(true): alert('Altere para salvar!');          
       }
 
     return (

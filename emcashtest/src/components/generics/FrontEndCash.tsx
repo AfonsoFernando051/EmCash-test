@@ -11,7 +11,7 @@ export default function FrontEndCash(){
             </FrontLetter>
         </>
     )
-}
+};
 
 const FrontLetter = styled.div`
    display:flex;
@@ -22,12 +22,11 @@ const FrontEndCashBlack = styled.h1`
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;
 `
 const FrontEndCashOrange = styled.h1`
     color: var(--primary-500, #EF6F2B);
-    /* subtitle2 */
     font-family: Manrope;
     font-size: 20px;
     font-style: normal;

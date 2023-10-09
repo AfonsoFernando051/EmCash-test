@@ -8,7 +8,7 @@ interface AddAlertProps {
     message: string;
     onClicked : any;
     severity: AlertColor;
-}
+};
 
 const AlertGreen: React.FC<AddAlertProps> = ({severity, message, onClicked}) => {
 
@@ -17,10 +17,10 @@ const AlertGreen: React.FC<AddAlertProps> = ({severity, message, onClicked}) => 
             {message} <CloseIcon onClick={() => {onClicked(false)}}><GrFormClose/></CloseIcon>
         </Alert>
     )
-}
+};
 
 const CloseIcon = styled.button`
-    POSITION: ABSOLUTE;
+    position: absolute;
     left: 94%;
     border: none;
     background-color: inherit;

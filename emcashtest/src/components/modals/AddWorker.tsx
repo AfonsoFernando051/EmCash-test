@@ -13,9 +13,9 @@ interface AddWorkerProps {
     respostWork: any;
     modalCase: any;
     mostrarAlerta: any
-}
+};
 
-  const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, respostWork, modalCase, mostrarAlerta}) => {
+const ModalAddFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, respostWork, modalCase, mostrarAlerta}) => {
     const form = useForm<FormValuesModal>();
     const {register, handleSubmit} = form;
     const [usarCpf, setUsarCpf] = useState(true);
@@ -33,23 +33,23 @@ interface AddWorkerProps {
         const url = 'http://18.117.195.42/funcionario/cadastro';
 
         if(data.cnpj){
-            data.cpf = ''
+            data.cpf = '';
         }
 
-        modalCase('Add')
+        modalCase('Add');
         axios.post(url, data, config)        
             .then((response: AxiosResponse) => {
                 console.log('Resposta: ', response);
                 respostWork(0);
-                mostrarAlerta(true)
+                mostrarAlerta(true);
             })
             .catch((error: AxiosError )=> {
                 console.log('Erro: ', error);
                 respostWork(-1);
-                mostrarAlerta(true)
+                mostrarAlerta(true);
             })
-            onClose(true)
-    }
+            onClose(true);
+    };
 
     if (!isOpen) {
         return null;
@@ -76,7 +76,7 @@ interface AddWorkerProps {
             </FormModal>
         </WholeModal>
     )
-}
+};
 
 export default ModalAddFuncionario;
 
@@ -104,7 +104,7 @@ const ModalTitle = styled.h2`
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;
 `
 const InputName = styled.input`

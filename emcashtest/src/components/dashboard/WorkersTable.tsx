@@ -26,7 +26,7 @@ export default function WorkersTable() {
             celular: '319876543210',
             email: 'funcionario@empresa.com'
         }
-    ]) 
+    ]); 
     const [count, setCount] = useState(0);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isChecked, setIsChecked] = useState(false);
@@ -107,7 +107,6 @@ export default function WorkersTable() {
                         setTimeout(() => {
                             setMostrarAlerta(false);
                         }, 3000);
-            
                     }        
                 }  
                 break;
@@ -125,7 +124,6 @@ export default function WorkersTable() {
                         setTimeout(() => {
                             setMostrarAlerta(false);
                         }, 3000);
-            
                     }     
                 }     
             break;
@@ -168,7 +166,7 @@ export default function WorkersTable() {
             default:
                 break;
         }
-    }, [modalWorkAdd, modalWorkDelete, modalWorkUpdate, mostrarAlerta, respost])
+    }, [modalWorkAdd, modalWorkDelete, modalWorkUpdate, mostrarAlerta, respost]);
 
     //Função que controla os eventos do checkbox
     const handleCheckboxChange = (event:any, id:any) => {
@@ -196,12 +194,12 @@ export default function WorkersTable() {
                 setCount(count - 1);
             }
         }
-    }
+    };
 
     //Função que esconde ou mostra CPF/CNPJ
     const showCPF = () => {
         hideCPF ? setHideCPF(false) : setHideCPF(true)
-    }
+    };
 
     //Funcionários vêm da URL via promise para parginar.
     useEffect(() => {        
@@ -219,7 +217,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage, funcionarios])
+    }, [currentPage, funcionarios]);
     
   return (
     <>
@@ -278,8 +276,8 @@ export default function WorkersTable() {
         </Table>
         <Pagination currentPage={currentPage} totalPages={totalPages} nextPage={setCurrentPage}/>
     </>
-  );
-}
+  )
+};
 
 const NavSelection = styled.div`
     display: flex;
@@ -294,10 +292,9 @@ const NavSelectionTitle = styled.h1`
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;
 `
-
 const Selected = styled.h1`
     margin-left: 39%;
     color: #1B1B1B;
@@ -305,10 +302,9 @@ const Selected = styled.h1`
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18.8px; /* 117.5% */
+    line-height: 18.8px;
     letter-spacing: -0.4px;
 `
-
 const Table = styled.table`
     margin-top: 3%;
     padding: 1% 0%;
@@ -327,13 +323,11 @@ const TbRow = styled.tr`
     background: var(--base-branco, #FFF);
     width: 100%;
 `
-
 const CheckBoxTh = styled.th`
     width: 1%;
     margin-top: 2px;
     padding: 12px 12px;
 `
-
 const TableTh = styled.th`
     font-weight: 500;
     font-size: 17px;
@@ -360,7 +354,6 @@ const EyeIcon = styled.span`
     vertical-align: middle;
     cursor: pointer;
 `
-
 const PhoneTableTh = styled.th`
     font-weight: 500;
     margin-left: 5%;
@@ -382,14 +375,13 @@ const TbRowData = styled.tr`
     display: flex;
     border-radius: 12px 12px 4px 4px;
 `
-
 const BodyTable = styled.tbody`
     display: flex;
     border-radius: 0px 11px;
     justify-content: space-around;
     flex-direction: column;
-    background: var(--dark-200, #F3F3F3);`
-
+    background: var(--dark-200, #F3F3F3);
+`
 const TableTdCheck = styled.td`
     padding: 12px 12px;
     width: 1%;

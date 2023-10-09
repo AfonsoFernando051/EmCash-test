@@ -17,12 +17,11 @@ export default function HomeLogin(){
             </WholePage>       
         </>
     )
-}
+};
 
 const WholePage = styled.div`
     display: flex
 `
-
 const HalfPage = styled.div`
     width: 50%;
     background-color: #E8E8E8;

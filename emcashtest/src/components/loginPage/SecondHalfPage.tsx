@@ -9,13 +9,13 @@ import OrangeButton from "../generics/OrangeButton";
 type FormValues = {
     usuario: string,
     senha: string
-}
+};
 
 export default function SecondHalfPage() {
 
   const handleClick = () => {   
     setLoginError(false);
-  }
+  };
   
   const [loginError, setLoginError] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
@@ -24,24 +24,24 @@ export default function SecondHalfPage() {
   const form = useForm<FormValues>();
   const {register, handleSubmit} = form;
 
-  const onSubmit = (data: FormValues) => {
-    const url = 'http://18.117.195.42/login';
-    
-    axios.post(url, data)
-        .then((response: AxiosResponse) => {
-            localStorage.setItem('token', response.data.access_token)
-        })
-        .then(response => {
-            setLoggedIn(true)
-        })
-        .catch((error: AxiosError )=> {
-            setLoginError(true);
-            console.log('Erro: ', error);
-        })
-  }
+    const onSubmit = (data: FormValues) => {
+        const url = 'http://18.117.195.42/login';
+
+        axios.post(url, data)
+            .then((response: AxiosResponse) => {
+                localStorage.setItem('token', response.data.access_token)
+            })
+            .then(response => {
+                setLoggedIn(true)
+            })
+            .catch((error: AxiosError )=> {
+                setLoginError(true);
+                console.log('Erro: ', error);
+            });
+    };
 
     if (loggedIn) {
-        navigate('/dashboard')
+        navigate('/dashboard');
     }
 
   return (
@@ -81,8 +81,8 @@ export default function SecondHalfPage() {
             </OrangeLink>
         </NeedHelp>
     </WholePage>
-  );
-}
+  )
+};
 
 const WholePage = styled.div`
     background: linear-gradient(286deg, rgba(243, 243, 243, 0.16) 8.14%, rgba(243, 243, 243, 0.04) 38.39%, rgba(243, 243, 243, 0.16) 88.69%);
@@ -94,27 +94,24 @@ const Form = styled.form`
 `
 const TitleForm = styled.h1`
     color: var(--primary-500, #EF6F2B);
-    /* title */
     font-family: Poppins;
     font-size: 36px;
     font-style: normal;
     font-weight: 600;
-    line-height: 54px; /* 150% */
+    line-height: 54px;
     letter-spacing: -0.4px;
     margin: 0% 6%;
 `
 const SubTitleForm = styled.h3`
     color: var(--dark-500, #1B1B1B);
     text-align: center;
-    /* body1 */
     font-family: Public Sans;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18.8px; /* 117.5% */
+    line-height: 18.8px;
     letter-spacing: -0.4px;
     width: 75%;
-
 `
 const RegisterInput = styled.input`
     display: flex;
@@ -130,7 +127,7 @@ const RegisterInput = styled.input`
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
-    line-height: 18.8px; /* 117.5% */
+    line-height: 18.8px;
     letter-spacing: -0.2px;
 `
 const LoginInvalid = styled.div`
@@ -150,14 +147,13 @@ const LoginInvalidContent = styled.h3`
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
-    line-height: 19.5px; /* 150% */
+    line-height: 19.5px;
     letter-spacing: -0.2px;
 `
 const LoginInvalidIconCheck = styled.i`
     color: #AD2C55;
     padding: 14px 1px 0px 0px;
 `
-
 const LoginInvalidIconX = styled.div`
     color: #AD2C55;
     padding: 15px 1px 0px 0px;
@@ -170,7 +166,7 @@ const ForgotPassword = styled.div`
     margin:5% 21%;
     font-style: normal;
     font-weight: 400;
-    line-height: 19.5px; /* 139.286% */
+    line-height: 19.5px;
     letter-spacing: -0.2px;
 `
 const OrangeLink = styled.a`
@@ -183,7 +179,7 @@ const NotYet = styled.div`
     font-size: 17px;
     font-style: normal;
     font-weight: 400;
-    line-height: 19.5px; /* 139.286% */
+    line-height: 19.5px;
     letter-spacing: -0.2px;
 `
 const NotYetText = styled.span`

@@ -32,21 +32,18 @@ export default function FirstHalfPage(){
                 <InvestText>O investimento evoluiu. O empréstimo também.</InvestText>  
             </WholePage>
         </>
-
     )
-}
+};
 
 const WholePage = styled.div`
     margin: 0% 2%;
 `
-
 const FrontLetter = styled.div`
    display:flex;
    padding: 4% 10%;
    margin-top: 1%;
    margin-bottom: 10%;
 `
-
 const FrontImage = styled.div`
     position: relative;
     height: 80%
@@ -57,7 +54,6 @@ const StyledVector = styled.img`
     transform: rotate(15.512deg);
     flex-shrink: 0;
 `
-
 const ImageText = styled.h1`
     position: absolute;
     top: 74px;
@@ -68,16 +64,14 @@ const ImageText = styled.h1`
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;    
 `
-
 const KhabyImg = styled.img`
     position: absolute;
     top: 40px;
     left: 310px;
 `
-
 const CardImg = styled.img`
     position: absolute;
     top: 233px;
@@ -105,7 +99,6 @@ const LineCardAboutImg = styled.img`
     top: 235px;
     left: 290px;
 `
-
 const LineCardAboveImg = styled.img`
     position: absolute;
     top: 254px;
@@ -115,11 +108,10 @@ const InvestText = styled.h1`
     margin-top: 10%;
     margin-left: 13%;
     color: var(--dark-500, #1B1B1B);
-    /* body1 */
     font-family: Public Sans;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18.8px; /* 117.5% */
+    line-height: 18.8px;
     letter-spacing: -0.4px;
 `

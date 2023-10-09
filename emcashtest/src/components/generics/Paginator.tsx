@@ -6,7 +6,7 @@ interface AddPaginationProps {
     currentPage:number;
     totalPages: number;
     nextPage:any;
-}
+};
 
 const Pagination: React.FC<AddPaginationProps> =({currentPage, totalPages, nextPage}) => {
 
@@ -26,9 +26,9 @@ const Pagination: React.FC<AddPaginationProps> =({currentPage, totalPages, nextP
             </PaginatorContent>
         </Paginator>
     )
-}
+};
 
-export default Pagination
+export default Pagination;
 
 const Paginator = styled.div`
     display: flex;

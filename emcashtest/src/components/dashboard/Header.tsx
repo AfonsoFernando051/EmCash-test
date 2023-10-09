@@ -45,7 +45,7 @@ export default function Header(){
             </HeaderDashboard>
         </>
     )
-}
+};
 
 const HeaderDashboard = styled.header`
   display: flex;
@@ -57,20 +57,17 @@ const HeaderDashboard = styled.header`
   justify-content: center;
   align-items: center;
 `
-
 const UserLogo = styled.div`
   display: flex;
   align-items:center;
   gap:5px;
   padding-left: 55%
 `
-
 const UserImg = styled.img`
   width: 32px;
   height: 32px;
   flex-shrink: 0; 
 `
-
 const UserText = styled.h1`
   color: var(--dark-500, #1B1B1B);
   text-align: center;
@@ -78,7 +75,7 @@ const UserText = styled.h1`
   font-size: 19px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18.8px; /* 117.5% */
+  line-height: 18.8px;
   letter-spacing: -0.4px;
 `
 const GoOutIcon = styled.div`

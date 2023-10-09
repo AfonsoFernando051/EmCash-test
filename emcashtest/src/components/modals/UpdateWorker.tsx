@@ -14,9 +14,9 @@ interface AddWorkerProps {
     respostWork: any;
     modalCase: any;
     mostrarAlerta: any
-  }
+};
 
-  const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, respostWork,onClose, modalCase, mostrarAlerta }) => {
+const ModalUpdateFuncionario: React.FC<AddWorkerProps> = ({id, isOpen, respostWork,onClose, modalCase, mostrarAlerta }) => {
     const form = useForm<FormValuesModal>();
     const {register, reset, handleSubmit} = form;
     const {config} = AuthConfig();
@@ -29,8 +29,8 @@ interface AddWorkerProps {
         }else{
             setUsarCpf(true);
         }
-        
-    }
+    };
+
     useEffect(() => {        
       if(isOpen){
         axios.get(url, config)
@@ -47,15 +47,16 @@ interface AddWorkerProps {
 
     if (!isOpen) {
         return null;
-    }
+    };
 
     const onSubmit = (data: FormValuesModal) => {
 
         if(data.cnpj){
             data.cpf = ''
-        }
+        };
                 
-        modalCase('Update')
+        modalCase('Update');
+
         axios.patch(url, data, config)
             .then((response: AxiosResponse) => {
                 console.log(response.status);
@@ -67,10 +68,10 @@ interface AddWorkerProps {
                 console.log( error.request.status);
                 respostWork(-1);
                 mostrarAlerta(true)
-            })
+            });
 
             onClose(true);          
-      }
+      };
 
     return (
        <WholeModal>
@@ -108,14 +109,14 @@ interface AddWorkerProps {
             </FormModal>
         </WholeModal>
     )
-}
+};
 
 export default ModalUpdateFuncionario;
 
 const Container = styled.div`
   position: relative;
   margin: 16px 0;
-`;
+`
 const Label = styled.label`
   position: absolute;
   top: -10px; //'-10px' : '12px'
@@ -125,7 +126,7 @@ const Label = styled.label`
   transition: top 0.2s, font-size 0.2s;
   background-color: white;
   padding: 0 5px; //'0 5px' : '0'
-`;
+`
 const ModalTitle = styled.h2`
     margin: auto;
     padding-bottom: 4%;
@@ -134,7 +135,7 @@ const ModalTitle = styled.h2`
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;
 `
 const WholeModal = styled.div`
@@ -192,7 +193,6 @@ const InputEmail = styled.input`
     margin: 6% 0%;
     border-radius: 4px;
     font-size: 15px;
-
 `
 const ButtonModal = styled.div`
     margin: 7% 0%;

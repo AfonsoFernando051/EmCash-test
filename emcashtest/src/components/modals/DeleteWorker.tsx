@@ -14,7 +14,7 @@ interface AddWorkerProps {
     modalCase: any;
     count: any;
     mostrarAlerta: any
-  }
+};
 
 const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, respostWork, modalCase, count, mostrarAlerta}) => {
     const {handleSubmit} = useForm();
@@ -36,20 +36,19 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
                     // eslint-disable-next-line @typescript-eslint/no-unused-vars
                     const response = await axios.delete(url+`/${id}`, config)
                         .then((response: AxiosResponse) => {
-                            console.log(url+`/${id}`);
                             console.log('Resposta: ', response);
                         })
                   })
               
                   const results = await Promise.all(deletePromises);
                   console.log('Elementos excluídos com sucesso:', results);
-                  count(0)
+                  count(0);
                   respostWork(1);
-                  mostrarAlerta(true)
+                  mostrarAlerta(true);
                 } catch (error) {
                   console.error('Erro ao excluir elementos:', error);
                   respostWork(-2);
-                  mostrarAlerta(true)
+                  mostrarAlerta(true);
                 }
               };
               deleteMultipleElements(id);
@@ -59,16 +58,16 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
                 .then((response: AxiosResponse) => {
                     console.log('Resposta: ', response);
                     respostWork(0);
-                    mostrarAlerta(true)
+                    mostrarAlerta(true);
                 })
                 .catch((error: AxiosError )=> {
                     console.log('Erro: ', error);
                     respostWork(-1);
-                    mostrarAlerta(true)
+                    mostrarAlerta(true);
                 })
         }
         onClose(true);
-      }
+    };
 
     return (
        <WholeModal>
@@ -84,7 +83,7 @@ const ModalDropFuncionario: React.FC<AddWorkerProps> = ({ isOpen, onClose, id, r
             </FormModal>
         </WholeModal>
     )
-}
+};
 
 export default ModalDropFuncionario;
 
@@ -115,7 +114,7 @@ const DropTitle = styled.h2`
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;
 `
 const DropSubTitle = styled.h3`
@@ -124,7 +123,7 @@ const DropSubTitle = styled.h3`
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18.8px; /* 117.5% */
+    line-height: 18.8px;
     letter-spacing: -0.4px;
 `
 const ButtonModal = styled.div`
@@ -133,5 +132,4 @@ const ButtonModal = styled.div`
     align-items: flex-start;
     gap: 2%;
     align-self: stretch;
-
 `

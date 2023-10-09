@@ -6,5 +6,5 @@ export default function AuthConfig(){
         },
     };
 
-    return {config}
-}
+    return {config};
+};

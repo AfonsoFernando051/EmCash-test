@@ -8,7 +8,7 @@ import GrayButton from '../generics/GrayButton';
 interface AddWorkerProps {
     isOpen: boolean;
     onClose : any,
-}
+};
 
 const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
 
@@ -38,7 +38,7 @@ const ModalOutSystem: React.FC<AddWorkerProps> = ({ isOpen, onClose} ) => {
             </FormModal>
         </WholeModal>
     )
-}
+};
 
 export default ModalOutSystem;
 
@@ -64,7 +64,7 @@ const OutTitle = styled.h2`
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
-    line-height: 23.5px; /* 117.5% */
+    line-height: 23.5px;
     letter-spacing: -0.4px;
 `
 const OutSubTitle = styled.h3`
@@ -74,7 +74,7 @@ const OutSubTitle = styled.h3`
     font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 18.8px; /* 117.5% */
+    line-height: 18.8px;
     letter-spacing: -0.4px;
 `
 const ButtonModal = styled.div`

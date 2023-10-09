@@ -4,4 +4,4 @@ export type FormValuesModal = {
     cnpj: string,
     celular: string,
     email: string,
-}
+};

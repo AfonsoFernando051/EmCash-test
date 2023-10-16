@@ -217,7 +217,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage, funcionarios]);
+    }, [currentPage, respost]);
     
   return (
     <>

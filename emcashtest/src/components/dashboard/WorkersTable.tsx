@@ -217,7 +217,7 @@ export default function WorkersTable() {
             }
         }
         fetchData()
-    }, [currentPage, respost]);
+    }, [currentPage, modalWorkAdd, modalWorkDelete, modalWorkUpdate, mostrarAlerta]);
     
   return (
     <>
